@@ -1,0 +1,60 @@
+import http from 'node:http';
+import {DatabaseSync,backup} from 'node:sqlite';
+import {promisify} from 'node:util';
+import {randomBytes,randomUUID,scrypt as scryptCb,timingSafeEqual,createHash} from 'node:crypto';
+import {readFile,stat,mkdir,readdir,unlink} from 'node:fs/promises';
+import {resolve,dirname,extname,sep} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {validateSnapshot} from '../public/save-format.mjs';
+const scrypt=promisify(scryptCb),root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),publicRoot=resolve(root,'public');
+const hash=s=>createHash('sha256').update(s).digest('hex');
+const scryptOptions={N:32768,r:8,p:1,maxmem:64*1024*1024};
+export async function hashPassword(password){const salt=randomBytes(16).toString('hex'),key=await scrypt(password,salt,32,scryptOptions);return `scrypt32768$${salt}$${key.toString('hex')}`;}
+export async function checkPassword(password,stored){const [algorithm,salt,expected]=stored.split('$');if(algorithm!=='scrypt32768'||!salt||expected?.length!==64)return false;const actual=await scrypt(password,salt,32,scryptOptions);return timingSafeEqual(actual,Buffer.from(expected,'hex'));}
+const mime={'.html':'text/html; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.glb':'model/gltf-binary','.wasm':'application/wasm','.svg':'image/svg+xml','.png':'image/png','.webp':'image/webp','.txt':'text/plain; charset=utf-8'};
+export async function createApp(options={}){
+ const production=options.production??process.env.NODE_ENV==='production';const dbPath=options.dbPath??process.env.DB_PATH??resolve(root,'data/pokeblox.db');await mkdir(dirname(dbPath),{recursive:true});const db=new DatabaseSync(dbPath);db.exec('PRAGMA foreign_keys = ON');db.exec('PRAGMA journal_mode = WAL');db.exec('PRAGMA synchronous = FULL');db.exec('PRAGMA busy_timeout = 5000');
+ const version=db.prepare('PRAGMA user_version').get().user_version;if(version<1){db.exec('BEGIN IMMEDIATE');try{db.exec(await readFile(resolve(root,'server/migrations/001_accounts.sql'),'utf8'));db.exec('PRAGMA user_version = 1');db.exec('COMMIT');}catch(e){db.exec('ROLLBACK');throw e;}}
+ const cookieName=production?'__Host-pokeblox_session':'pokeblox_session';const sessionAge=30*24*3600;const limiters=new Map();let hashing=0;const dummyHash=await hashPassword(randomBytes(32).toString('hex'));
+ const json=(res,status,obj,extra={})=>{res.writeHead(status,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff',...extra});res.end(JSON.stringify(obj));};
+ const readBody=async req=>{if(!String(req.headers['content-type']??'').startsWith('application/json'))throw Object.assign(Error('JSON_REQUIRED'),{status:415});let length=0;const chunks=[];for await(const chunk of req){length+=chunk.length;if(length>62000)throw Object.assign(Error('TOO_LARGE'),{status:413});chunks.push(chunk);}try{return JSON.parse(Buffer.concat(chunks).toString('utf8'));}catch{throw Object.assign(Error('INVALID_JSON'),{status:400});}};
+ const session=req=>{const cookie=String(req.headers.cookie??'').split(';').map(s=>s.trim()).find(s=>s.startsWith(cookieName+'='));const token=cookie?.slice(cookieName.length+1);if(!token||!/^[a-f0-9]{64}$/.test(token))return null;return db.prepare('SELECT sessions.token_hash, sessions.csrf_token, sessions.expires_at, users.id, users.username FROM sessions JOIN users ON users.id = sessions.user_id WHERE token_hash = ? AND expires_at > ?').get(hash(token),Date.now());};
+ const setSession=(res,user)=>{const token=randomBytes(32).toString('hex'),csrf=randomBytes(24).toString('hex');db.prepare('INSERT INTO sessions (token_hash, user_id, csrf_token, expires_at) VALUES (?, ?, ?, ?)').run(hash(token),user.id,csrf,Date.now()+sessionAge*1000);res.setHeader('Set-Cookie',`${cookieName}=${token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${sessionAge}${production?'; Secure':''}`);return csrf;};
+ const rate=(key,max,windowMs)=>{const now=Date.now();let entry=limiters.get(key);if(!entry||entry.until<now){entry={count:0,until:now+windowMs};limiters.set(key,entry);}entry.count++;return entry.count<=max;};
+ const sameOrigin=req=>{if(req.headers['sec-fetch-site']==='cross-site')return false;const origin=req.headers.origin;if(!origin)return true;try{const configured=options.publicUrl??process.env.PUBLIC_URL;if(configured)return new URL(origin).origin===new URL(configured).origin;return new URL(origin).host===req.headers.host&&['http:','https:'].includes(new URL(origin).protocol);}catch{return false;}};
+ const server=http.createServer(async(req,res)=>{res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Referrer-Policy','same-origin');res.setHeader('X-Frame-Options','DENY');let url;try{url=new URL(req.url,'http://localhost');}catch{return json(res,400,{error:'INVALID_URL'});}try{
+  if(url.pathname==='/healthz')return json(res,200,{ok:true,version:'0.3.0'});
+  if(url.pathname.startsWith('/api/')){
+   if(req.method!=='GET'&&!sameOrigin(req))return json(res,403,{error:'INVALID_ORIGIN'});
+   if(url.pathname==='/api/me'&&req.method==='GET'){const s=session(req);return json(res,200,s?{user:{id:s.id,username:s.username},csrfToken:s.csrf_token}:{user:null,csrfToken:null});}
+   if(['/api/login','/api/register'].includes(url.pathname)&&req.method==='POST'){
+    const body=await readBody(req),username=typeof body.username==='string'?body.username.normalize('NFC').trim():'',password=body.password,key=username.toLocaleLowerCase('ru-RU');
+    if(!/^[a-zа-яё0-9_]{3,24}$/i.test(username)||typeof password!=='string'||password.length<8||password.length>128)return json(res,400,{error:'INVALID_CREDENTIAL_FORMAT'});
+    if(hashing>=4||!rate('auth:'+key,12,15*60*1000)||!rate('global-auth',120,60*1000))return json(res,429,{error:'TOO_MANY_ATTEMPTS'});
+    hashing++;try{
+     if(url.pathname==='/api/register'){
+      if(!rate('register',30,3600*1000))return json(res,429,{error:'TOO_MANY_ATTEMPTS'});if(db.prepare('SELECT id FROM users WHERE username_key = ?').get(key))return json(res,409,{error:'USERNAME_TAKEN'});
+      const passwordHash=await hashPassword(password),user={id:randomUUID(),username};try{db.prepare('INSERT INTO users (id, username, username_key, password_hash, created_at) VALUES (?, ?, ?, ?, ?)').run(user.id,username,key,passwordHash,new Date().toISOString());}catch(e){if(String(e.message).includes('UNIQUE'))return json(res,409,{error:'USERNAME_TAKEN'});throw e;}const csrfToken=setSession(res,user);return json(res,201,{user,csrfToken});
+     }
+     const user=db.prepare('SELECT * FROM users WHERE username_key = ?').get(key),valid=await checkPassword(password,user?.password_hash??dummyHash);if(!user||!valid)return json(res,401,{error:'INVALID_CREDENTIALS'});limiters.delete('auth:'+key);const csrfToken=setSession(res,user);return json(res,200,{user:{id:user.id,username:user.username},csrfToken});
+    }finally{hashing--;}
+   }
+   const s=session(req);if(!s)return json(res,401,{error:'SIGN_IN_REQUIRED'});
+   if(req.method!=='GET'&&req.headers['x-csrf-token']!==s.csrf_token)return json(res,403,{error:'INVALID_CSRF'});
+   if(url.pathname==='/api/logout'&&req.method==='POST'){db.prepare('DELETE FROM sessions WHERE token_hash = ?').run(s.token_hash);res.setHeader('Set-Cookie',`${cookieName}=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0${production?'; Secure':''}`);return json(res,200,{ok:true});}
+   if(url.pathname==='/api/save'&&req.method==='GET'){const row=db.prepare('SELECT * FROM game_saves WHERE user_id = ?').get(s.id);return json(res,200,{accountKey:s.id,revision:row?.revision??0,lastWriteId:row?.last_write_id??null,updatedAt:row?.updated_at??null,snapshot:row?JSON.parse(row.snapshot):null});}
+   if(url.pathname==='/api/save'&&req.method==='POST'){
+    const body=await readBody(req);if(!Number.isSafeInteger(body?.revision)||body.revision<0||typeof body.writeId!=='string'||!/^[a-zA-Z0-9-]{8,80}$/.test(body.writeId))return json(res,400,{error:'INVALID_WRITE'});let snapshot;try{snapshot=validateSnapshot(body.snapshot);}catch{return json(res,400,{error:'INVALID_SAVE'});}
+    db.exec('BEGIN IMMEDIATE');let row;try{row=db.prepare('SELECT revision, last_write_id, updated_at FROM game_saves WHERE user_id = ?').get(s.id);if(row?.last_write_id===body.writeId){db.exec('COMMIT');return json(res,200,{revision:row.revision,lastWriteId:row.last_write_id,updatedAt:row.updated_at});}if((row?.revision??0)!==body.revision){db.exec('ROLLBACK');return json(res,409,{error:'SAVE_CONFLICT',revision:row?.revision??0,lastWriteId:row?.last_write_id??null});}const revision=body.revision+1,updatedAt=new Date().toISOString();db.prepare('INSERT INTO game_saves (user_id, snapshot, revision, last_write_id, updated_at) VALUES (?, ?, ?, ?, ?) ON CONFLICT(user_id) DO UPDATE SET snapshot = excluded.snapshot, revision = excluded.revision, last_write_id = excluded.last_write_id, updated_at = excluded.updated_at').run(s.id,JSON.stringify(snapshot),revision,body.writeId,updatedAt);db.exec('COMMIT');return json(res,200,{revision,lastWriteId:body.writeId,updatedAt});}catch(e){try{db.exec('ROLLBACK');}catch{}throw e;}
+   }
+   return json(res,404,{error:'NOT_FOUND'});
+  }
+  if(!['GET','HEAD'].includes(req.method))return json(res,405,{error:'METHOD_NOT_ALLOWED'});let pathname;try{pathname=decodeURIComponent(url.pathname);}catch{return json(res,400,{error:'INVALID_URL'});}const file=resolve(publicRoot,'.'+(pathname==='/'?'/index.html':pathname));if(!file.startsWith(publicRoot+sep)||pathname.split('/').some(p=>p.startsWith('.')))return json(res,404,{error:'NOT_FOUND'});let info;try{info=await stat(file);if(!info.isFile())throw Error();}catch{return json(res,404,{error:'NOT_FOUND'});}const etag=`"${info.size}-${Math.floor(info.mtimeMs)}"`;res.setHeader('ETag',etag);res.setHeader('Cache-Control',/\.(glb|wasm|png|webp)$/.test(file)?'public, max-age=86400':'no-cache');if(req.headers['if-none-match']===etag){res.writeHead(304);return res.end();}res.setHeader('Content-Type',mime[extname(file)]??'application/octet-stream');res.setHeader('Content-Length',info.size);if(req.method==='HEAD')return res.end();res.end(await readFile(file));
+ }catch(e){if(!res.headersSent)json(res,e.status??500,{error:e.status?e.message:'SERVER_ERROR'});else res.end();if(!e.status)console.error('Request failed:',e.name);}});
+ server.requestTimeout=15000;server.headersTimeout=10000;
+ const cleanup=setInterval(()=>{db.prepare('DELETE FROM sessions WHERE expires_at < ?').run(Date.now());for(const [key,val]of limiters)if(val.until<Date.now())limiters.delete(key);},60000);cleanup.unref();let backupTimer;
+ const makeBackup=async()=>{if(options.backups===false)return;const dir=resolve(dirname(dbPath),'backups');await mkdir(dir,{recursive:true});const name=`pokeblox-${new Date().toISOString().slice(0,10)}.db`,target=resolve(dir,name);try{await stat(target);return;}catch{}await backup(db,target);const files=(await readdir(dir)).filter(n=>/^pokeblox-\d{4}-\d\d-\d\d\.db$/.test(n)).sort();for(const old of files.slice(0,-7))await unlink(resolve(dir,old));};
+ if(options.backups!==false){backupTimer=setInterval(()=>makeBackup().catch(()=>console.error('Backup failed')),3600000);backupTimer.unref();}
+ return {server,db,makeBackup,async close(){clearInterval(cleanup);clearInterval(backupTimer);await new Promise(r=>server.close(r));db.close();}};
+}
+if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){const app=await createApp();app.server.listen(Number(process.env.PORT??3000),'0.0.0.0',()=>console.log('Pokeblox 0.3.0 listening; persistent database ready.'));for(const signal of ['SIGTERM','SIGINT'])process.on(signal,()=>app.close().then(()=>process.exit(0)));}
