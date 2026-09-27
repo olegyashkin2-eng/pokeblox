@@ -1,0 +1,1015 @@
+{
+  "retrieved_at": "2026-09-26",
+  "repository": "https://github.com/Pokemon-3D-api/assets",
+  "repository_readme": "https://github.com/Pokemon-3D-api/assets/blob/main/README.md",
+  "repository_license": "https://github.com/Pokemon-3D-api/assets/blob/main/LICENSE",
+  "rights_note": "The repository README states that all 3D assets are property of Nintendo/Creatures Inc./GAME FREAK inc. The repository MIT license is a software license and must not be represented as an unrestricted license from the Pokémon rights holders. No independent permission from those rights holders was verified. Original per-model Sketchfab authors/links are not recorded in these GLBs; the repository model_map.json was empty when retrieved. Preserve this provenance and repository license.",
+  "models": [
+    {
+      "id": 1,
+      "name": "Bulbasaur",
+      "filename": "1.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/1.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/1.glb",
+      "byte_size": 541608,
+      "sha256": "f858e644251443d4011ef4b3c01f119d732307a3e6658c6cc60db51fd4e72eb4",
+      "meshes": 1,
+      "vertices": 2851,
+      "triangles": 4338,
+      "materials": 3,
+      "embedded_images": 3,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [
+        {
+          "name": "model_skeleton|001aidle",
+          "duration_seconds": 1.6667
+        },
+        {
+          "name": "model_skeleton|001fight_b",
+          "duration_seconds": 1.75
+        },
+        {
+          "name": "model_skeleton|001fight_d",
+          "duration_seconds": 2.625
+        },
+        {
+          "name": "model_skeleton|001jump_e",
+          "duration_seconds": 0.75
+        },
+        {
+          "name": "model_skeleton|001jump_l",
+          "duration_seconds": 0.75
+        },
+        {
+          "name": "model_skeleton|001jump_s",
+          "duration_seconds": 0.5417
+        },
+        {
+          "name": "model_skeleton|001ko",
+          "duration_seconds": 2
+        },
+        {
+          "name": "model_skeleton|001run",
+          "duration_seconds": 0.375
+        },
+        {
+          "name": "model_skeleton|001walk",
+          "duration_seconds": 1.1667
+        }
+      ],
+      "default_pose_world_bounds": {
+        "min": [
+          -0.305635,
+          -5.5e-05,
+          -0.408652
+        ],
+        "max": [
+          0.305657,
+          0.781493,
+          0.524731
+        ],
+        "size": [
+          0.611292,
+          0.781548,
+          0.933384
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms.",
+      "recommended_outer_rotation_xyz_radians": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "orientation_note": "Visually checked default pose: Y-up, front approximately +Z after this outer rotation. Animations can change pose.",
+      "corrected_default_pose_world_bounds": {
+        "min": [
+          -0.305635,
+          -5.5e-05,
+          -0.408652
+        ],
+        "max": [
+          0.305657,
+          0.781493,
+          0.524731
+        ],
+        "size": [
+          0.611292,
+          0.781548,
+          0.933384
+        ]
+      },
+      "scale_factor_for_height_1": 1.27951194
+    },
+    {
+      "id": 2,
+      "name": "Ivysaur",
+      "filename": "2.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/2.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/2.glb",
+      "byte_size": 75664,
+      "sha256": "e170c141f797179e504a705a60cffff91619f11a791454d2bbb5b1c61bbe6411",
+      "meshes": 1,
+      "vertices": 4171,
+      "triangles": 6324,
+      "materials": 4,
+      "embedded_images": 4,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -2.101481,
+          -1e-06,
+          -2.373815
+        ],
+        "max": [
+          2.101481,
+          3.224657,
+          1.822221
+        ],
+        "size": [
+          4.202962,
+          3.224658,
+          4.196036
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms.",
+      "recommended_outer_rotation_xyz_radians": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "orientation_note": "Visually checked default pose: Y-up, front approximately +Z after this outer rotation. Animations can change pose.",
+      "corrected_default_pose_world_bounds": {
+        "min": [
+          -2.101481,
+          -1e-06,
+          -2.373815
+        ],
+        "max": [
+          2.101481,
+          3.224657,
+          1.822221
+        ],
+        "size": [
+          4.202962,
+          3.224658,
+          4.196036
+        ]
+      },
+      "scale_factor_for_height_1": 0.31011041
+    },
+    {
+      "id": 3,
+      "name": "Venusaur",
+      "filename": "3.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/3.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/3.glb",
+      "byte_size": 81820,
+      "sha256": "38705b7a41f86a4323fd2a66b0684a0f0e6fa66a9329b10e9927c44bfad28ccc",
+      "meshes": 1,
+      "vertices": 4333,
+      "triangles": 6346,
+      "materials": 4,
+      "embedded_images": 4,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -3.558489,
+          -0.000249,
+          -3.191509
+        ],
+        "max": [
+          3.558591,
+          4.864728,
+          3.925572
+        ],
+        "size": [
+          7.11708,
+          4.864977,
+          7.11708
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms.",
+      "recommended_outer_rotation_xyz_radians": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "orientation_note": "Visually checked default pose: Y-up, front approximately +Z after this outer rotation. Animations can change pose.",
+      "corrected_default_pose_world_bounds": {
+        "min": [
+          -3.558489,
+          -0.000249,
+          -3.191509
+        ],
+        "max": [
+          3.558591,
+          4.864728,
+          3.925572
+        ],
+        "size": [
+          7.11708,
+          4.864977,
+          7.11708
+        ]
+      },
+      "scale_factor_for_height_1": 0.20555082
+    },
+    {
+      "id": 4,
+      "name": "Charmander",
+      "filename": "4.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/4.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/4.glb",
+      "byte_size": 62508,
+      "sha256": "c8c3892e73f19c5152a5a36f7a1419ada27df465153d432e756333e8fd34ea8b",
+      "meshes": 1,
+      "vertices": 3034,
+      "triangles": 4680,
+      "materials": 4,
+      "embedded_images": 4,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -0.127229,
+          -0.047707,
+          -1.541658
+        ],
+        "max": [
+          1.224057,
+          1.474734,
+          0.484744
+        ],
+        "size": [
+          1.351286,
+          1.522441,
+          2.026402
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms.",
+      "recommended_outer_rotation_xyz_radians": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "orientation_note": "Visually checked default pose: Y-up, front approximately +Z after this outer rotation. Animations can change pose.",
+      "corrected_default_pose_world_bounds": {
+        "min": [
+          -0.127229,
+          -0.047707,
+          -1.541658
+        ],
+        "max": [
+          1.224057,
+          1.474734,
+          0.484744
+        ],
+        "size": [
+          1.351286,
+          1.522441,
+          2.026402
+        ]
+      },
+      "scale_factor_for_height_1": 0.6568399
+    },
+    {
+      "id": 5,
+      "name": "Charmeleon",
+      "filename": "5.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/5.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/5.glb",
+      "byte_size": 68544,
+      "sha256": "ba2fff1fddcf3c36a3c833a83092bc3ae00e8bdfe5aba62ac98fe04b15dabe30",
+      "meshes": 1,
+      "vertices": 3417,
+      "triangles": 5404,
+      "materials": 5,
+      "embedded_images": 5,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -1.374947,
+          -1.342776,
+          -2.687029
+        ],
+        "max": [
+          1.439593,
+          1.545905,
+          0.736133
+        ],
+        "size": [
+          2.81454,
+          2.888682,
+          3.423161
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms.",
+      "recommended_outer_rotation_xyz_radians": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "orientation_note": "Visually checked default pose: Y-up, front approximately +Z after this outer rotation. Animations can change pose.",
+      "corrected_default_pose_world_bounds": {
+        "min": [
+          -1.374947,
+          -1.342776,
+          -2.687029
+        ],
+        "max": [
+          1.439593,
+          1.545905,
+          0.736133
+        ],
+        "size": [
+          2.81454,
+          2.888682,
+          3.423161
+        ]
+      },
+      "scale_factor_for_height_1": 0.34617864
+    },
+    {
+      "id": 6,
+      "name": "Charizard",
+      "filename": "6.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/6.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/6.glb",
+      "byte_size": 173672,
+      "sha256": "1dc18de231df4ba6fcc2c2ee9f9d483c2f33478bca52cf83357a5c9188c3076e",
+      "meshes": 5,
+      "vertices": 4464,
+      "triangles": 6218,
+      "materials": 5,
+      "embedded_images": 5,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [
+        {
+          "name": "Chariard_dizzy",
+          "duration_seconds": 4.2917
+        }
+      ],
+      "default_pose_world_bounds": {
+        "min": [
+          -3.142438,
+          -1.524946,
+          -5.979158
+        ],
+        "max": [
+          3.142438,
+          2.889603,
+          2.302671
+        ],
+        "size": [
+          6.284876,
+          4.414549,
+          8.281829
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms.",
+      "recommended_outer_rotation_xyz_radians": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "orientation_note": "Visually checked default pose: Y-up, front approximately +Z after this outer rotation. Animations can change pose.",
+      "corrected_default_pose_world_bounds": {
+        "min": [
+          -3.142438,
+          -1.524946,
+          -5.979158
+        ],
+        "max": [
+          3.142438,
+          2.889603,
+          2.302671
+        ],
+        "size": [
+          6.284876,
+          4.414549,
+          8.281829
+        ]
+      },
+      "scale_factor_for_height_1": 0.22652371
+    },
+    {
+      "id": 7,
+      "name": "Squirtle",
+      "filename": "7.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/7.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/7.glb",
+      "byte_size": 54720,
+      "sha256": "6878675bc3f9f7453ae9bffaf1503c1da53321eca51235507efe6ffd7d76dfa9",
+      "meshes": 1,
+      "vertices": 2923,
+      "triangles": 4672,
+      "materials": 2,
+      "embedded_images": 2,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -0.471627,
+          -0.0,
+          -0.655554
+        ],
+        "max": [
+          0.471618,
+          1.115962,
+          0.550596
+        ],
+        "size": [
+          0.943245,
+          1.115962,
+          1.20615
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms.",
+      "recommended_outer_rotation_xyz_radians": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "orientation_note": "Visually checked default pose: Y-up, front approximately +Z after this outer rotation. Animations can change pose.",
+      "corrected_default_pose_world_bounds": {
+        "min": [
+          -0.471627,
+          -0.0,
+          -0.655554
+        ],
+        "max": [
+          0.471618,
+          1.115962,
+          0.550596
+        ],
+        "size": [
+          0.943245,
+          1.115962,
+          1.20615
+        ]
+      },
+      "scale_factor_for_height_1": 0.89608786
+    },
+    {
+      "id": 8,
+      "name": "Wartortle",
+      "filename": "8.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/8.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/8.glb",
+      "byte_size": 60984,
+      "sha256": "ecb840dbe4f030cede3734afa2c6e9451ad9af46f81e8bd03e36590055edb2b7",
+      "meshes": 1,
+      "vertices": 3226,
+      "triangles": 5032,
+      "materials": 3,
+      "embedded_images": 3,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -0.902729,
+          -0.862777,
+          -1.678782
+        ],
+        "max": [
+          0.902701,
+          2.5351,
+          1.469312
+        ],
+        "size": [
+          1.805429,
+          3.397876,
+          3.148094
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms.",
+      "recommended_outer_rotation_xyz_radians": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "orientation_note": "Visually checked default pose: Y-up, front approximately +Z after this outer rotation. Animations can change pose.",
+      "corrected_default_pose_world_bounds": {
+        "min": [
+          -0.902729,
+          -0.862777,
+          -1.678782
+        ],
+        "max": [
+          0.902701,
+          2.5351,
+          1.469312
+        ],
+        "size": [
+          1.805429,
+          3.397876,
+          3.148094
+        ]
+      },
+      "scale_factor_for_height_1": 0.2943015
+    },
+    {
+      "id": 9,
+      "name": "Blastoise",
+      "filename": "9.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/9.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/9.glb",
+      "byte_size": 84744,
+      "sha256": "64edfae1880699dc57b8da749aebcd67a692138cc6d7f43cc56a7265a8cf4dff",
+      "meshes": 3,
+      "vertices": 4306,
+      "triangles": 6305,
+      "materials": 4,
+      "embedded_images": 4,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -1.862419,
+          -0.0,
+          -1.832724
+        ],
+        "max": [
+          1.862419,
+          3.501613,
+          2.223023
+        ],
+        "size": [
+          3.724838,
+          3.501614,
+          4.055747
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms.",
+      "recommended_outer_rotation_xyz_radians": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "orientation_note": "Visually checked default pose: Y-up, front approximately +Z after this outer rotation. Animations can change pose.",
+      "corrected_default_pose_world_bounds": {
+        "min": [
+          -1.862419,
+          -0.0,
+          -1.832724
+        ],
+        "max": [
+          1.862419,
+          3.501613,
+          2.223023
+        ],
+        "size": [
+          3.724838,
+          3.501614,
+          4.055747
+        ]
+      },
+      "scale_factor_for_height_1": 0.28558259
+    },
+    {
+      "id": 25,
+      "name": "Pikachu",
+      "filename": "25.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/25.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/25.glb",
+      "byte_size": 146152,
+      "sha256": "6c09be51ffcf8caf45ae0980c9e11a0e963fc6fdbf111a200910982ba9bf8b2c",
+      "meshes": 5,
+      "vertices": 2866,
+      "triangles": 4556,
+      "materials": 5,
+      "embedded_images": 4,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [
+        {
+          "name": "Impactrueno",
+          "duration_seconds": 4.5
+        }
+      ],
+      "default_pose_world_bounds": {
+        "min": [
+          -0.78082,
+          -2.113439,
+          0.129701
+        ],
+        "max": [
+          0.761932,
+          -0.00245,
+          2.45298
+        ],
+        "size": [
+          1.542752,
+          2.110989,
+          2.323279
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms.",
+      "recommended_outer_rotation_xyz_radians": [
+        -1.5707963267948966,
+        0.0,
+        0.0
+      ],
+      "orientation_note": "Visually checked default pose: Y-up, front approximately +Z after this outer rotation. Animations can change pose.",
+      "corrected_default_pose_world_bounds": {
+        "min": [
+          -0.78082,
+          0.129701,
+          0.00245
+        ],
+        "max": [
+          0.761932,
+          2.45298,
+          2.113439
+        ],
+        "size": [
+          1.542752,
+          2.323279,
+          2.110989
+        ]
+      },
+      "scale_factor_for_height_1": 0.43042613
+    },
+    {
+      "id": 26,
+      "name": "Raichu",
+      "filename": "26.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/26.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/26.glb",
+      "byte_size": 68868,
+      "sha256": "0fcf6bd119d33fda6111a19b909fd1977eeb3c7e7bc05d79b33fd444954e9758",
+      "meshes": 1,
+      "vertices": 2956,
+      "triangles": 4758,
+      "materials": 4,
+      "embedded_images": 4,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -0.679618,
+          -0.0,
+          -5.195035
+        ],
+        "max": [
+          0.679647,
+          2.143675,
+          0.643672
+        ],
+        "size": [
+          1.359264,
+          2.143676,
+          5.838707
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms.",
+      "recommended_outer_rotation_xyz_radians": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "orientation_note": "Visually checked default pose: Y-up, front approximately +Z after this outer rotation. Animations can change pose.",
+      "corrected_default_pose_world_bounds": {
+        "min": [
+          -0.679618,
+          -0.0,
+          -5.195035
+        ],
+        "max": [
+          0.679647,
+          2.143675,
+          0.643672
+        ],
+        "size": [
+          1.359264,
+          2.143676,
+          5.838707
+        ]
+      },
+      "scale_factor_for_height_1": 0.46648841
+    },
+    {
+      "id": 133,
+      "name": "Eevee",
+      "filename": "133.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/133.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/133.glb",
+      "byte_size": 168400,
+      "sha256": "f0c8eb0876da64ac4e6f62de361b2362fb8dd45168e89903c6bda026be0ef40c",
+      "meshes": 4,
+      "vertices": 2968,
+      "triangles": 4850,
+      "materials": 3,
+      "embedded_images": 3,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [
+        {
+          "name": "Armature|ArmatureAction",
+          "duration_seconds": 4.125
+        }
+      ],
+      "default_pose_world_bounds": {
+        "min": [
+          -0.773497,
+          -0.011002,
+          -1.055558
+        ],
+        "max": [
+          0.836753,
+          1.403159,
+          0.951004
+        ],
+        "size": [
+          1.61025,
+          1.414162,
+          2.006561
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms.",
+      "recommended_outer_rotation_xyz_radians": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "orientation_note": "Visually checked default pose: Y-up, front approximately +Z after this outer rotation. Animations can change pose.",
+      "corrected_default_pose_world_bounds": {
+        "min": [
+          -0.773497,
+          -0.011002,
+          -1.055558
+        ],
+        "max": [
+          0.836753,
+          1.403159,
+          0.951004
+        ],
+        "size": [
+          1.61025,
+          1.414162,
+          2.006561
+        ]
+      },
+      "scale_factor_for_height_1": 0.70713256
+    },
+    {
+      "id": 134,
+      "name": "Vaporeon",
+      "filename": "134.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/134.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/134.glb",
+      "byte_size": 212264,
+      "sha256": "44101789d8141a5435b1a0660c90da30ae10bb05d932093000a95e7140e43399",
+      "meshes": 7,
+      "vertices": 3548,
+      "triangles": 5240,
+      "materials": 3,
+      "embedded_images": 3,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [
+        {
+          "name": "Armature|ArmatureAction",
+          "duration_seconds": 5.5417
+        }
+      ],
+      "default_pose_world_bounds": {
+        "min": [
+          -0.333375,
+          -0.000455,
+          -0.946743
+        ],
+        "max": [
+          0.340315,
+          0.886937,
+          0.775122
+        ],
+        "size": [
+          0.67369,
+          0.887391,
+          1.721865
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms.",
+      "recommended_outer_rotation_xyz_radians": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "orientation_note": "Visually checked default pose: Y-up, front approximately +Z after this outer rotation. Animations can change pose.",
+      "corrected_default_pose_world_bounds": {
+        "min": [
+          -0.333375,
+          -0.000455,
+          -0.946743
+        ],
+        "max": [
+          0.340315,
+          0.886937,
+          0.775122
+        ],
+        "size": [
+          0.67369,
+          0.887391,
+          1.721865
+        ]
+      },
+      "scale_factor_for_height_1": 1.12689897
+    },
+    {
+      "id": 135,
+      "name": "Jolteon",
+      "filename": "135.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/135.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/135.glb",
+      "byte_size": 221300,
+      "sha256": "4c745afc675f66cd17259cea1325b684bf2b17c8162c3246935b9857c69d2faf",
+      "meshes": 4,
+      "vertices": 2823,
+      "triangles": 4825,
+      "materials": 2,
+      "embedded_images": 2,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [
+        {
+          "name": "Armature|ArmatureAction",
+          "duration_seconds": 6.3333
+        }
+      ],
+      "default_pose_world_bounds": {
+        "min": [
+          -0.239461,
+          -3.7e-05,
+          -0.36606
+        ],
+        "max": [
+          0.234209,
+          0.756656,
+          0.44961
+        ],
+        "size": [
+          0.47367,
+          0.756693,
+          0.815671
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms.",
+      "recommended_outer_rotation_xyz_radians": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "orientation_note": "Visually checked default pose: Y-up, front approximately +Z after this outer rotation. Animations can change pose.",
+      "corrected_default_pose_world_bounds": {
+        "min": [
+          -0.239461,
+          -3.7e-05,
+          -0.36606
+        ],
+        "max": [
+          0.234209,
+          0.756656,
+          0.44961
+        ],
+        "size": [
+          0.47367,
+          0.756693,
+          0.815671
+        ]
+      },
+      "scale_factor_for_height_1": 1.32153991
+    },
+    {
+      "id": 136,
+      "name": "Flareon",
+      "filename": "136.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/136.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/136.glb",
+      "byte_size": 207916,
+      "sha256": "8f7bfd8fe7e8eb719a569ca9f660951acf373423fd2eef2a0d6e0e84fb5a0762",
+      "meshes": 5,
+      "vertices": 4103,
+      "triangles": 6056,
+      "materials": 4,
+      "embedded_images": 4,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [
+        {
+          "name": "Armature|ArmatureAction",
+          "duration_seconds": 5.6667
+        }
+      ],
+      "default_pose_world_bounds": {
+        "min": [
+          -1.178225,
+          -0.000705,
+          -0.635527
+        ],
+        "max": [
+          0.345105,
+          1.254957,
+          1.143152
+        ],
+        "size": [
+          1.52333,
+          1.255662,
+          1.778679
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms.",
+      "recommended_outer_rotation_xyz_radians": [
+        0.0,
+        1.5707963267948966,
+        0.0
+      ],
+      "orientation_note": "Visually checked default pose: Y-up, front approximately +Z after this outer rotation. Animations can change pose.",
+      "corrected_default_pose_world_bounds": {
+        "min": [
+          -0.635527,
+          -0.000705,
+          -0.345105
+        ],
+        "max": [
+          1.143152,
+          1.254957,
+          1.178225
+        ],
+        "size": [
+          1.778679,
+          1.255662,
+          1.52333
+        ]
+      },
+      "scale_factor_for_height_1": 0.79639266
+    }
+  ],
+  "download_total_bytes": 2229164,
+  "integration_notes": [
+    "Copy only the numeric .glb files into your game asset folder. All images are embedded.",
+    "Configure GLTFLoader with DRACOLoader; local decoder files from three/examples/jsm/libs/draco/gltf are recommended. These assets also require EXT_texture_webp, supported by modern browsers.",
+    "Preserve imported node transforms. Apply corrections in an outer group: Pikachu 25 X=-PI/2, Flareon 136 Y=+PI/2. The other 13 need no base correction for a +Z facing convention.",
+    "Use SkeletonUtils.clone for repeated model instances because these GLBs contain skins.",
+    "After correcting orientation and updating world matrices, compute a skinned Box3; scale by targetHeight / size.y and translate horizontal center to zero and min.y to ground. Avoid normalizing by longest dimension: long tails shrink Raichu and Charizard excessively.",
+    "Animation selection should be deliberate: Charizard has a dizzy clip and Pikachu a thunder-shock clip; they are not neutral idle animations. Static models can receive gentle whole-body bob/turn movement."
+  ]
+}
