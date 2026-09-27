@@ -1,0 +1,51 @@
+import {BASE_STATS} from './stats.mjs';
+export const SPECIES = {
+  1: {name:'Бульбазавр',type:'grass',height:1.12,next:2,level:16,zone:'Лиственный лес',move:'Лоза'},
+  2: {name:'Ивизавр',type:'grass',height:1.6,next:3,level:32,zone:'Лиственный лес',move:'Лоза'},
+  3: {name:'Венузавр',type:'grass',height:2.45,zone:'Лиственный лес',move:'Солнечный луч'},
+  4: {name:'Чармандер',type:'fire',height:1.35,next:5,level:16,zone:'Янтарные скалы',move:'Искра'},
+  5: {name:'Чармелеон',type:'fire',height:1.8,next:6,level:36,zone:'Янтарные скалы',move:'Огненный клык'},
+  6: {name:'Чаризард',type:'fire',height:3.2,zone:'Янтарные скалы',move:'Огнемёт'},
+  7: {name:'Сквиртл',type:'water',height:1.25,next:8,level:16,zone:'Лазурное озеро',move:'Водяная пушка'},
+  8: {name:'Вартортл',type:'water',height:1.65,next:9,level:36,zone:'Лазурное озеро',move:'Водяная пушка'},
+  9: {name:'Бластойз',type:'water',height:2.4,zone:'Лазурное озеро',move:'Гидропомпа'},
+  25: {name:'Пикачу',type:'electric',height:1.3,stones:{thunder:26},zone:'Грозовая роща',move:'Удар молнии'},
+  26: {name:'Райчу',type:'electric',height:1.85,zone:'Грозовая роща',move:'Гром'},
+  133: {name:'Иви',type:'normal',height:1.2,stones:{water:134,thunder:135,fire:136},zone:'Солнечная поляна',move:'Быстрая атака'},
+  134: {name:'Вапореон',type:'water',height:1.7,zone:'Лазурное озеро',move:'Водяная волна'},
+  135: {name:'Джолтеон',type:'electric',height:1.6,zone:'Грозовая роща',move:'Гром'},
+  136: {name:'Флареон',type:'fire',height:1.6,zone:'Янтарные скалы',move:'Огнемёт'}
+};
+export const BASES=[4,1,7,25,133];
+export const ALL_IDS=[1,2,3,4,5,6,7,8,9,25,26,133,134,135,136];
+export const TYPES={grass:{name:'Травяной',color:'#55b985',icon:'leaf'},fire:{name:'Огненный',color:'#f79458',icon:'flame'},water:{name:'Водный',color:'#69bced',icon:'drop'},electric:{name:'Электрический',color:'#efca49',icon:'bolt'},normal:{name:'Обычный',color:'#bfa68b',icon:'star'}};
+export const STONES={water:{name:'Водный камень',color:0x46c7ff},thunder:{name:'Громовой камень',color:0xffd948},fire:{name:'Огненный камень',color:0xff8840}};
+export const LANDMARKS=[
+ {name:'Лагерь',x:0,z:22,color:'#ffffff',label:'Лагерь исследователей'},
+ {name:'Лес',x:-30,z:0,color:'#83d991',label:'Лиственный лес'},
+ {name:'Озеро',x:33,z:4,color:'#74d9ff',label:'Лазурное озеро'},
+ {name:'Роща',x:-28,z:-35,color:'#ffdf6b',label:'Грозовая роща'},
+ {name:'Скалы',x:22,z:-40,color:'#ffb875',label:'Янтарные скалы'}
+];
+export const STARTER_ID=25;
+export const MAX_PARTY=180;
+export const ENCOUNTERS={meadow:[[25,75],[1,20],[133,5]],forest:[[1,65],[25,30],[133,5]],lake:[[7,80],[25,20]],storm:[[25,85],[1,10],[133,5]],rocks:[[4,75],[25,24.5],[6,.5]]};
+export function rollEncounter(zone,rng=Math.random){let r=rng()*100;for(const [id,weight] of ENCOUNTERS[zone]){r-=weight;if(r<0)return id;}return ENCOUNTERS[zone].at(-1)[0];}
+export function rarity(id){return id===6?'Очень редкий':id===133?'Редкий':id===25?'Стартовый':BASES.includes(id)?'Необычный':'Эволюция';}
+export function baseStats(id){return BASE_STATS[id];}
+let nextUid=1;
+export function reserveUids(party){nextUid=Math.max(nextUid,1,...party.map(p=>p.uid+1));}
+export function hpMax(p){return Math.floor((2*BASE_STATS[p.species].stats.hp+15)*p.level/100)+p.level+25;}
+export function battleStat(p,name){return Math.floor((2*BASE_STATS[p.species].stats[name]+15)*p.level/100)+5;}
+export function damageFor(p,q,special=false,rng=Math.random){const a=battleStat(p,special?'spAttack':'attack'),d=battleStat(q,special?'spDefense':'defense');const eff=special?effectiveness(SPECIES[p.species].type,SPECIES[q.species].type):1;const critical=rng()<Math.min(.18,.04+Math.max(0,battleStat(p,'speed')-battleStat(q,'speed'))/800);const damage=Math.max(2,Math.round((((2*p.level/5+2)*(special?65:40)*a/d)/50+2)*1.45*eff*(critical?1.5:1)*(.9+rng()*.1)));return {damage,eff,critical};}
+export function newPokemon(species,level=5){const p={uid:nextUid++,species,level,xp:0,hp:0};p.hp=hpMax(p);return p;}
+export function createState(){return {started:false,party:[],active:0,balls:20,stones:{water:0,thunder:0,fire:0},potions:5,seen:new Set(),caught:new Set(),wins:0,evolutions:0,pickedStones:new Set(),completed:false,visited:new Set(),captured:0};}
+export function xpNeeded(p){return 18+p.level*3;}
+export function evolutionOptions(p,s){const d=SPECIES[p.species];if(d.next)return [{id:d.next,available:p.level>=d.level,label:`Уровень ${d.level}`,level:d.level}];return Object.entries(d.stones||{}).map(([stone,id])=>({id,stone,available:s.stones[stone]>0,label:STONES[stone].name}));}
+export function evolve(p,s,target){const option=evolutionOptions(p,s).find(x=>x.id===target);if(!option?.available)return false;if(option.stone)s.stones[option.stone]--;p.species=target;p.hp=hpMax(p);s.caught.add(target);s.seen.add(target);s.evolutions++;return true;}
+export function gainXP(p,value){let levels=0;p.xp+=value;while(p.level<50&&p.xp>=xpNeeded(p)){p.xp-=xpNeeded(p);p.level++;levels++;}if(p.level===50)p.xp=0;if(levels)p.hp=hpMax(p);return levels;}
+export function effectiveness(attacker,defender){if((attacker==='fire'&&defender==='grass')||(attacker==='grass'&&defender==='water')||(attacker==='water'&&defender==='fire')||(attacker==='electric'&&defender==='water'))return 1.65;if(attacker===defender&&attacker!=='normal')return .72;if((attacker==='grass'&&defender==='fire')||(attacker==='water'&&defender==='grass')||(attacker==='fire'&&defender==='water')||(attacker==='electric'&&defender==='grass'))return .72;return 1;}
+export function catchChance(wild){const coefficient=BASE_STATS[wild.species].captureRate;const penalty=wild.species===6?.58:1;return Math.min(.97,(.15+coefficient/255*.35+(1-wild.hp/hpMax(wild))*.57)*penalty);}
+export function chapterComplete(s){return BASES.every(id=>s.caught.has(id))&&s.pickedStones.size===3&&s.evolutions>=1&&s.wins>=3;}
+export function zoneAt(x,z){if(z<-22&&x>3)return 'Янтарные скалы';if(z<-19&&x<-9)return 'Грозовая роща';if(x>18&&z<22)return 'Лазурное озеро';if(x<-16&&z<16)return 'Лиственный лес';if(z>16&&Math.abs(x)<15)return 'Лагерь исследователей';return 'Солнечная поляна';}
+export function walkable(x,z){if((x/65)**2+(z/65)**2>1)return false;if(((x-35)/16)**2+((z-4)/20)**2<1)return false;return true;}
