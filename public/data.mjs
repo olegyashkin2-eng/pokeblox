@@ -1,5 +1,21 @@
 import {BASE_STATS} from './stats.mjs';
 export const SPECIES = {
+  54: {"name":"Псайдак","type":"water","height":1.5,"zone":"Приливный остров","move":"Водяная волна","next":55,"level":33},
+  55: {"name":"Голдак","type":"water","height":2.4,"zone":"Приливный остров","move":"Водяная волна"},
+  60: {"name":"Поливаг","type":"water","height":1.1,"zone":"Приливный остров","move":"Водяная волна","next":61,"level":25},
+  61: {"name":"Поливирл","type":"water","height":1.7,"zone":"Приливный остров","move":"Водяная волна","stones":{"water":62}},
+  62: {"name":"Поливрат","type":"water","height":2.3,"zone":"Приливный остров","move":"Водяная волна"},
+  74: {"name":"Геодуд","type":"rock","height":1.2,"zone":"Приливный остров","move":"Каменный обвал","next":75,"level":25},
+  75: {"name":"Гравелер","type":"rock","height":1.8,"zone":"Приливный остров","move":"Каменный обвал","next":76,"level":36},
+  76: {"name":"Голем","type":"rock","height":2.4,"zone":"Приливный остров","move":"Каменный обвал"},
+  86: {"name":"Сил","type":"water","height":1.45,"zone":"Приливный остров","move":"Водяная волна","next":87,"level":34},
+  87: {"name":"Дьюгонг","type":"water","height":2.1,"zone":"Приливный остров","move":"Водяная волна"},
+  90: {"name":"Шелдер","type":"water","height":1.1,"zone":"Приливный остров","move":"Водяная волна"},
+  116: {"name":"Хорси","type":"water","height":1.1,"zone":"Приливный остров","move":"Водяная волна","next":117,"level":32},
+  117: {"name":"Сидра","type":"water","height":1.7,"zone":"Приливный остров","move":"Водяная волна"},
+  118: {"name":"Голдин","type":"water","height":1.25,"zone":"Приливный остров","move":"Водяная волна","next":119,"level":33},
+  119: {"name":"Сикинг","type":"water","height":1.9,"zone":"Приливный остров","move":"Водяная волна"},
+  129: {"name":"Мэджикарп","type":"water","height":1.25,"zone":"Приливный остров","move":"Всплеск"},
   1: {name:'Бульбазавр',type:'grass',height:1.12,next:2,level:16,zone:'Лиственный лес',move:'Лоза'},
   2: {name:'Ивизавр',type:'grass',height:1.6,next:3,level:32,zone:'Лиственный лес',move:'Лоза'},
   3: {name:'Венузавр',type:'grass',height:2.45,zone:'Лиственный лес',move:'Солнечный луч'},
@@ -17,8 +33,14 @@ export const SPECIES = {
   136: {name:'Флареон',type:'fire',height:1.6,zone:'Янтарные скалы',move:'Огнемёт'}
 };
 export const BASES=[4,1,7,25,133];
-export const ALL_IDS=[1,2,3,4,5,6,7,8,9,25,26,133,134,135,136];
-export const TYPES={grass:{name:'Травяной',color:'#55b985',icon:'leaf'},fire:{name:'Огненный',color:'#f79458',icon:'flame'},water:{name:'Водный',color:'#69bced',icon:'drop'},electric:{name:'Электрический',color:'#efca49',icon:'bolt'},normal:{name:'Обычный',color:'#bfa68b',icon:'star'}};
+export const ALL_IDS=Object.keys(SPECIES).map(Number).sort((a,b)=>a-b);
+export const ISLAND2_IDS=[76,75,74,54,116,117,134,7,9,8,129,118,119,60,61,62,86,87,90];
+export const ISLAND_NAMES={1:'Канто',2:'Приливный остров'};
+export const ISLAND2_ZONES=['Приливный лагерь','Базальтовые скалы','Жемчужный берег','Коралловая бухта','Ледяной мыс','Арена Голдака'];
+export const ISLAND2_LANDMARKS=[{x:0,z:22,color:'#fff',label:'Приливный лагерь'},{x:-28,z:0,color:'#adacbc',label:'Базальтовые скалы'},{x:25,z:23,color:'#ffcdb2',label:'Жемчужный берег'},{x:21,z:-15,color:'#69d2e5',label:'Коралловая бухта'},{x:-27,z:-35,color:'#dcecff',label:'Ледяной мыс'},{x:0,z:-43,color:'#ffcc69',label:'Арена Голдака'}];
+export const ISLAND2_SPAWNS=ISLAND2_IDS.map((id,i)=>({id,...Object.fromEntries(['x','z'].map((k,j)=>[k,[[-25,5],[-34,-8],[-20,13],[6,13],[22,22],[18,1],[30,-20],[10,31],[42,29],[18,30],[-7,4],[12,6],[12,-12],[-9,13],[-17,-13],[-17,-25],[-35,-30],[-28,-43],[53,13]][i][j]]))})).concat([{id:55,x:0,z:-43,boss:true}]);
+export function islandZone(x,z,island=1){return island===1?zoneAt(x,z):z<-32&&Math.abs(x)<14?'Арена Голдака':z>16&&Math.abs(x)<15?'Приливный лагерь':x<-15&&z<-19?'Ледяной мыс':x<-15?'Базальтовые скалы':z<-8?'Коралловая бухта':'Жемчужный берег';}
+export const TYPES={rock:{name:'Каменный',color:'#b9ad93',icon:'gem'},grass:{name:'Травяной',color:'#55b985',icon:'leaf'},fire:{name:'Огненный',color:'#f79458',icon:'flame'},water:{name:'Водный',color:'#69bced',icon:'drop'},electric:{name:'Электрический',color:'#efca49',icon:'bolt'},normal:{name:'Обычный',color:'#bfa68b',icon:'star'}};
 export const STONES={water:{name:'Водный камень',color:0x46c7ff},thunder:{name:'Громовой камень',color:0xffd948},fire:{name:'Огненный камень',color:0xff8840}};
 export const LANDMARKS=[
  {name:'Лагерь',x:0,z:22,color:'#ffffff',label:'Лагерь исследователей'},
@@ -31,7 +53,7 @@ export const STARTER_ID=25;
 export const MAX_PARTY=180;
 export const ENCOUNTERS={meadow:[[25,75],[1,20],[133,5]],forest:[[1,65],[25,30],[133,5]],lake:[[7,80],[25,20]],storm:[[25,85],[1,10],[133,5]],rocks:[[4,75],[25,24.5],[6,.5]]};
 export function rollEncounter(zone,rng=Math.random){let r=rng()*100;for(const [id,weight] of ENCOUNTERS[zone]){r-=weight;if(r<0)return id;}return ENCOUNTERS[zone].at(-1)[0];}
-export function rarity(id){return id===6?'Очень редкий':id===133?'Редкий':id===25?'Стартовый':BASES.includes(id)?'Необычный':'Эволюция';}
+export function rarity(id){return id===55?'Босс / эволюция':ISLAND2_IDS.includes(id)&&![7,8,9,134].includes(id)?'Приливный остров':id===6?'Очень редкий':id===133?'Редкий':id===25?'Стартовый':BASES.includes(id)?'Необычный':'Эволюция';}
 export function baseStats(id){return BASE_STATS[id];}
 let nextUid=1;
 export function reserveUids(party){nextUid=Math.max(nextUid,1,...party.map(p=>p.uid+1));}
@@ -39,12 +61,12 @@ export function hpMax(p){return Math.floor((2*BASE_STATS[p.species].stats.hp+15)
 export function battleStat(p,name){return Math.floor((2*BASE_STATS[p.species].stats[name]+15)*p.level/100)+5;}
 export function damageFor(p,q,special=false,rng=Math.random){const a=battleStat(p,special?'spAttack':'attack'),d=battleStat(q,special?'spDefense':'defense');const eff=special?effectiveness(SPECIES[p.species].type,SPECIES[q.species].type):1;const critical=rng()<Math.min(.18,.04+Math.max(0,battleStat(p,'speed')-battleStat(q,'speed'))/800);const damage=Math.max(2,Math.round((((2*p.level/5+2)*(special?65:40)*a/d)/50+2)*1.45*eff*(critical?1.5:1)*(.9+rng()*.1)));return {damage,eff,critical};}
 export function newPokemon(species,level=5){const p={uid:nextUid++,species,level,xp:0,hp:0};p.hp=hpMax(p);return p;}
-export function createState(){return {started:false,party:[],active:0,balls:20,stones:{water:0,thunder:0,fire:0},potions:5,seen:new Set(),caught:new Set(),wins:0,evolutions:0,pickedStones:new Set(),completed:false,visited:new Set(),captured:0};}
+export function createState(){return {island:1,bossDefeated:false,island2Wins:0,started:false,party:[],active:0,balls:20,stones:{water:0,thunder:0,fire:0},potions:5,seen:new Set(),caught:new Set(),wins:0,evolutions:0,pickedStones:new Set(),completed:false,visited:new Set(),captured:0};}
 export function xpNeeded(p){return 18+p.level*3;}
 export function evolutionOptions(p,s){const d=SPECIES[p.species];if(d.next)return [{id:d.next,available:p.level>=d.level,label:`Уровень ${d.level}`,level:d.level}];return Object.entries(d.stones||{}).map(([stone,id])=>({id,stone,available:s.stones[stone]>0,label:STONES[stone].name}));}
 export function evolve(p,s,target){const option=evolutionOptions(p,s).find(x=>x.id===target);if(!option?.available)return false;if(option.stone)s.stones[option.stone]--;p.species=target;p.hp=hpMax(p);s.caught.add(target);s.seen.add(target);s.evolutions++;return true;}
 export function gainXP(p,value){let levels=0;p.xp+=value;while(p.level<50&&p.xp>=xpNeeded(p)){p.xp-=xpNeeded(p);p.level++;levels++;}if(p.level===50)p.xp=0;if(levels)p.hp=hpMax(p);return levels;}
-export function effectiveness(attacker,defender){if((attacker==='fire'&&defender==='grass')||(attacker==='grass'&&defender==='water')||(attacker==='water'&&defender==='fire')||(attacker==='electric'&&defender==='water'))return 1.65;if(attacker===defender&&attacker!=='normal')return .72;if((attacker==='grass'&&defender==='fire')||(attacker==='water'&&defender==='grass')||(attacker==='fire'&&defender==='water')||(attacker==='electric'&&defender==='grass'))return .72;return 1;}
+export function effectiveness(attacker,defender){if(defender==='rock'&&['water','grass'].includes(attacker)||attacker==='rock'&&defender==='fire')return 1.65;if(defender==='rock'&&['fire','normal'].includes(attacker))return .72;if((attacker==='fire'&&defender==='grass')||(attacker==='grass'&&defender==='water')||(attacker==='water'&&defender==='fire')||(attacker==='electric'&&defender==='water'))return 1.65;if(attacker===defender&&attacker!=='normal')return .72;if((attacker==='grass'&&defender==='fire')||(attacker==='water'&&defender==='grass')||(attacker==='fire'&&defender==='water')||(attacker==='electric'&&defender==='grass'))return .72;return 1;}
 export function catchChance(wild){const coefficient=BASE_STATS[wild.species].captureRate;const penalty=wild.species===6?.58:1;return Math.min(.97,(.15+coefficient/255*.35+(1-wild.hp/hpMax(wild))*.57)*penalty);}
 export function chapterComplete(s){return BASES.every(id=>s.caught.has(id))&&s.pickedStones.size===3&&s.evolutions>=1&&s.wins>=3;}
 export function zoneAt(x,z){if(z<-22&&x>3)return 'Янтарные скалы';if(z<-19&&x<-9)return 'Грозовая роща';if(x>18&&z<22)return 'Лазурное озеро';if(x<-16&&z<16)return 'Лиственный лес';if(z>16&&Math.abs(x)<15)return 'Лагерь исследователей';return 'Солнечная поляна';}
