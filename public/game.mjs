@@ -61,7 +61,20 @@ function openPanel(type){if(battle&&type!=='switch'||!$('evolution').hidden)retu
 }
 function closePanel(){if($('panel').open)$('panel').close();openPanelType=null;keys.clear();}
 function setPartner(i){if(!Number.isInteger(i)||!state.party[i]||battle)return false;state.active=i;world.setPartner(active().species);updateHUD();if($('panel').open)openPanel('team');sound();return true;}
-async function performEvolution(i,target){const p=state.party[i];if(!p||battle||!$('evolution').hidden)return false;const oldId=p.species,old=SPECIES[oldId].name;if(!evolve(p,state,target))return false;closePanel();keys.clear();joy.x=joy.y=0;world.startEvolution(oldId,target);$('evolution-title').textContent=`${old} меняется…`;$('evolution-img').hidden=true;$('evolution-text').textContent='Новая сила пробуждается';$('evolution').hidden=false;$('evolution-done').disabled=true;updateHUD();sound('evolve');await sleep(3500);$('evolution-title').textContent=`${old} → ${SPECIES[target].name}`;$('evolution-text').textContent=`${SPECIES[target].name} теперь в твоей команде.`;$('evolution-done').disabled=false;return true;}
+async function performEvolution(i,target){
+ const p=state.party[i];if(!p||battle||!$('evolution').hidden)return false;
+ const oldId=p.species,old=SPECIES[oldId].name,option=evolutionOptions(p,state).find(o=>o.id===target);
+ if(!evolve(p,state,target))return false;
+ closePanel();keys.clear();joy.x=joy.y=0;
+ $('evolution-title').textContent=`${old} эволюционирует`;$('evolution-img').hidden=true;
+ $('evolution-text').textContent=option.stone?`${STONES[option.stone].name} пробуждает новую силу`:'Новая сила пробуждается';
+ $('evolution').hidden=false;$('evolution-done').disabled=true;$('evolution-done').textContent='Превращение…';
+ // Commit the evolution and stone once, before the cosmetic cinematic starts.
+ updateHUD();sound('evolve');await world.startEvolution(oldId,target,option.stone);
+ $('evolution-title').textContent=`${old} → ${SPECIES[target].name}`;
+ $('evolution-text').textContent=`${SPECIES[target].name} теперь в твоей команде.`;
+ $('evolution-done').textContent='Вернуться к приключению';$('evolution-done').disabled=false;sound('win');return true;
+}
 async function travelIsland(id){if(battle||lock||saves.blocked||id===state.island)return;if(id===2&&state.wins<3){toast('Для переправы нужно 3 победы.');return;}lock=true;closePanel();keys.clear();joy.x=joy.y=0;regions[state.island]=world.snapshotWorld();world.configureIsland(id);if(regions[id])world.restoreWorld(regions[id]);delete regions[id];state.island=id;world.begin(active().species);updateHUD();updateNear();saveGame();await saves.flushAll();lock=false;toast(`Добро пожаловать: ${ISLAND_NAMES[id]}`,5000);}
 
 function healActive(){const p=active();if(!p)return false;if(!state.potions){toast('Зелья закончились. В лагере лечение бесплатное.');return false;}if(p.hp===hpMax(p)){toast('У напарника уже полное здоровье.');return false;}state.potions--;p.hp=Math.min(hpMax(p),p.hp+45);updateHUD();sound('pickup');toast(`${SPECIES[p.species].name} восстановил здоровье.`);return true;}
