@@ -606,6 +606,245 @@
       "scale_factor_for_height_1": 0.28558259
     },
     {
+      "id": 10,
+      "name": "caterpie",
+      "filename": "10.glb",
+      "local_path": "public/assets/10.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/10.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/10.glb",
+      "byte_size": 39612,
+      "sha256": "41d694bae74bee7cea7bed41b2efa3c8559356bdd4a44672a4152053ab20c5ac",
+      "meshes": 1,
+      "vertices": 2771,
+      "triangles": 4362,
+      "materials": 1,
+      "embedded_images": 1,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -0.126029,
+          -0.398536,
+          -0.140957
+        ],
+        "max": [
+          0.126034,
+          0.365067,
+          0.161585
+        ],
+        "size": [
+          0.252064,
+          0.763603,
+          0.302542
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 11,
+      "name": "metapod",
+      "filename": "11.glb",
+      "local_path": "public/assets/11.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/11.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/11.glb",
+      "byte_size": 42028,
+      "sha256": "9664caf9d70b0852462b00af8ccabd4267bb0a5c67cc8bc403e54e510db1c3e2",
+      "meshes": 1,
+      "vertices": 2268,
+      "triangles": 3702,
+      "materials": 2,
+      "embedded_images": 2,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -0.36241,
+          0.000265,
+          -0.965454
+        ],
+        "max": [
+          0.36243,
+          1.458726,
+          0.810918
+        ],
+        "size": [
+          0.724839,
+          1.458461,
+          1.776372
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 12,
+      "name": "butterfree",
+      "filename": "12.glb",
+      "local_path": "public/assets/12.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/12.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/12.glb",
+      "byte_size": 52848,
+      "sha256": "71ec8b1821b68e72880c0a7d4578f25dd20950616e353c35b4abfdb0ff196f38",
+      "meshes": 1,
+      "vertices": 2398,
+      "triangles": 3932,
+      "materials": 3,
+      "embedded_images": 3,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -1.546499,
+          -0.033403,
+          -0.262749
+        ],
+        "max": [
+          1.546499,
+          2.429782,
+          0.54516
+        ],
+        "size": [
+          3.092999,
+          2.463185,
+          0.807909
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 13,
+      "name": "weedle",
+      "filename": "13.glb",
+      "local_path": "public/assets/13.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/13.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/13.glb",
+      "byte_size": 35916,
+      "sha256": "eedbfe651fa08ba716964af8d810e1969bf3f155a44c831bfa7ffba05dbf186f",
+      "meshes": 1,
+      "vertices": 2615,
+      "triangles": 4476,
+      "materials": 2,
+      "embedded_images": 2,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -0.101516,
+          -0.30065,
+          -0.134186
+        ],
+        "max": [
+          0.101513,
+          0.44833,
+          0.111908
+        ],
+        "size": [
+          0.203029,
+          0.74898,
+          0.246094
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 14,
+      "name": "kakuna",
+      "filename": "14.glb",
+      "local_path": "public/assets/14.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/14.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/14.glb",
+      "byte_size": 58336,
+      "sha256": "8f80fa131768854de99f41ea4271cb214654fc7a0a2ac4804324a192eb8ad0aa",
+      "meshes": 1,
+      "vertices": 2325,
+      "triangles": 3850,
+      "materials": 2,
+      "embedded_images": 2,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -0.382849,
+          0.018308,
+          -0.668101
+        ],
+        "max": [
+          0.38288,
+          1.50239,
+          0.09482
+        ],
+        "size": [
+          0.765729,
+          1.484082,
+          0.762921
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 15,
+      "name": "beedrill",
+      "filename": "15.glb",
+      "local_path": "public/assets/15.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/15.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/15.glb",
+      "byte_size": 125768,
+      "sha256": "bf17d8b17dd744496e7c161044f4315be854255a9796c256a55440d1f37373a4",
+      "meshes": 5,
+      "vertices": 3055,
+      "triangles": 4632,
+      "materials": 1,
+      "embedded_images": 1,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [
+        {
+          "name": "ArmatureAction.001",
+          "duration_seconds": 4.1667
+        }
+      ],
+      "default_pose_world_bounds": {
+        "min": [
+          -1.258956,
+          0.360849,
+          -1.474541
+        ],
+        "max": [
+          1.257956,
+          3.584859,
+          1.533605
+        ],
+        "size": [
+          2.516913,
+          3.22401,
+          3.008146
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
       "id": 25,
       "name": "Pikachu",
       "filename": "25.glb",
@@ -733,6 +972,2017 @@
         ]
       },
       "scale_factor_for_height_1": 0.46648841
+    },
+    {
+      "id": 27,
+      "name": "sandshrew",
+      "filename": "27.glb",
+      "local_path": "public/assets/27.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/27.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/27.glb",
+      "byte_size": 86496,
+      "sha256": "993c80edbc234a9708bc83f8f5cfd63e12396d22c394dd3caa9e6a323130de3b",
+      "meshes": 2,
+      "vertices": 3293,
+      "triangles": 5322,
+      "materials": 3,
+      "embedded_images": 3,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -0.732815,
+          -0.0,
+          -1.325245
+        ],
+        "max": [
+          0.73279,
+          1.490817,
+          0.771421
+        ],
+        "size": [
+          1.465606,
+          1.490817,
+          2.096666
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 28,
+      "name": "sandslash",
+      "filename": "28.glb",
+      "local_path": "public/assets/28.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/28.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/28.glb",
+      "byte_size": 78744,
+      "sha256": "0793a259bdc19a42202f633012ecb3e7e460acba52af8940abdb2f3242c4bebd",
+      "meshes": 1,
+      "vertices": 3777,
+      "triangles": 5468,
+      "materials": 3,
+      "embedded_images": 3,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -1.119769,
+          0.0,
+          -1.670031
+        ],
+        "max": [
+          1.119769,
+          2.60658,
+          0.974956
+        ],
+        "size": [
+          2.239538,
+          2.60658,
+          2.644987
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 35,
+      "name": "clefairy",
+      "filename": "35.glb",
+      "local_path": "public/assets/35.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/35.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/35.glb",
+      "byte_size": 18952,
+      "sha256": "d6db3655265d61e35d22bf184ededc8d4f09cb482e479641426582d0a7a4308a",
+      "meshes": 3,
+      "vertices": 1386,
+      "triangles": 1862,
+      "materials": 3,
+      "embedded_images": 3,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -0.310615,
+          -0.001627,
+          -0.500674
+        ],
+        "max": [
+          0.310597,
+          0.616481,
+          0.258318
+        ],
+        "size": [
+          0.621212,
+          0.618108,
+          0.758992
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 36,
+      "name": "clefable",
+      "filename": "36.glb",
+      "local_path": "public/assets/36.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/36.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/36.glb",
+      "byte_size": 45740,
+      "sha256": "1cd15789ac7f94468fd5fda337b4313c220481965e7350a118bddeeb73f64d46",
+      "meshes": 1,
+      "vertices": 2770,
+      "triangles": 4681,
+      "materials": 3,
+      "embedded_images": 3,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -2.368974,
+          -5e-06,
+          -2.884196
+        ],
+        "max": [
+          2.368974,
+          3.631179,
+          1.004515
+        ],
+        "size": [
+          4.737948,
+          3.631185,
+          3.88871
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 39,
+      "name": "jigglypuff",
+      "filename": "39.glb",
+      "local_path": "public/assets/39.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/39.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/39.glb",
+      "byte_size": 47996,
+      "sha256": "4b80135adfb9bcc341d62b558db747cae1a5a1ae31cc002519b1bddd5fd9098f",
+      "meshes": 1,
+      "vertices": 2405,
+      "triangles": 4100,
+      "materials": 4,
+      "embedded_images": 4,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -0.756425,
+          0.021088,
+          -0.682445
+        ],
+        "max": [
+          0.756425,
+          1.424696,
+          0.760778
+        ],
+        "size": [
+          1.512849,
+          1.403608,
+          1.443223
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 40,
+      "name": "wigglytuff",
+      "filename": "40.glb",
+      "local_path": "public/assets/40.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/40.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/40.glb",
+      "byte_size": 102804,
+      "sha256": "2d0d07fd407420a0f643fbe60052b560b0600ff45f4e9fdc5f307a046db068bd",
+      "meshes": 3,
+      "vertices": 2495,
+      "triangles": 4316,
+      "materials": 3,
+      "embedded_images": 3,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [
+        {
+          "name": "bd_ev103_taa",
+          "duration_seconds": 1.3333
+        },
+        {
+          "name": "bd_ev107_sleeploop",
+          "duration_seconds": 1
+        },
+        {
+          "name": "bd_landing",
+          "duration_seconds": 0.5
+        },
+        {
+          "name": "bd_run",
+          "duration_seconds": 0.6667
+        }
+      ],
+      "default_pose_world_bounds": {
+        "min": [
+          -0.006741,
+          -3.8e-05,
+          -0.004491
+        ],
+        "max": [
+          0.006741,
+          0.012408,
+          0.004312
+        ],
+        "size": [
+          0.013482,
+          0.012446,
+          0.008803
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 43,
+      "name": "oddish",
+      "filename": "43.glb",
+      "local_path": "public/assets/43.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/43.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/43.glb",
+      "byte_size": 36872,
+      "sha256": "cffd5802f946aa02048aea0453ed8c8598fb2b9e3320f65f6d11202bd2a0fb5e",
+      "meshes": 1,
+      "vertices": 2277,
+      "triangles": 3662,
+      "materials": 3,
+      "embedded_images": 3,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -0.731921,
+          -8.1e-05,
+          -0.490941
+        ],
+        "max": [
+          0.731921,
+          1.26969,
+          0.290081
+        ],
+        "size": [
+          1.463843,
+          1.269771,
+          0.781023
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 44,
+      "name": "gloom",
+      "filename": "44.glb",
+      "local_path": "public/assets/44.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/44.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/44.glb",
+      "byte_size": 44064,
+      "sha256": "c223b1e49e73c5601df14c39ac77f3c622522b4a776093f857cb2f1f4d8aedb3",
+      "meshes": 1,
+      "vertices": 3045,
+      "triangles": 4884,
+      "materials": 2,
+      "embedded_images": 2,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -1.228293,
+          -0.000455,
+          -1.143836
+        ],
+        "max": [
+          1.146134,
+          2.042947,
+          0.762462
+        ],
+        "size": [
+          2.374428,
+          2.043402,
+          1.906298
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 45,
+      "name": "vileplume",
+      "filename": "45.glb",
+      "local_path": "public/assets/45.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/45.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/45.glb",
+      "byte_size": 44132,
+      "sha256": "1882c6c7271426e3eb900a247e51d9c47f8b1b1e833d14755b310f0970f269f1",
+      "meshes": 1,
+      "vertices": 2804,
+      "triangles": 4816,
+      "materials": 3,
+      "embedded_images": 3,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -2.536822,
+          -0.001248,
+          -2.592374
+        ],
+        "max": [
+          2.592832,
+          3.080678,
+          2.531957
+        ],
+        "size": [
+          5.129654,
+          3.081926,
+          5.124332
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 46,
+      "name": "paras",
+      "filename": "46.glb",
+      "local_path": "public/assets/46.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/46.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/46.glb",
+      "byte_size": 43200,
+      "sha256": "a6d3b9a658a83af1521b714c9b31808f1df199af2bfc93a7d44aca4860820c47",
+      "meshes": 1,
+      "vertices": 3123,
+      "triangles": 5038,
+      "materials": 2,
+      "embedded_images": 2,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -0.59264,
+          -0.024505,
+          -0.547873
+        ],
+        "max": [
+          0.59264,
+          0.781309,
+          0.552688
+        ],
+        "size": [
+          1.185281,
+          0.805814,
+          1.100561
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 47,
+      "name": "parasect",
+      "filename": "47.glb",
+      "local_path": "public/assets/47.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/47.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/47.glb",
+      "byte_size": 48164,
+      "sha256": "bf116d7615d7599fbacb05f18ca61e878d9649dca136a2979262187f99d5f235",
+      "meshes": 1,
+      "vertices": 3202,
+      "triangles": 4978,
+      "materials": 2,
+      "embedded_images": 2,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -1.446901,
+          -0.525986,
+          -1.301277
+        ],
+        "max": [
+          1.4469,
+          2.598943,
+          1.373834
+        ],
+        "size": [
+          2.893801,
+          3.124929,
+          2.675112
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 48,
+      "name": "venonat",
+      "filename": "48.glb",
+      "local_path": "public/assets/48.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/48.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/48.glb",
+      "byte_size": 49740,
+      "sha256": "5161e02de616d83d3dcc3b4556a0b3e39e8f2d751ce9b12aba085ddbb9facd47",
+      "meshes": 1,
+      "vertices": 2788,
+      "triangles": 4812,
+      "materials": 2,
+      "embedded_images": 2,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -1.391016,
+          -0.000147,
+          -1.333144
+        ],
+        "max": [
+          1.391134,
+          3.962858,
+          1.426536
+        ],
+        "size": [
+          2.78215,
+          3.963005,
+          2.75968
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 49,
+      "name": "venomoth",
+      "filename": "49.glb",
+      "local_path": "public/assets/49.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/49.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/49.glb",
+      "byte_size": 51516,
+      "sha256": "ee407f03c565bb238301f461b19cdfa844bcca373c61a9136f0cbdef0c492999",
+      "meshes": 1,
+      "vertices": 3173,
+      "triangles": 4940,
+      "materials": 3,
+      "embedded_images": 3,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -2.808096,
+          -0.16035,
+          -1.914052
+        ],
+        "max": [
+          2.808097,
+          3.864557,
+          0.555886
+        ],
+        "size": [
+          5.616193,
+          4.024907,
+          2.469938
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 54,
+      "name": "psyduck",
+      "filename": "54.glb",
+      "local_path": "public/assets/54.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/54.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/54.glb",
+      "byte_size": 49680,
+      "sha256": "6dafc814712170c46ec69b71043ff756674819db77871dd687fc486df72535a6",
+      "meshes": 1,
+      "vertices": 2809,
+      "triangles": 4658,
+      "materials": 3,
+      "embedded_images": 3,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -1.433507,
+          -0.0,
+          -1.22688
+        ],
+        "max": [
+          1.433507,
+          2.607141,
+          1.37921
+        ],
+        "size": [
+          2.867014,
+          2.607141,
+          2.60609
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 55,
+      "name": "golduck",
+      "filename": "55.glb",
+      "local_path": "public/assets/55.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/55.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/55.glb",
+      "byte_size": 57764,
+      "sha256": "50bd1b5b6abf4cb2fb6643111197cfa06092b25db73ea8d0623d63fe0dc38b6b",
+      "meshes": 1,
+      "vertices": 3773,
+      "triangles": 4922,
+      "materials": 2,
+      "embedded_images": 2,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -2.391631,
+          -0.008053,
+          -2.115467
+        ],
+        "max": [
+          2.391631,
+          3.922088,
+          1.510738
+        ],
+        "size": [
+          4.783262,
+          3.93014,
+          3.626205
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 56,
+      "name": "mankey",
+      "filename": "56.glb",
+      "local_path": "public/assets/56.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/56.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/56.glb",
+      "byte_size": 42996,
+      "sha256": "06136dc247ce385d890c5da7d694af314433b35c9b448d13c205fdf2bb1aa56f",
+      "meshes": 1,
+      "vertices": 2775,
+      "triangles": 4334,
+      "materials": 2,
+      "embedded_images": 2,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -1.315008,
+          -0.102196,
+          -1.938574
+        ],
+        "max": [
+          1.315009,
+          1.360423,
+          0.421748
+        ],
+        "size": [
+          2.630017,
+          1.462619,
+          2.360322
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 57,
+      "name": "primeape",
+      "filename": "57.glb",
+      "local_path": "public/assets/57.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/57.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/57.glb",
+      "byte_size": 46112,
+      "sha256": "9c6f1faeb3257ff3db7e768d0f1a57bb260bdf0f560bdedb00e1e5671d6192b2",
+      "meshes": 1,
+      "vertices": 2543,
+      "triangles": 3910,
+      "materials": 2,
+      "embedded_images": 2,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -2.625166,
+          -0.0,
+          -1.323576
+        ],
+        "max": [
+          2.625166,
+          3.248381,
+          0.970021
+        ],
+        "size": [
+          5.250332,
+          3.248381,
+          2.293597
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 60,
+      "name": "poliwag",
+      "filename": "60.glb",
+      "local_path": "public/assets/60.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/60.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/60.glb",
+      "byte_size": 16140,
+      "sha256": "4074a33e232d69dae3efa31a8c1245a9fd794a754f99021584d96fa4157f2bb5",
+      "meshes": 3,
+      "vertices": 900,
+      "triangles": 1248,
+      "materials": 3,
+      "embedded_images": 3,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -0.259018,
+          0.002973,
+          -0.846641
+        ],
+        "max": [
+          0.258993,
+          0.592104,
+          0.304706
+        ],
+        "size": [
+          0.518011,
+          0.589132,
+          1.151347
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 61,
+      "name": "poliwhirl",
+      "filename": "61.glb",
+      "local_path": "public/assets/61.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/61.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/61.glb",
+      "byte_size": 46892,
+      "sha256": "8742f50a28814d1f3a393a4ddfd154007477bca800f236e052fd8c5ed39b7492",
+      "meshes": 1,
+      "vertices": 2721,
+      "triangles": 4562,
+      "materials": 3,
+      "embedded_images": 3,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -2.737257,
+          -0.002166,
+          -0.892419
+        ],
+        "max": [
+          2.737255,
+          2.542777,
+          0.916713
+        ],
+        "size": [
+          5.474512,
+          2.544943,
+          1.809132
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 62,
+      "name": "poliwrath",
+      "filename": "62.glb",
+      "local_path": "public/assets/62.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/62.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/62.glb",
+      "byte_size": 49468,
+      "sha256": "495f67a9aa465f8deb32189dfadad990318374ee3dcbe6d45b7fe498692f3554",
+      "meshes": 1,
+      "vertices": 2926,
+      "triangles": 4906,
+      "materials": 3,
+      "embedded_images": 3,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -4.360011,
+          -1e-06,
+          -1.174226
+        ],
+        "max": [
+          4.360011,
+          3.83813,
+          1.195772
+        ],
+        "size": [
+          8.720022,
+          3.838132,
+          2.369998
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 63,
+      "name": "abra",
+      "filename": "63.glb",
+      "local_path": "public/assets/63.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/63.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/63.glb",
+      "byte_size": 53240,
+      "sha256": "6ff7e80c572e977986df0c9888cf2db034fc825715028c70d2dc233d40fdcf27",
+      "meshes": 1,
+      "vertices": 3027,
+      "triangles": 4732,
+      "materials": 1,
+      "embedded_images": 1,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -0.912046,
+          -0.0,
+          -2.246957
+        ],
+        "max": [
+          0.912115,
+          2.296517,
+          0.604413
+        ],
+        "size": [
+          1.824161,
+          2.296518,
+          2.851371
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 64,
+      "name": "kadabra",
+      "filename": "64.glb",
+      "local_path": "public/assets/64.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/64.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/64.glb",
+      "byte_size": 80032,
+      "sha256": "0121ba2791d6e9af8b646a96cd1b967a107f7c8219643b75b665595f97d9fc4d",
+      "meshes": 1,
+      "vertices": 3773,
+      "triangles": 5812,
+      "materials": 4,
+      "embedded_images": 4,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -2.290622,
+          -0.001294,
+          -3.140566
+        ],
+        "max": [
+          2.290623,
+          3.294451,
+          0.943263
+        ],
+        "size": [
+          4.581245,
+          3.295745,
+          4.083828
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 65,
+      "name": "alakazam",
+      "filename": "65.glb",
+      "local_path": "public/assets/65.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/65.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/65.glb",
+      "byte_size": 69800,
+      "sha256": "b85039e57d15a54868d43d7ac44c3acea7cc16bd93dd6006055c41a6383d9f76",
+      "meshes": 1,
+      "vertices": 3478,
+      "triangles": 5116,
+      "materials": 3,
+      "embedded_images": 3,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -1.915904,
+          -0.0,
+          -0.57196
+        ],
+        "max": [
+          1.915904,
+          3.810992,
+          1.333069
+        ],
+        "size": [
+          3.831808,
+          3.810992,
+          1.905028
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 66,
+      "name": "machop",
+      "filename": "66.glb",
+      "local_path": "public/assets/66.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/66.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/66.glb",
+      "byte_size": 59372,
+      "sha256": "24c7b613d547d595ab0ec78a88570e5e63a15db1a79c69b7e0e2c309cc640ae1",
+      "meshes": 1,
+      "vertices": 2989,
+      "triangles": 4666,
+      "materials": 3,
+      "embedded_images": 3,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -1.340858,
+          0.007008,
+          -0.673719
+        ],
+        "max": [
+          1.340858,
+          2.011216,
+          0.50877
+        ],
+        "size": [
+          2.681716,
+          2.004209,
+          1.18249
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 67,
+      "name": "machoke",
+      "filename": "67.glb",
+      "local_path": "public/assets/67.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/67.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/67.glb",
+      "byte_size": 67456,
+      "sha256": "d4aba5cc0cc32561aac7c1151b82137a306d10c573e2d733d53f5c797e518282",
+      "meshes": 1,
+      "vertices": 3590,
+      "triangles": 5526,
+      "materials": 2,
+      "embedded_images": 2,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -3.019933,
+          -1e-06,
+          -0.706689
+        ],
+        "max": [
+          3.019932,
+          3.820492,
+          0.790835
+        ],
+        "size": [
+          6.039865,
+          3.820493,
+          1.497524
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 68,
+      "name": "machamp",
+      "filename": "68.glb",
+      "local_path": "public/assets/68.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/68.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/68.glb",
+      "byte_size": 88116,
+      "sha256": "1bcd6b44189a07de02115885961d3951798ce1b17459cdf452526873f85137fc",
+      "meshes": 1,
+      "vertices": 3930,
+      "triangles": 5751,
+      "materials": 3,
+      "embedded_images": 3,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -2.990798,
+          -0.007541,
+          -0.749063
+        ],
+        "max": [
+          2.990799,
+          3.987698,
+          0.955008
+        ],
+        "size": [
+          5.981597,
+          3.995239,
+          1.704071
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 69,
+      "name": "bellsprout",
+      "filename": "69.glb",
+      "local_path": "public/assets/69.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/69.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/69.glb",
+      "byte_size": 45844,
+      "sha256": "c1f38166b8313fd1cfe6d2e9b0b90caa5c996899d92bca114ff7ccf94e88b0e5",
+      "meshes": 1,
+      "vertices": 2341,
+      "triangles": 3718,
+      "materials": 2,
+      "embedded_images": 2,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -0.775167,
+          0.046877,
+          -0.27289
+        ],
+        "max": [
+          0.77516,
+          1.763603,
+          0.38182
+        ],
+        "size": [
+          1.550327,
+          1.716726,
+          0.65471
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 70,
+      "name": "weepinbell",
+      "filename": "70.glb",
+      "local_path": "public/assets/70.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/70.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/70.glb",
+      "byte_size": 38128,
+      "sha256": "5dde8f4e9b7b8b403aa58585b0a76b100b43fa4702eede5f14991aff71760f6b",
+      "meshes": 1,
+      "vertices": 1938,
+      "triangles": 3260,
+      "materials": 2,
+      "embedded_images": 2,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -1.992084,
+          -0.356369,
+          -0.547876
+        ],
+        "max": [
+          1.992084,
+          2.643723,
+          1.095032
+        ],
+        "size": [
+          3.984168,
+          3.000092,
+          1.642908
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 71,
+      "name": "victreebel",
+      "filename": "71.glb",
+      "local_path": "public/assets/71.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/71.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/71.glb",
+      "byte_size": 42876,
+      "sha256": "bedc7ee7a3033c9caedcc7f093f0fd79d237bede99e544262a25613864c34ba6",
+      "meshes": 1,
+      "vertices": 2295,
+      "triangles": 3668,
+      "materials": 2,
+      "embedded_images": 2,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -3.600323,
+          0.018829,
+          -8.724189
+        ],
+        "max": [
+          3.600188,
+          3.560794,
+          1.020234
+        ],
+        "size": [
+          7.200511,
+          3.541965,
+          9.744423
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 74,
+      "name": "geodude",
+      "filename": "74.glb",
+      "local_path": "public/assets/74.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/74.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/74.glb",
+      "byte_size": 48056,
+      "sha256": "6a3dd1e93824aec535bca1467b613b9bd75abd25cd07cb3d81ff46db6dd9f676",
+      "meshes": 1,
+      "vertices": 2727,
+      "triangles": 4476,
+      "materials": 3,
+      "embedded_images": 3,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -2.596286,
+          0.080182,
+          -0.560875
+        ],
+        "max": [
+          2.596286,
+          1.138779,
+          0.524358
+        ],
+        "size": [
+          5.192572,
+          1.058597,
+          1.085233
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 75,
+      "name": "graveler",
+      "filename": "75.glb",
+      "local_path": "public/assets/75.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/75.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/75.glb",
+      "byte_size": 78700,
+      "sha256": "e8217a5445957bbf95c150f349b662025d38deb0e5e717fc737708be6e6aa265",
+      "meshes": 1,
+      "vertices": 3126,
+      "triangles": 4992,
+      "materials": 3,
+      "embedded_images": 3,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -3.263087,
+          -0.0,
+          -1.103437
+        ],
+        "max": [
+          3.263087,
+          2.492014,
+          1.722033
+        ],
+        "size": [
+          6.526173,
+          2.492014,
+          2.82547
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 76,
+      "name": "golem",
+      "filename": "76.glb",
+      "local_path": "public/assets/76.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/76.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/76.glb",
+      "byte_size": 60512,
+      "sha256": "d237d8ecebe73835d922953ac059833b135f44e02f75742411124dc39e0d40f4",
+      "meshes": 1,
+      "vertices": 3478,
+      "triangles": 5077,
+      "materials": 3,
+      "embedded_images": 3,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -2.707995,
+          -0.052952,
+          -1.582438
+        ],
+        "max": [
+          2.707995,
+          3.362617,
+          2.138585
+        ],
+        "size": [
+          5.415991,
+          3.415569,
+          3.721023
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 86,
+      "name": "seel",
+      "filename": "86.glb",
+      "local_path": "public/assets/86.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/86.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/86.glb",
+      "byte_size": 48012,
+      "sha256": "1e08dc7baa498817654ecf5a382c405af447f6b5c76a33c76ce02041a4972aab",
+      "meshes": 1,
+      "vertices": 2786,
+      "triangles": 4622,
+      "materials": 2,
+      "embedded_images": 2,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -1.134664,
+          0.034843,
+          -1.215651
+        ],
+        "max": [
+          1.13464,
+          1.52383,
+          1.250879
+        ],
+        "size": [
+          2.269304,
+          1.488988,
+          2.46653
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 87,
+      "name": "dewgong",
+      "filename": "87.glb",
+      "local_path": "public/assets/87.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/87.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/87.glb",
+      "byte_size": 47472,
+      "sha256": "4214282e7fdbef4ae8131bd237802f458cfb844ccadbcd71ca994406054c08a1",
+      "meshes": 1,
+      "vertices": 2833,
+      "triangles": 4828,
+      "materials": 2,
+      "embedded_images": 2,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -1.300901,
+          0.03756,
+          -2.327125
+        ],
+        "max": [
+          1.300809,
+          1.626024,
+          2.053986
+        ],
+        "size": [
+          2.601711,
+          1.588463,
+          4.381111
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 90,
+      "name": "shellder",
+      "filename": "90.glb",
+      "local_path": "public/assets/90.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/90.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/90.glb",
+      "byte_size": 43972,
+      "sha256": "cea1da91f70c15595fc3bdf2d31e7d94cb5968130cee0d057ebf2fa86a596b90",
+      "meshes": 2,
+      "vertices": 4779,
+      "triangles": 7040,
+      "materials": 2,
+      "embedded_images": 2,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -20.522711,
+          -1.157998,
+          -19.355362
+        ],
+        "max": [
+          20.523829,
+          29.06486,
+          38.666964
+        ],
+        "size": [
+          41.046539,
+          30.222858,
+          58.022326
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 96,
+      "name": "drowzee",
+      "filename": "96.glb",
+      "local_path": "public/assets/96.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/96.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/96.glb",
+      "byte_size": 60120,
+      "sha256": "1eba422b72e6a16ccdfb15be8812fe342d2c8f0456a3bbfbe0d71771e70f40b4",
+      "meshes": 2,
+      "vertices": 5719,
+      "triangles": 9440,
+      "materials": 2,
+      "embedded_images": 2,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -66.025414,
+          0.785248,
+          -41.374981
+        ],
+        "max": [
+          66.025429,
+          95.646156,
+          24.670589
+        ],
+        "size": [
+          132.050842,
+          94.860908,
+          66.04557
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 97,
+      "name": "hypno",
+      "filename": "97.glb",
+      "local_path": "public/assets/97.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/97.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/97.glb",
+      "byte_size": 38284,
+      "sha256": "4770c40b74c39872cfca04a6565c3cc7d3fae5d978525d9b828f051371b57ffb",
+      "meshes": 2,
+      "vertices": 4535,
+      "triangles": 6110,
+      "materials": 2,
+      "embedded_images": 2,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -117.579979,
+          -49.000076,
+          -22.372602
+        ],
+        "max": [
+          117.579964,
+          163.007034,
+          54.92849
+        ],
+        "size": [
+          235.159943,
+          212.007111,
+          77.301092
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 106,
+      "name": "hitmonlee",
+      "filename": "106.glb",
+      "local_path": "public/assets/106.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/106.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/106.glb",
+      "byte_size": 55148,
+      "sha256": "a11a7365af8ba1d899359c3d964618c98f6037af85c7a713c380a9016efa86ce",
+      "meshes": 2,
+      "vertices": 6147,
+      "triangles": 9492,
+      "materials": 2,
+      "embedded_images": 2,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -124.614594,
+          -0.923431,
+          -30.037022
+        ],
+        "max": [
+          124.614594,
+          154.73262,
+          34.312572
+        ],
+        "size": [
+          249.229187,
+          155.656051,
+          64.349594
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 107,
+      "name": "hitmonchan",
+      "filename": "107.glb",
+      "local_path": "public/assets/107.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/107.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/107.glb",
+      "byte_size": 59776,
+      "sha256": "e379a1b686cce38a69863e28a92c73206fcbfa99a6ee49e2ce3a00a1f42084f3",
+      "meshes": 1,
+      "vertices": 3662,
+      "triangles": 5726,
+      "materials": 3,
+      "embedded_images": 3,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -2.069612,
+          -1e-06,
+          -0.418214
+        ],
+        "max": [
+          2.069612,
+          3.173329,
+          0.590875
+        ],
+        "size": [
+          4.139225,
+          3.17333,
+          1.009089
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 108,
+      "name": "lickitung",
+      "filename": "108.glb",
+      "local_path": "public/assets/108.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/108.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/108.glb",
+      "byte_size": 60760,
+      "sha256": "3ac61e563a4c028acc295421ba7cc4f85cdb3a2bed5a779dec9e8af9291eed82",
+      "meshes": 2,
+      "vertices": 7574,
+      "triangles": 10204,
+      "materials": 2,
+      "embedded_images": 2,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -69.393517,
+          -3e-06,
+          -121.594055
+        ],
+        "max": [
+          69.3946,
+          119.70211,
+          125.393311
+        ],
+        "size": [
+          138.788116,
+          119.702113,
+          246.987366
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 116,
+      "name": "horsea",
+      "filename": "116.glb",
+      "local_path": "public/assets/116.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/116.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/116.glb",
+      "byte_size": 52592,
+      "sha256": "740b7b70ed6bd9d7f9dbae1d4b0a16915b96730e01011fe62dd5559b1ed7ead9",
+      "meshes": 2,
+      "vertices": 4566,
+      "triangles": 7556,
+      "materials": 2,
+      "embedded_images": 2,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -14.960291,
+          -3e-06,
+          -18.760773
+        ],
+        "max": [
+          14.961189,
+          39.625217,
+          16.43343
+        ],
+        "size": [
+          29.92148,
+          39.625221,
+          35.194202
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 117,
+      "name": "seadra",
+      "filename": "117.glb",
+      "local_path": "public/assets/117.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/117.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/117.glb",
+      "byte_size": 74292,
+      "sha256": "20b73e0114a339bf217efdf83afa67e549781db12d3ac3b778776d25771abb62",
+      "meshes": 2,
+      "vertices": 7273,
+      "triangles": 10320,
+      "materials": 2,
+      "embedded_images": 2,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -63.92905,
+          -0.479418,
+          -52.299519
+        ],
+        "max": [
+          63.92905,
+          121.993706,
+          60.49625
+        ],
+        "size": [
+          127.858101,
+          122.473124,
+          112.795769
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 118,
+      "name": "goldeen",
+      "filename": "118.glb",
+      "local_path": "public/assets/118.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/118.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/118.glb",
+      "byte_size": 63032,
+      "sha256": "bf3cbb6963d1a80e8529dc15bb8a12a5845a8b7bb319672f26d61f9a894dc881",
+      "meshes": 3,
+      "vertices": 5339,
+      "triangles": 8604,
+      "materials": 3,
+      "embedded_images": 3,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -23.015474,
+          -0.005342,
+          -41.248657
+        ],
+        "max": [
+          23.013998,
+          22.819504,
+          13.971221
+        ],
+        "size": [
+          46.029472,
+          22.824846,
+          55.219878
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 119,
+      "name": "seaking",
+      "filename": "119.glb",
+      "local_path": "public/assets/119.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/119.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/119.glb",
+      "byte_size": 69512,
+      "sha256": "2488f2af1e9e509a8fa353788f76eb0defbf3e1a18db98f09500851a4859ad4a",
+      "meshes": 2,
+      "vertices": 5702,
+      "triangles": 9436,
+      "materials": 2,
+      "embedded_images": 2,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -41.557552,
+          -13.674478,
+          -75.335419
+        ],
+        "max": [
+          41.560337,
+          73.147522,
+          45.309608
+        ],
+        "size": [
+          83.117889,
+          86.822,
+          120.645027
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 120,
+      "name": "staryu",
+      "filename": "120.glb",
+      "local_path": "public/assets/120.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/120.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/120.glb",
+      "byte_size": 35556,
+      "sha256": "96ebf6b2f5f07ba9aba46d4db8bc9a97fb6c163da5b4a796611982b492aea5f1",
+      "meshes": 4,
+      "vertices": 2158,
+      "triangles": 2684,
+      "materials": 1,
+      "embedded_images": 1,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -0.420918,
+          -0.006349,
+          -0.127053
+        ],
+        "max": [
+          0.420916,
+          0.8004,
+          0.185546
+        ],
+        "size": [
+          0.841834,
+          0.806749,
+          0.3126
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 121,
+      "name": "starmie",
+      "filename": "121.glb",
+      "local_path": "public/assets/121.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/121.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/121.glb",
+      "byte_size": 57476,
+      "sha256": "ab24bb12f7fc42cda90cdd02efd437c33e72db2054ba3d8f9c9b80905a722e2a",
+      "meshes": 7,
+      "vertices": 2225,
+      "triangles": 2880,
+      "materials": 2,
+      "embedded_images": 2,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -0.566312,
+          -0.049792,
+          -0.300027
+        ],
+        "max": [
+          0.566312,
+          1.081626,
+          0.255358
+        ],
+        "size": [
+          1.132624,
+          1.131419,
+          0.555385
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 122,
+      "name": "mr-mime",
+      "filename": "122.glb",
+      "local_path": "public/assets/122.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/122.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/122.glb",
+      "byte_size": 64148,
+      "sha256": "dc8e42191eb2d50ec7f7e0c4615fb4d618c4aec76f4232af0926360ce9b3491b",
+      "meshes": 1,
+      "vertices": 3077,
+      "triangles": 4994,
+      "materials": 4,
+      "embedded_images": 4,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -2.784271,
+          -9e-06,
+          -0.496216
+        ],
+        "max": [
+          2.784272,
+          3.282722,
+          0.647221
+        ],
+        "size": [
+          5.568543,
+          3.282731,
+          1.143437
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 124,
+      "name": "jynx",
+      "filename": "124.glb",
+      "local_path": "public/assets/124.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/124.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/124.glb",
+      "byte_size": 71020,
+      "sha256": "6efddcd4f558a5ee71b7a09db5cf5512b177732adc1871441d0e273bdc836005",
+      "meshes": 2,
+      "vertices": 7153,
+      "triangles": 10856,
+      "materials": 2,
+      "embedded_images": 2,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -119.552017,
+          -0.002501,
+          -67.651001
+        ],
+        "max": [
+          119.552048,
+          138.121216,
+          63.05864
+        ],
+        "size": [
+          239.104065,
+          138.123716,
+          130.709641
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 129,
+      "name": "magikarp",
+      "filename": "129.glb",
+      "local_path": "public/assets/129.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/129.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/129.glb",
+      "byte_size": 51632,
+      "sha256": "3288c802758922b7cfb0f25468c2ae8d9c4d4341e9c8df4544401bde412a70bc",
+      "meshes": 1,
+      "vertices": 2293,
+      "triangles": 3667,
+      "materials": 2,
+      "embedded_images": 2,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -1.692468,
+          -0.0255,
+          -1.279262
+        ],
+        "max": [
+          1.692468,
+          2.150338,
+          1.004222
+        ],
+        "size": [
+          3.384936,
+          2.175838,
+          2.283484
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 131,
+      "name": "lapras",
+      "filename": "131.glb",
+      "local_path": "public/assets/131.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/131.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/131.glb",
+      "byte_size": 211424,
+      "sha256": "d4165d082f4419a84653ea6ab835adc1c977c50895f28915775528ebbd1349f1",
+      "meshes": 1,
+      "vertices": 27455,
+      "triangles": 50704,
+      "materials": 1,
+      "embedded_images": 1,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -4.40104,
+          -0.24588,
+          -4.064171
+        ],
+        "max": [
+          4.40104,
+          6.554872,
+          4.35591
+        ],
+        "size": [
+          8.80208,
+          6.800752,
+          8.420081
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 132,
+      "name": "ditto",
+      "filename": "132.glb",
+      "local_path": "public/assets/132.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/132.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/132.glb",
+      "byte_size": 45348,
+      "sha256": "b5b46d5618ba46108ad1e3d92d388c93477e9e0aec4916eee0cec9a25623431a",
+      "meshes": 1,
+      "vertices": 1785,
+      "triangles": 3072,
+      "materials": 1,
+      "embedded_images": 1,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [
+        {
+          "name": "Dancing",
+          "duration_seconds": 0.6333
+        }
+      ],
+      "default_pose_world_bounds": {
+        "min": [
+          -1.398891,
+          -0.023968,
+          -1.114112
+        ],
+        "max": [
+          1.490268,
+          2.222893,
+          0.985619
+        ],
+        "size": [
+          2.889159,
+          2.246861,
+          2.099732
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
     },
     {
       "id": 133,
@@ -1001,6 +3251,450 @@
         ]
       },
       "scale_factor_for_height_1": 0.79639266
+    },
+    {
+      "id": 137,
+      "name": "porygon",
+      "filename": "137.glb",
+      "local_path": "public/assets/137.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/137.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/137.glb",
+      "byte_size": 20480,
+      "sha256": "ac8c24af591a66eaa0955f602e09e15112da1f91034890e460ae0b1d6601c7f8",
+      "meshes": 1,
+      "vertices": 229,
+      "triangles": 182,
+      "materials": 2,
+      "embedded_images": 2,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -1.006823,
+          -0.0,
+          -1.992817
+        ],
+        "max": [
+          1.006883,
+          2.031958,
+          1.293094
+        ],
+        "size": [
+          2.013706,
+          2.031958,
+          3.285911
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 144,
+      "name": "articuno",
+      "filename": "144.glb",
+      "local_path": "public/assets/144.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/144.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/144.glb",
+      "byte_size": 86756,
+      "sha256": "9fbca36c3a935749b98d3819ede49a28e53f0397d6ed34c0b9d354ec15d44333",
+      "meshes": 1,
+      "vertices": 4475,
+      "triangles": 6248,
+      "materials": 3,
+      "embedded_images": 3,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -4.707128,
+          -5.341668,
+          -8.517789
+        ],
+        "max": [
+          4.707129,
+          4.388907,
+          1.689166
+        ],
+        "size": [
+          9.414256,
+          9.730575,
+          10.206954
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 147,
+      "name": "dratini",
+      "filename": "147.glb",
+      "local_path": "public/assets/147.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/147.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/147.glb",
+      "byte_size": 38528,
+      "sha256": "ae28a1041e835c618adbdac544cd6fa5a74b691f942cbf9d69b5a13deab7cb44",
+      "meshes": 1,
+      "vertices": 1793,
+      "triangles": 2994,
+      "materials": 3,
+      "embedded_images": 3,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -0.388277,
+          0.006594,
+          -0.361922
+        ],
+        "max": [
+          0.388165,
+          4.561002,
+          0.428977
+        ],
+        "size": [
+          0.776443,
+          4.554408,
+          0.790898
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 148,
+      "name": "dragonair",
+      "filename": "148.glb",
+      "local_path": "public/assets/148.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/148.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/148.glb",
+      "byte_size": 49040,
+      "sha256": "b9b8bc0be64df910687b0825d23b783346ef4cdbd815635c09c71f63d21c5401",
+      "meshes": 1,
+      "vertices": 2275,
+      "triangles": 3777,
+      "materials": 3,
+      "embedded_images": 3,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "default_pose_world_bounds": {
+        "min": [
+          -0.533081,
+          -0.784483,
+          -0.539738
+        ],
+        "max": [
+          0.533392,
+          10.128706,
+          0.837151
+        ],
+        "size": [
+          1.066473,
+          10.91319,
+          1.376889
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 149,
+      "name": "dragonite",
+      "filename": "149.glb",
+      "local_path": "public/assets/149.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/149.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/149.glb",
+      "byte_size": 5675848,
+      "sha256": "becaa8098e26676837dd2f19589a16c774e46b433118b9d911cc7876abbe36b8",
+      "meshes": 4,
+      "vertices": 3691,
+      "triangles": 5699,
+      "materials": 3,
+      "embedded_images": 3,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [
+        {
+          "name": "pm0149_00_00_00000_defaultwait01_loop",
+          "duration_seconds": 2.5167
+        },
+        {
+          "name": "pm0149_00_00_00010_defaultidle01",
+          "duration_seconds": 3.0167
+        },
+        {
+          "name": "pm0149_00_00_00021_turn_r090",
+          "duration_seconds": 1.0167
+        },
+        {
+          "name": "pm0149_00_00_00024_turn_l090",
+          "duration_seconds": 1.0167
+        },
+        {
+          "name": "pm0149_00_00_00030_walk01_loop",
+          "duration_seconds": 1.5833
+        },
+        {
+          "name": "pm0149_00_00_00100_run01_loop",
+          "duration_seconds": 0.6833
+        },
+        {
+          "name": "pm0149_00_00_00150_jumpup01_start",
+          "duration_seconds": 0.1167
+        },
+        {
+          "name": "pm0149_00_00_00151_jumpup01_loop",
+          "duration_seconds": 0.4167
+        },
+        {
+          "name": "pm0149_00_00_00152_jumpdown01_start",
+          "duration_seconds": 0.4167
+        },
+        {
+          "name": "pm0149_00_00_00153_jumpdown01_loop",
+          "duration_seconds": 0.4167
+        },
+        {
+          "name": "pm0149_00_00_00155_land02",
+          "duration_seconds": 0.7167
+        },
+        {
+          "name": "pm0149_00_00_00270_rest01_start",
+          "duration_seconds": 1.0167
+        },
+        {
+          "name": "pm0149_00_00_00271_rest01_loop",
+          "duration_seconds": 2.0167
+        },
+        {
+          "name": "pm0149_00_00_00272_rest01_end",
+          "duration_seconds": 1.0167
+        },
+        {
+          "name": "pm0149_00_00_00280_sleep01_start",
+          "duration_seconds": 1.6833
+        },
+        {
+          "name": "pm0149_00_00_00281_sleep01_loop",
+          "duration_seconds": 2.6833
+        },
+        {
+          "name": "pm0149_00_00_00282_sleep01_end",
+          "duration_seconds": 1.6833
+        },
+        {
+          "name": "pm0149_00_00_00290_eat01_start",
+          "duration_seconds": 0.35
+        },
+        {
+          "name": "pm0149_00_00_00291_eat01_loop",
+          "duration_seconds": 0.6833
+        },
+        {
+          "name": "pm0149_00_00_00292_eat01_end",
+          "duration_seconds": 0.85
+        },
+        {
+          "name": "pm0149_00_00_00293_eat02_start",
+          "duration_seconds": 1.1833
+        },
+        {
+          "name": "pm0149_00_00_00294_eat02_loop",
+          "duration_seconds": 0.6833
+        },
+        {
+          "name": "pm0149_00_00_00295_eat02_end",
+          "duration_seconds": 0.85
+        },
+        {
+          "name": "pm0149_00_00_00300_roar01",
+          "duration_seconds": 2.6833
+        },
+        {
+          "name": "pm0149_00_00_00320_refresh01",
+          "duration_seconds": 2.35
+        },
+        {
+          "name": "pm0149_00_00_00550_glad01",
+          "duration_seconds": 1.6833
+        },
+        {
+          "name": "pm0149_00_00_00560_notice01",
+          "duration_seconds": 1.6833
+        },
+        {
+          "name": "pm0149_00_00_00563_hate01",
+          "duration_seconds": 2.0167
+        },
+        {
+          "name": "pm0149_00_00_20000_defaultwait01_loop",
+          "duration_seconds": 1.5167
+        },
+        {
+          "name": "pm0149_00_00_20001_battlewait01_loop",
+          "duration_seconds": 1.5167
+        },
+        {
+          "name": "pm0149_00_00_20010_defaultidle01",
+          "duration_seconds": 1.6833
+        },
+        {
+          "name": "pm0149_00_00_20011_defaultidle02",
+          "duration_seconds": 2.1833
+        },
+        {
+          "name": "pm0149_00_00_20021_turn_r090",
+          "duration_seconds": 1.0167
+        },
+        {
+          "name": "pm0149_00_00_20024_turn_l090",
+          "duration_seconds": 1.0167
+        },
+        {
+          "name": "pm0149_00_00_20030_walk01_loop",
+          "duration_seconds": 1.0167
+        },
+        {
+          "name": "pm0149_00_00_20100_run01_loop",
+          "duration_seconds": 0.85
+        },
+        {
+          "name": "pm0149_00_00_20145_stepout01_start",
+          "duration_seconds": 0.1167
+        },
+        {
+          "name": "pm0149_00_00_20146_stepout01",
+          "duration_seconds": 0.25
+        },
+        {
+          "name": "pm0149_00_00_20147_stepout01_end",
+          "duration_seconds": 1.0167
+        },
+        {
+          "name": "pm0149_00_00_20150_jumpup01_start",
+          "duration_seconds": 0.1167
+        },
+        {
+          "name": "pm0149_00_00_20151_jumpup01_loop",
+          "duration_seconds": 0.4167
+        },
+        {
+          "name": "pm0149_00_00_20152_jumpdown01_start",
+          "duration_seconds": 0.4167
+        },
+        {
+          "name": "pm0149_00_00_20153_jumpdown01_loop",
+          "duration_seconds": 0.4167
+        },
+        {
+          "name": "pm0149_00_00_20155_land02",
+          "duration_seconds": 0.7167
+        },
+        {
+          "name": "pm0149_00_00_20300_roar01",
+          "duration_seconds": 2.6833
+        },
+        {
+          "name": "pm0149_00_00_20400_attack01",
+          "duration_seconds": 2.1833
+        },
+        {
+          "name": "pm0149_00_00_20410_attack02",
+          "duration_seconds": 2.5167
+        },
+        {
+          "name": "pm0149_00_00_20450_rangeattack01",
+          "duration_seconds": 2.7167
+        },
+        {
+          "name": "pm0149_00_00_20460_rangeattack02_start",
+          "duration_seconds": 0.6833
+        },
+        {
+          "name": "pm0149_00_00_20461_rangeattack02_loop",
+          "duration_seconds": 0.65
+        },
+        {
+          "name": "pm0149_00_00_20462_rangeattack02_end",
+          "duration_seconds": 1.0167
+        },
+        {
+          "name": "pm0149_00_00_20500_damage01",
+          "duration_seconds": 0.6833
+        },
+        {
+          "name": "pm0149_00_00_20501_damage02",
+          "duration_seconds": 1.1833
+        },
+        {
+          "name": "pm0149_00_00_20510_stun01_start",
+          "duration_seconds": 0.6833
+        },
+        {
+          "name": "pm0149_00_00_20511_stun01_loop",
+          "duration_seconds": 2.0167
+        },
+        {
+          "name": "pm0149_00_00_20512_stun01_end",
+          "duration_seconds": 1.0167
+        },
+        {
+          "name": "pm0149_00_00_20520_down01_start",
+          "duration_seconds": 2.0167
+        },
+        {
+          "name": "pm0149_00_00_20521_down01_loop",
+          "duration_seconds": 2.0167
+        },
+        {
+          "name": "pm0149_00_00_20522_down01_end",
+          "duration_seconds": 1.0167
+        },
+        {
+          "name": "pm0149_00_00_20560_notice01",
+          "duration_seconds": 1.6833
+        },
+        {
+          "name": "pm0149_00_00_28000_eye01",
+          "duration_seconds": 0.35
+        },
+        {
+          "name": "pm0149_00_00_28100_mouth01",
+          "duration_seconds": 0.35
+        }
+      ],
+      "default_pose_world_bounds": {
+        "min": [
+          -0.963134,
+          2.3e-05,
+          -2.242527
+        ],
+        "max": [
+          0.963192,
+          2.277139,
+          0.525654
+        ],
+        "size": [
+          1.926326,
+          2.277115,
+          2.768181
+        ]
+      },
+      "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
     }
   ],
   "download_total_bytes": 2229164,
@@ -1011,5 +3705,6 @@
     "Use SkeletonUtils.clone for repeated model instances because these GLBs contain skins.",
     "After correcting orientation and updating world matrices, compute a skinned Box3; scale by targetHeight / size.y and translate horizontal center to zero and min.y to ground. Avoid normalizing by longest dimension: long tails shrink Raichu and Charizard excessively.",
     "Animation selection should be deliberate: Charizard has a dizzy clip and Pikachu a thunder-shock clip; they are not neutral idle animations. Static models can receive gentle whole-body bob/turn movement."
-  ]
+  ],
+  "updated_at": "2026-09-30"
 }
