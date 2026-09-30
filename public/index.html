@@ -4,7 +4,7 @@
 <meta name="description" content="Покеблокс: Канто. Два острова, кубические покемоны, босс Голдак, ловля и эволюции."><title>Покеблокс · Два острова</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23f5faf6'/%3E%3Cpath d='M2 16a14 14 0 0 1 28 0Z' fill='%23ef654d'/%3E%3Cpath d='M2 16h28' stroke='%231b3436' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='5' fill='white' stroke='%231b3436' stroke-width='3'/%3E%3C/svg%3E">
 <link rel="manifest" href="./manifest.webmanifest"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes">
-<link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="./style.css"><link rel="stylesheet" href="./responsive.css">
 <script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
 </head><body>
 <svg class="symbols" aria-hidden="true"><defs>
@@ -59,7 +59,6 @@
 <dialog id="auth-dialog" class="auth-dialog"><div class="panel-top"><div><span class="eyebrow">ПОКЕБЛОКС · АККАУНТ</span><h2 id="auth-title">Войти в игру</h2></div><button id="auth-close" class="icon-button" aria-label="Закрыть"><svg><use href="#i-x"/></svg></button></div><form id="auth-form"><p>Твоя команда и прогресс сохраняются в аккаунте. Войти можно с телефона и компьютера.</p><label>Логин<input id="auth-username" name="username" autocomplete="username" minlength="3" maxlength="24" required placeholder="Имя тренера"></label><label>Пароль<input id="auth-password" name="password" type="password" autocomplete="current-password" minlength="8" maxlength="128" required placeholder="Не меньше 8 символов"></label><p id="auth-error" class="form-error" role="alert"></p><button id="auth-submit" type="submit" class="primary">Войти</button><button id="auth-switch" type="button" class="auth-switch">Нет аккаунта? Зарегистрироваться</button></form><div id="signed-in" hidden><p>Ты вошёл как <strong id="signed-in-name"></strong>.</p><p>Сохранения принадлежат этому аккаунту.</p><button id="signout-button" class="small-button">Сохранить и выйти</button></div></dialog>
 <div id="sync-block" class="sync-block" hidden><strong id="sync-message"></strong><button id="sync-retry" class="primary">Повторить</button><button id="sync-server" class="small-button" hidden>Загрузить сохранение сервера</button></div>
 <script>window.addEventListener('error',e=>{if(e.target?.tagName==='SCRIPT'){document.getElementById('fatal').hidden=false;document.getElementById('boot').hidden=true;}},true);</script>
-<div id="rotate-screen"><div class="rotate-icon">↻</div><h2>Поверни телефон</h2><p>Острова удобнее исследовать горизонтально.<br>Джойстик слева, действия справа.</p></div>
 <button id="install-game" class="install-game">↓ Установить игру</button>
 <dialog id="install-help" class="auth-dialog"><h2>Игра на главном экране</h2><p>iPhone / iPad: открой ссылку в Safari → «Поделиться» → «На экран Домой».<br><br>Android: меню браузера → «Установить приложение» или «Добавить на главный экран».<br><br>Для входа и сохранений нужен интернет. Прогресс остаётся в твоём аккаунте.</p><form method="dialog"><button class="primary">Понятно</button></form></dialog>
 <script type="module" src="./install.mjs"></script><script type="module" src="./game.mjs"></script>

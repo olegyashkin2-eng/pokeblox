@@ -1,0 +1,38 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pokeblox · проверка интерфейса</title>
+<style>body{margin:0;background:#152d31;color:#eff7ef;font:14px system-ui}header{padding:18px 24px;border-bottom:1px solid #ffffff30}h1{font-size:22px;margin:0 0 6px}p{margin:8px 0;color:#c3d5ce}select,button{font:inherit;padding:9px;border-radius:8px;border:1px solid #92b8a0;margin:6px 8px 0 0;background:#e9f4e9;color:#173e39}main{padding:18px 24px;display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap}#preview{position:relative;flex-shrink:0}iframe{border:0;background:#a7d6c8;transform-origin:top left;border-radius:16px}pre{white-space:pre-wrap;font:12px/1.6 ui-monospace,monospace;max-width:420px}#report{min-width:280px}</style></head><body>
+<header><h1>Pokeblox · обе ориентации</h1><p>Проверка настоящего HTML/CSS без 3D. Сенсорные стили включены для проверки на компьютере. Данные демонстрационные; аккаунты и сохранения не используются.</p>
+<label>Размер <select id="size"><option value="390,844">Телефон · 390 × 844</option><option value="844,390">Телефон · 844 × 390</option><option value="320,568">Малый телефон · 320 × 568</option><option value="568,320">Малый телефон · 568 × 320</option><option value="768,1024">Планшет · 768 × 1024</option><option value="1024,768">Планшет · 1024 × 768</option><option value="1024,1366">Большой планшет · 1024 × 1366</option><option value="1366,1024">Большой планшет · 1366 × 1024</option></select></label>
+<label>Экран <select id="state"><option value="hud">Остров</option><option value="start">Начало</option><option value="battle">Бой</option><option value="panel">Команда</option><option value="auth">Аккаунт</option><option value="evolution">Эволюция</option></select></label><button id="rotate">Повернуть</button><button id="audit">Проверить все размеры</button></header>
+<main><div id="preview"><iframe id="frame" title="Игровой интерфейс"></iframe></div><section id="report"><h2>Результат</h2><pre id="result">Загрузка…</pre></section></main>
+<script type="module">
+const $=id=>document.getElementById(id),frame=$('frame');
+const [html,base,responsive]=await Promise.all(['/index.html','/style.css','/responsive.css'].map(url=>fetch(url,{cache:'no-store'}).then(r=>r.text())));
+const css=(base+'\n'+responsive).replaceAll('(any-pointer:coarse)','(min-width:0px)');
+let serial=0;
+function fixture(state){
+ const doc=new DOMParser().parseFromString(html,'text/html');doc.querySelectorAll('script,link').forEach(e=>e.remove());
+ const style=doc.createElement('style');style.textContent=css+'\n*{animation:none!important;transition:none!important}';doc.head.append(style);
+ const q=id=>doc.getElementById(id);q('boot').hidden=true;q('start').hidden=state!=='start';q('hud').hidden=!['hud','panel'].includes(state);q('battle-ui').hidden=state!=='battle';q('evolution').hidden=state!=='evolution';q('install-game').hidden=state!=='start';q('save-status').hidden=false;q('save-text').textContent='Сохранено';q('account-name').textContent='Тренер';
+ q('nearby').hidden=state!=='hud';q('nearby-label').textContent='Иви · редкий покемон';q('interact-label').textContent='Начать бой';q('partner-name').innerHTML='Пикачу <small>ур. 15</small>';q('partner-hp').style.width='76%';q('partner-xp').style.width='42%';
+ q('starter-grid').innerHTML=['Пикачу','Бульбазавр','Чармандер','Сквиртл','Иви'].map((n,i)=>`<button class="starter-card ${i?'':'active'}" ${i?'disabled':''}><span class="number">#025</span><img alt=""><strong>${n}</strong><small>${i?'Найди на острове':'Твой первый'}</small></button>`).join('');
+ q('enemy-type').textContent='ВОДНЫЙ · БОСС';q('enemy-name').textContent='Голдак · ур. 45';q('enemy-hp-text').textContent='124 / 180';q('enemy-hp').style.width='69%';q('battle-own-name').textContent='Пикачу';q('battle-own-level').textContent='ур. 40';q('battle-own-hp').style.width='72%';q('battle-own-hp-text').textContent='92 / 128';q('battle-message').textContent='Голдак — хранитель прилива! Меняй бойцов и используй преимущество стихий.';
+ q('panel-content').innerHTML='<p class="panel-copy">Выбери напарника для приключения.</p><div class="team-grid">'+['Пикачу','Иви','Чаризард','Бульбазавр','Вапореон','Голдак'].map(n=>`<article class="pokemon-card"><img alt=""><h3>${n}</h3><div class="hp-track"><i style="width:80%"></i></div><div class="card-actions"><button class="small-button">Взять напарником</button><button class="small-button">Дать конфету</button></div></article>`).join('')+'</div>';
+ q('evolution-title').textContent='Иви → Флареон';q('evolution-text').textContent='Огненный камень раскрыл новую форму!';
+ const setup=doc.createElement('script');setup.textContent=`document.querySelectorAll('form').forEach(f=>f.onsubmit=e=>e.preventDefault());${state==='panel'?"document.getElementById('panel').showModal();":state==='auth'?"document.getElementById('auth-dialog').showModal();":''}`;doc.body.append(setup);
+ return '<!doctype html>'+doc.documentElement.outerHTML;
+}
+async function render(state=$('state').value,size=$('size').value){
+ const [w,h]=size.split(',').map(Number),scale=Math.min(1,700/h,Math.max(300,innerWidth-80)/w);frame.width=w;frame.height=h;frame.style.transform=`scale(${scale})`;$('preview').style.width=w*scale+'px';$('preview').style.height=h*scale+'px';
+ await new Promise(resolve=>{frame.onload=()=>requestAnimationFrame(()=>requestAnimationFrame(resolve));frame.srcdoc=fixture(state);});return audit(state,w,h);
+}
+function audit(state,w,h){
+ const doc=frame.contentDocument,fail=[],ids={hud:['account-button','help','quest-detail','minimap-button','joystick','touch-run','touch-jump','interact','open-team','open-dex','open-bag','open-map'],start:['account-button','begin'],battle:['account-button','attack','special','catch','battle-heal','battle-switch','flee'],panel:['close-panel'],auth:['auth-close'],evolution:['evolution-done']}[state];
+ for(const id of ids){const el=doc.getElementById(id),r=el.getBoundingClientRect(),style=frame.contentWindow.getComputedStyle(el);if(!r.width||!r.height||style.visibility==='hidden')fail.push(id+': скрыт');else if(r.left<-.5||r.top<-.5||r.right>w+.5||r.bottom>h+.5)fail.push(id+': за краем экрана');else{const top=doc.elementFromPoint(r.x+r.width/2,r.y+r.height/2);if(!el.contains(top))fail.push(id+': перекрыт '+(top?.id||top?.className||top?.tagName));}}
+ if(doc.documentElement.scrollWidth>w)fail.push('Горизонтальное переполнение');
+ return {size:w+'×'+h,state,fail};
+}
+async function current(){const result=await render();$('result').textContent=JSON.stringify(result,null,2);}
+$('size').onchange=current;$('state').onchange=current;$('rotate').onclick=()=>{const [w,h]=$('size').value.split(',');$('size').value=h+','+w;current();};
+$('audit').onclick=async()=>{const n=++serial,results=[];$('audit').disabled=true;for(const size of [...$('size').options].map(o=>o.value))for(const state of ['hud','start','battle','panel','auth','evolution']){results.push(await render(state,size));$('result').textContent=results.map(r=>`${r.fail.length?'ОШИБКА':'OK'} ${r.size} ${r.state}${r.fail.length?' — '+r.fail.join('; '):''}`).join('\n');}if(n===serial){await render();$('result').textContent=`${results.length} проверок; ошибок: ${results.filter(r=>r.fail.length).length}\n`+results.map(r=>`${r.fail.length?'ОШИБКА':'OK'} ${r.size} ${r.state}${r.fail.length?' — '+r.fail.join('; '):''}`).join('\n');}$('audit').disabled=false;};
+await current();
+</script></body></html>
