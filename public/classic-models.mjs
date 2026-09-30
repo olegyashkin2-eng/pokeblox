@@ -2,10 +2,10 @@ import * as THREE from 'three';
 import {GLTFLoader} from './vendor/GLTFLoader.js';
 import {DRACOLoader} from './vendor/DRACOLoader.js';
 import {clone} from './vendor/SkeletonUtils.js';
-import {classicSculpture} from './classic-sculptures.mjs';
+import {ALL_IDS} from './data.mjs';
 import {ClassicAnimator} from './classic-animation.mjs';
 
-export const ORIGINAL_IDS=Object.freeze([1,2,3,4,5,6,7,8,9,25,26,133,134,135,136]);
+export const ORIGINAL_IDS=Object.freeze([...ALL_IDS]);
 
 export async function loadClassicModels(ids,onProgress=()=>{}){
  const models=new Map(),draco=new DRACOLoader();
@@ -13,12 +13,10 @@ export async function loadClassicModels(ids,onProgress=()=>{}){
  const loader=new GLTFLoader();loader.setDRACOLoader(draco);let cursor=0,done=0;
  const worker=async()=>{while(cursor<ids.length){
   const id=ids[cursor++];
-  if(ORIGINAL_IDS.includes(id)){
-   const gltf=await loader.loadAsync(`./assets/${id}.glb`);
+  const gltf=await loader.loadAsync(`./assets/${id}.glb`);
    gltf.scene.traverse(o=>{if(!o.isMesh)return;o.castShadow=true;o.receiveShadow=false;o.frustumCulled=false;
     for(const m of Array.isArray(o.material)?o.material:[o.material])if(m){m.metalness=0;m.roughness=.8;}
    });models.set(id,gltf);
-  }else models.set(id,classicSculpture(id));
   onProgress(++done,ids.length);
  }};
  try{const results=await Promise.allSettled([worker(),worker(),worker()]);const failed=results.find(r=>r.status==='rejected');if(failed)throw failed.reason;return models;}
@@ -26,10 +24,13 @@ export async function loadClassicModels(ids,onProgress=()=>{}){
 }
 
 export function makeClassicPokemon(id,height,template,phase=0){
- const imported=!!template?.scene,model=clone(imported?template.scene:template??classicSculpture(id));
+ if(!template?.scene)throw new Error(`Missing GLB model: ${id}`);
+ const model=clone(template.scene);
+ // Dragonite includes three LOD meshes; render the most detailed level once.
+ model.traverse(o=>{if(/^lod[12](?:_|$)/i.test(o.name))o.visible=false;});
  const correction=new THREE.Group();correction.add(model);
- if(imported&&id===25)correction.rotation.x=-Math.PI/2;
- if(imported&&id===136)correction.rotation.y=Math.PI/2;
+ if(id===25)correction.rotation.x=-Math.PI/2;
+ if(id===136)correction.rotation.y=Math.PI/2;
  correction.updateMatrixWorld(true);
  const bounds=new THREE.Box3().setFromObject(correction,true),size=bounds.getSize(new THREE.Vector3()),scale=height/Math.max(.001,size.y);
  correction.position.set(-(bounds.min.x+bounds.max.x)/2,-bounds.min.y,-(bounds.min.z+bounds.max.z)/2);
@@ -44,7 +45,7 @@ export function makeClassicPokemon(id,height,template,phase=0){
   const z=plant?-.12:cannon?.23:.36;
   return motion.localToWorld(new THREE.Vector3(side*size.x*scale*(cannon?.32:.24),height*y,size.z*scale*z));
  };
- outer.userData={id,height,visual,model,animator,socket,span:Math.max(size.x,size.y,size.z)*scale,modelSource:imported?'original-glb':'classic-sculpture'};
+ outer.userData={id,height,visual,model,animator,socket,span:Math.max(size.x,size.y,size.z)*scale,modelSource:'original-glb'};
  outer.updateMatrixWorld(true);
  return outer;
 }

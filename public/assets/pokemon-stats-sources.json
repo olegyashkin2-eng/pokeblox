@@ -1,227 +1,112 @@
 {
-  "1": {
-    "id": 1,
-    "name": "bulbasaur",
-    "captureRate": 45,
-    "stats": {
-      "hp": 45,
-      "attack": 49,
-      "defense": 49,
-      "spAttack": 65,
-      "spDefense": 65,
-      "speed": 45
+  "retrieved_at": "2026-09-30",
+  "species_count": 77,
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/v2/csv/pokemon_stats.csv",
+      "sha256": "fa2c44263a3706468682fefc3e0b3c4f5487fe9febed7d4ebcd6939c34b16aa8"
     },
-    "source": "https://github.com/PokeAPI/pokeapi/tree/master/data/v2/csv",
-    "total": 318
+    {
+      "url": "https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/v2/csv/pokemon_species.csv",
+      "sha256": "e66e2eeb25fd3836b0ebab6bf87bbf01960aa3c0555e2bac495fa8393c5e0c45"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/v2/csv/pokemon.csv",
+      "sha256": "16c81c33188b0eac403aa2f759fcbe9e42c611f722d263f5b5a6a5bff9f8ce6b"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/v2/csv/pokemon_evolution.csv",
+      "sha256": "e78be51c8805551fffccd5551a556e752e4a76ff1b52482b53b409dd3882e1dd"
+    }
+  ],
+  "custom_rules": {
+    "dratini_to_dragonair": "dragon stone",
+    "dragonair_to_dragonite": "dragon stone",
+    "kadabra_to_alakazam": "level 36 (single-player trade adaptation)",
+    "machoke_to_machamp": "level 36 (single-player trade adaptation)",
+    "tidal_encounter_percent": {
+      "dratini": 0.5,
+      "articuno": 0.005,
+      "lapras": 20
+    }
   },
-  "2": {
-    "id": 2,
-    "name": "ivysaur",
-    "captureRate": 45,
-    "stats": {
-      "hp": 60,
-      "attack": 62,
-      "defense": 63,
-      "spAttack": 80,
-      "spDefense": 80,
-      "speed": 60
-    },
-    "source": "https://github.com/PokeAPI/pokeapi/tree/master/data/v2/csv",
-    "total": 405
-  },
-  "3": {
-    "id": 3,
-    "name": "venusaur",
-    "captureRate": 45,
-    "stats": {
-      "hp": 80,
-      "attack": 82,
-      "defense": 83,
-      "spAttack": 100,
-      "spDefense": 100,
-      "speed": 80
-    },
-    "source": "https://github.com/PokeAPI/pokeapi/tree/master/data/v2/csv",
-    "total": 525
-  },
-  "4": {
-    "id": 4,
-    "name": "charmander",
-    "captureRate": 45,
-    "stats": {
-      "hp": 39,
-      "attack": 52,
-      "defense": 43,
-      "spAttack": 60,
-      "spDefense": 50,
-      "speed": 65
-    },
-    "source": "https://github.com/PokeAPI/pokeapi/tree/master/data/v2/csv",
-    "total": 309
-  },
-  "5": {
-    "id": 5,
-    "name": "charmeleon",
-    "captureRate": 45,
-    "stats": {
-      "hp": 58,
-      "attack": 64,
-      "defense": 58,
-      "spAttack": 80,
-      "spDefense": 65,
-      "speed": 80
-    },
-    "source": "https://github.com/PokeAPI/pokeapi/tree/master/data/v2/csv",
-    "total": 405
-  },
-  "6": {
-    "id": 6,
-    "name": "charizard",
-    "captureRate": 45,
-    "stats": {
-      "hp": 78,
-      "attack": 84,
-      "defense": 78,
-      "spAttack": 109,
-      "spDefense": 85,
-      "speed": 100
-    },
-    "source": "https://github.com/PokeAPI/pokeapi/tree/master/data/v2/csv",
-    "total": 534
-  },
-  "7": {
-    "id": 7,
-    "name": "squirtle",
-    "captureRate": 45,
-    "stats": {
-      "hp": 44,
-      "attack": 48,
-      "defense": 65,
-      "spAttack": 50,
-      "spDefense": 64,
-      "speed": 43
-    },
-    "source": "https://github.com/PokeAPI/pokeapi/tree/master/data/v2/csv",
-    "total": 314
-  },
-  "8": {
-    "id": 8,
-    "name": "wartortle",
-    "captureRate": 45,
-    "stats": {
-      "hp": 59,
-      "attack": 63,
-      "defense": 80,
-      "spAttack": 65,
-      "spDefense": 80,
-      "speed": 58
-    },
-    "source": "https://github.com/PokeAPI/pokeapi/tree/master/data/v2/csv",
-    "total": 405
-  },
-  "9": {
-    "id": 9,
-    "name": "blastoise",
-    "captureRate": 45,
-    "stats": {
-      "hp": 79,
-      "attack": 83,
-      "defense": 100,
-      "spAttack": 85,
-      "spDefense": 105,
-      "speed": 78
-    },
-    "source": "https://github.com/PokeAPI/pokeapi/tree/master/data/v2/csv",
-    "total": 530
-  },
-  "25": {
-    "id": 25,
-    "name": "pikachu",
-    "captureRate": 190,
-    "stats": {
-      "hp": 35,
-      "attack": 55,
-      "defense": 40,
-      "spAttack": 50,
-      "spDefense": 50,
-      "speed": 90
-    },
-    "source": "https://github.com/PokeAPI/pokeapi/tree/master/data/v2/csv",
-    "total": 320
-  },
-  "26": {
-    "id": 26,
-    "name": "raichu",
-    "captureRate": 75,
-    "stats": {
-      "hp": 60,
-      "attack": 90,
-      "defense": 55,
-      "spAttack": 90,
-      "spDefense": 80,
-      "speed": 110
-    },
-    "source": "https://github.com/PokeAPI/pokeapi/tree/master/data/v2/csv",
-    "total": 485
-  },
-  "133": {
-    "id": 133,
-    "name": "eevee",
-    "captureRate": 45,
-    "stats": {
-      "hp": 55,
-      "attack": 55,
-      "defense": 50,
-      "spAttack": 45,
-      "spDefense": 65,
-      "speed": 55
-    },
-    "source": "https://github.com/PokeAPI/pokeapi/tree/master/data/v2/csv",
-    "total": 325
-  },
-  "134": {
-    "id": 134,
-    "name": "vaporeon",
-    "captureRate": 45,
-    "stats": {
-      "hp": 130,
-      "attack": 65,
-      "defense": 60,
-      "spAttack": 110,
-      "spDefense": 95,
-      "speed": 65
-    },
-    "source": "https://github.com/PokeAPI/pokeapi/tree/master/data/v2/csv",
-    "total": 525
-  },
-  "135": {
-    "id": 135,
-    "name": "jolteon",
-    "captureRate": 45,
-    "stats": {
-      "hp": 65,
-      "attack": 65,
-      "defense": 60,
-      "spAttack": 110,
-      "spDefense": 95,
-      "speed": 130
-    },
-    "source": "https://github.com/PokeAPI/pokeapi/tree/master/data/v2/csv",
-    "total": 525
-  },
-  "136": {
-    "id": 136,
-    "name": "flareon",
-    "captureRate": 45,
-    "stats": {
-      "hp": 65,
-      "attack": 130,
-      "defense": 60,
-      "spAttack": 95,
-      "spDefense": 110,
-      "speed": 65
-    },
-    "source": "https://github.com/PokeAPI/pokeapi/tree/master/data/v2/csv",
-    "total": 525
-  }
+  "ids": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    25,
+    26,
+    27,
+    28,
+    35,
+    36,
+    39,
+    40,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    54,
+    55,
+    56,
+    57,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    74,
+    75,
+    76,
+    86,
+    87,
+    90,
+    96,
+    97,
+    106,
+    107,
+    108,
+    116,
+    117,
+    118,
+    119,
+    120,
+    121,
+    122,
+    124,
+    129,
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    137,
+    144,
+    147,
+    148,
+    149
+  ]
 }

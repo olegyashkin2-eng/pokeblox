@@ -3,7 +3,7 @@ import * as THREE from 'three';
 const V=THREE.Vector3,clamp=THREE.MathUtils.clamp;
 const orb=new THREE.IcosahedronGeometry(1,1),cube=new THREE.BoxGeometry(1,1,1),rock=new THREE.DodecahedronGeometry(1,0);
 const ring=new THREE.TorusGeometry(1,.045,4,32),rod=new THREE.CylinderGeometry(1,1,1,6);
-const COLORS={hit:0xfff1d2,dash:0xffffff,fire:0xff9b38,water:0x63d7ff,hydro:0x85e6ff,splash:0x8ee9ff,electric:0xffdf4b,vine:0x68c96a,solar:0xffed91,rock:0xb6a087};
+const COLORS={pollen:0xb8da75,psychic:0xc283fa,fairy:0xffb7e8,sand:0xecc187,force:0xffb75d,ice:0xacffff,dragon:0xa19aff,hit:0xfff1d2,dash:0xffffff,fire:0xff9b38,water:0x63d7ff,hydro:0x85e6ff,splash:0x8ee9ff,electric:0xffdf4b,vine:0x68c96a,solar:0xffed91,rock:0xb6a087};
 const MOUTH={4:[0,1.48,.53],5:[0,1.48,.53],6:[0,1.48,.53],7:[0,1.35,.63],8:[0,1.35,.63],54:[0,1.17,.86],55:[0,1.18,.81],86:[0,.91,.85],87:[0,.91,.85],116:[0,1.19,.8],117:[0,1.19,.8],134:[0,1.03,.77],136:[0,1.03,.77]};
 
 // Read the exact animated attachment in bind coordinates, including world scale.
