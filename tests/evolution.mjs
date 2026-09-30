@@ -2,15 +2,16 @@ import assert from 'node:assert/strict';
 import {registerHooks} from 'node:module';
 registerHooks({resolve(s,c,next){if(s==='three')return{url:new URL('../public/vendor/three.module.min.js',import.meta.url).href,shortCircuit:true};return next(s,c);}});
 const THREE=await import('../public/vendor/three.module.min.js');
-const {questModel}=await import('../public/quest-models.mjs');
+const {classicSculpture:questModel}=await import('../public/classic-sculptures.mjs');
+const {classicFixtures}=await import('./classic-fixtures.mjs');
 const {EvolutionScene,EVOLUTION_DURATION}=await import('../public/evolution-scene.mjs');
 const {createState,newPokemon,evolve,ALL_IDS}=await import('../public/data.mjs');
 const {World}=await import('../public/world.mjs');
-const world=Object.create(World.prototype);world.models=new Map(ALL_IDS.map(id=>[id,questModel(id)]));
-for(const id of ALL_IDS){const g=world.models.get(id).geometry;assert.ok(g.attributes.position.count/3<26000,'Mobile triangle budget');assert.ok(g.attributes.normal.array.every(Number.isFinite));}
+const world=Object.create(World.prototype);world.models=await classicFixtures();
+for(const id of ALL_IDS){const g=questModel(id).geometry;assert.ok(g.attributes.position.count/3<26000,'Mobile triangle budget');assert.ok(g.attributes.normal.array.every(Number.isFinite));}
 for(const [stone,target] of [['fire',136],['water',134],['thunder',135]]){
  const s=createState(),p=newPokemon(133,9);s.stones[stone]=1;assert.ok(evolve(p,s,target));assert.equal(s.stones[stone],0);assert.equal(p.species,target);assert.equal(evolve(p,s,target),false);
- const original=world.models.get(133).material;const scene=new EvolutionScene(world.makePokemon(133,2.15),world.makePokemon(target,2.3),{stone,aspect:16/9});
+ let original;world.models.get(133).scene.traverse(o=>{if(o.isMesh)original=Array.isArray(o.material)?o.material[0]:o.material;});const scene=new EvolutionScene(world.makePokemon(133,2.15),world.makePokemon(target,2.3),{stone,aspect:16/9});
  assert.ok(scene.old.visible);assert.equal(scene.next.visible,false);assert.ok(scene.stone.visible);
  scene.update(2);assert.equal(scene.phase,'charge');assert.ok(scene.old.visible);assert.equal(scene.done,false);
  scene.update(2.25);assert.equal(scene.phase,'transform');assert.ok(scene.next.visible);assert.equal(scene.old.visible,false);
