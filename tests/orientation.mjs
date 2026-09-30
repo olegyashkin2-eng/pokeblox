@@ -21,12 +21,12 @@ function bounds(model,camera){
  for(const x of [box.min.x,box.max.x])for(const y of [box.min.y,box.max.y])for(const z of [box.min.z,box.max.z]){
   const v=new THREE.Vector3(x,y,z).project(camera);xs.push(v.x);ys.push(v.y);
  }
- return {x:Math.max(...xs.map(Math.abs)),y:Math.max(...ys.map(Math.abs))};
+ return {bottom:(1-Math.min(...ys))*height/2,x:Math.max(...xs.map(Math.abs)),y:Math.max(...ys.map(Math.abs))};
 }
-for(const [w,h] of [[320,568],[390,844],[844,390],[768,1024],[1024,768],[1024,1366],[1366,1024],[390,844]]){
+for(const [w,h] of [[568,320],[320,568],[390,844],[844,390],[768,1024],[1024,768],[1024,1366],[1366,1024],[390,844]]){
  width=w;height=h;world.resize();assert.equal(world.camera.aspect,w/h);assert.ok(Number.isFinite(viewportFov(w/h)));
  world.beginBattle(6,55);world.tick(1);const battle=world.battleGroup;
- for(const model of [world.battleOwn,world.battleEnemy]){const b=bounds(model,world.camera);assert.ok(b.x<.98,`Both fighters fit horizontally at ${w}×${h}: ${b.x}`);assert.ok(b.y<.98);}
+ for(const model of [world.battleOwn,world.battleEnemy]){const b=bounds(model,world.camera);assert.ok(b.x<.98,`Both fighters fit horizontally at ${w}×${h}: ${b.x}`);assert.ok(b.y<.98);if(w>h&&h<450)assert.ok(b.bottom<h-129,`Fighters clear the short landscape action panel at ${w}×${h}`);}
  world.resize();assert.equal(world.battleGroup,battle,'Rotation keeps the running encounter');assert.deepEqual(world.playerPos,originalPosition);assert.equal(world.cameraDistance,originalDistance,'User zoom survives rotation');world.endBattle();
 }
 // Reframe an in-progress evolution without resetting its phase, time or models.
