@@ -3,9 +3,8 @@ import {registerHooks} from 'node:module';
 registerHooks({resolve(s,c,next){if(s==='three')return{url:new URL('../public/vendor/three.module.min.js',import.meta.url).href,shortCircuit:true};return next(s,c);}});
 const THREE=await import('../public/vendor/three.module.min.js');
 const {World,viewportFov}=await import('../public/world.mjs');
-const {classicSculpture:questModel}=await import('../public/classic-sculptures.mjs');
 const {classicFixtures}=await import('./classic-fixtures.mjs');
-const {ALL_IDS}=await import('../public/data.mjs');
+const {ALL_IDS,canBattle}=await import('../public/data.mjs');
 const {EvolutionScene}=await import('../public/evolution-scene.mjs');
 const world=Object.create(World.prototype);
 let width=390,height=844;
@@ -26,7 +25,7 @@ function bounds(model,camera){
 }
 for(const [w,h] of [[568,320],[320,568],[390,844],[844,390],[768,1024],[1024,768],[1024,1366],[1366,1024],[390,844]]){
  width=w;height=h;world.resize();assert.equal(world.camera.aspect,w/h);assert.ok(Number.isFinite(viewportFov(w/h)));
- for(const id of ALL_IDS){world.beginBattle(id,6);world.tick(1);const battle=world.battleGroup;
+ for(const id of ALL_IDS.filter(canBattle)){world.beginBattle(id,6);world.tick(1);const battle=world.battleGroup;
  for(const model of [world.battleOwn,world.battleEnemy]){const b=bounds(model,world.camera);assert.ok(b.x<.98,`Both fighters fit horizontally at ${w}×${h}: ${b.x}`);assert.ok(b.y<.98);if(w>h&&h<450)assert.ok(b.bottom<h-129,`Fighters clear the short landscape action panel at ${w}×${h}`);}
  world.resize();assert.equal(world.battleGroup,battle,'Rotation keeps the running encounter');assert.deepEqual(world.playerPos,originalPosition);assert.equal(world.cameraDistance,originalDistance,'User zoom survives rotation');world.endBattle();}
 }

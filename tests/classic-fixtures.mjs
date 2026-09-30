@@ -5,7 +5,6 @@ import vm from 'node:vm';
 import * as THREE from 'three';
 import {GLTFLoader} from '../public/vendor/GLTFLoader.js';
 import {ORIGINAL_IDS} from '../public/classic-models.mjs';
-import {classicSculpture} from '../public/classic-sculptures.mjs';
 import {ALL_IDS} from '../public/data.mjs';
 
 export async function classicFixtures(){
@@ -27,7 +26,6 @@ export async function classicFixtures(){
  loader.pluginCallbacks.unshift(()=>({name:'CPUImageUpload',loadTexture:()=>Promise.resolve(new THREE.Texture())}));
  const models=new Map();
  for(const id of ALL_IDS){
-  if(!ORIGINAL_IDS.includes(id)){models.set(id,classicSculpture(id));continue;}
   const b=await readFile(new URL(`assets/${id}.glb`,base));
   models.set(id,await loader.parseAsync(b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength),''));
  }

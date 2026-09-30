@@ -42,5 +42,5 @@ const scene=new EvolutionScene(makeClassicPokemon(25,2,{scene:mixed,animations:[
 scene.update(2);assert.equal(lit.emissive.getHex(),0);assert.equal(scene.modelMaterials.length>=2,true);scene.dispose();
 const sw=await readFile(new URL('../public/sw.js',import.meta.url),'utf8');
 for(const id of ORIGINAL_IDS)assert.ok(sw.includes(`'/assets/${id}.glb'`),`Offline asset ${id}`);
-for(const path of ['classic-models.mjs','classic-sculptures.mjs','classic-animation.mjs','vendor/GLTFLoader.js','vendor/SkeletonUtils.js','vendor/DRACOLoader.js','vendor/draco/draco_decoder.wasm','vendor/draco/draco_wasm_wrapper.js'])assert.ok(sw.includes(`'/${path}'`),`Offline dependency ${path}`);
-console.log('PASS: 15 real Draco GLBs and 16 restored sculptures, upright bounds, independent clones, native clips, impact markers, mixed materials and offline cache');
+for(const path of ['classic-models.mjs','classic-animation.mjs','vendor/GLTFLoader.js','vendor/SkeletonUtils.js','vendor/DRACOLoader.js','vendor/draco/draco_decoder.wasm','vendor/draco/draco_wasm_wrapper.js'])assert.ok(sw.includes(`'/${path}'`),`Offline dependency ${path}`);
+console.log('PASS: 77 real GLBs, upright bounds, independent clones, native clips, impact markers, mixed materials and offline cache');
