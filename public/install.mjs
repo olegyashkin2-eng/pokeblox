@@ -4,8 +4,12 @@ const installed=()=>matchMedia('(display-mode:standalone)').matches||navigator.s
 button.hidden=installed();
 window.addEventListener('appinstalled',()=>{button.hidden=true;promptEvent=null;});
 button.onclick=async()=>{if(promptEvent){await promptEvent.prompt();await promptEvent.userChoice;promptEvent=null;}else document.getElementById('install-help').showModal();};
-// Follow the device orientation, including an already installed copy of the game.
-const unlockOrientation=()=>{try{screen.orientation?.unlock?.();}catch{}};
-unlockOrientation();
-document.getElementById('begin').addEventListener('click',unlockOrientation);
+// An existing PWA can retain its old landscape manifest until the browser updates it.
+// "any" permits all orientations; plain unlock would restore that old default.
+const followOrientation=async()=>{
+ try{if(installed()&&screen.orientation?.lock)await screen.orientation.lock('any');else screen.orientation?.unlock?.();}
+ catch{try{screen.orientation?.unlock?.();}catch{}}
+};
+followOrientation();
+document.getElementById('begin').addEventListener('click',followOrientation);
 if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js').catch(()=>{});
