@@ -1,6 +1,6 @@
 {
   "name": "pokeblox-kanto",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "private": true,
   "type": "module",
   "engines": {
@@ -8,6 +8,6 @@
   },
   "scripts": {
     "start": "node server/index.mjs",
-    "test": "node verify.mjs && node tests/server.mjs && node tests/island2.mjs && node tests/evolution.mjs && node tests/orientation.mjs && node tests/animation.mjs"
+    "test": "node verify.mjs && node tests/server.mjs && node tests/island2.mjs && node tests/evolution.mjs && node tests/orientation.mjs && node tests/animation.mjs && node tests/classic-models.mjs"
   }
 }

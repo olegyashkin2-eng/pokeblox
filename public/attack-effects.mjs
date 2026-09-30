@@ -8,6 +8,7 @@ const MOUTH={4:[0,1.48,.53],5:[0,1.48,.53],6:[0,1.48,.53],7:[0,1.35,.63],8:[0,1.
 
 // Read the exact animated attachment in bind coordinates, including world scale.
 export function attachment(pokemon,name,point){
+ if(pokemon.userData.socket)return pokemon.userData.socket(name,point);
  const model=pokemon.userData.model,bone=model.userData.parts[name]??model.userData.parts.body;
  model.updateWorldMatrix(true,true);
  const i=model.skeleton.bones.indexOf(bone);

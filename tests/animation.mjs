@@ -5,6 +5,7 @@ const THREE=await import('three');
 const {questModel}=await import('../public/quest-models.mjs');
 const {PokemonAnimator,attackSpec,ANIMATION_PROFILES}=await import('../public/pokemon-animation.mjs');
 const {World}=await import('../public/world.mjs');
+const {classicFixtures}=await import('./classic-fixtures.mjs');
 const {ALL_IDS,createState,newPokemon}=await import('../public/data.mjs');
 const {resolveTurn}=await import('../public/battle.mjs');
 
@@ -48,7 +49,7 @@ console.log('PASS: 31 rigid rigs, bind poses, articulated locomotion, 62 attack 
 // Run the real world/attack/effect integration using rendered time (no GPU needed).
 const world=Object.create(World.prototype);
 Object.assign(world,{
- scene:new THREE.Scene(),camera:new THREE.PerspectiveCamera(46,16/9,.1,260),viewportHeight:720,renderer:{render(){}},
+ models:await classicFixtures(),scene:new THREE.Scene(),camera:new THREE.PerspectiveCamera(46,16/9,.1,260),viewportHeight:720,renderer:{render(){}},
  playerPos:new THREE.Vector3(0,0,18),trainer:new THREE.Group(),ring:new THREE.Group(),shadowTexture:null,wild:[],pickups:[],clouds:[],
  motes:new THREE.Group(),portalGlow:{material:{}},clock:0
 });
