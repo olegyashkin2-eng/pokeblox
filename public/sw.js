@@ -1,5 +1,5 @@
-const CACHE='pokeblox-0.6.0';
-const FILES=['/','/index.html','/style.css','/game.mjs','/world.mjs','/quest-models.mjs','/quest-faces.mjs','/evolution-scene.mjs','/data.mjs','/stats.mjs','/battle.mjs','/save-format.mjs','/saving.mjs','/accounts.mjs','/install.mjs','/manifest.webmanifest','/icon-192.png','/icon-512.png','/vendor/three.module.min.js','/vendor/utils/BufferGeometryUtils.js'];
+const CACHE='pokeblox-0.7.0';
+const FILES=['/','/index.html','/style.css','/responsive.css','/game.mjs','/world.mjs','/quest-models.mjs','/quest-faces.mjs','/evolution-scene.mjs','/data.mjs','/stats.mjs','/battle.mjs','/save-format.mjs','/saving.mjs','/accounts.mjs','/install.mjs','/manifest.webmanifest','/icon-192.png','/icon-512.png','/vendor/three.module.min.js','/vendor/utils/BufferGeometryUtils.js'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES))));
 // Do not activate a new game version over an in-progress battle.
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('pokeblox-')&&k!==CACHE).map(k=>caches.delete(k))))));

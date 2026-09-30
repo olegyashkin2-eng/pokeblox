@@ -4,6 +4,8 @@ import {EvolutionScene} from './evolution-scene.mjs';
 import {SPECIES,ALL_IDS,walkable,zoneAt,rollEncounter,ISLAND2_SPAWNS} from './data.mjs';
 
 export const V3=THREE.Vector3;
+// Preserve enough horizontal field of view when a phone is held upright.
+export const viewportFov=aspect=>THREE.MathUtils.radToDeg(2*Math.atan(Math.tan(THREE.MathUtils.degToRad(46)/2)/Math.min(1,Math.max(.4,aspect))));
 const TAU=Math.PI*2;
 let seed=1786;const rand=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296;};
 const smooth=(a,b,t)=>a+(b-a)*t;
@@ -20,7 +22,7 @@ function pathDistance(x,z){let min=1e3;for(const points of pathSets){for(let i=1
 
 export class World{
  constructor(canvas){
-  this.island=1;this.layouts={};this.bossDefeated=false;this.canvas=canvas;this.mobile=matchMedia('(pointer:coarse)').matches;this.scene=new THREE.Scene();this.scene.background=new THREE.Color('#addcdf');this.scene.fog=new THREE.Fog('#b9e2d8',65,145);
+  this.island=1;this.layouts={};this.bossDefeated=false;this.canvas=canvas;this.mobile=matchMedia('(any-pointer:coarse)').matches;this.scene=new THREE.Scene();this.scene.background=new THREE.Color('#addcdf');this.scene.fog=new THREE.Fog('#b9e2d8',65,145);
   this.renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance'});this.renderer.setPixelRatio(Math.min(devicePixelRatio,this.mobile?1.4:1.75));this.renderer.outputColorSpace=THREE.SRGBColorSpace;this.renderer.toneMapping=THREE.ACESFilmicToneMapping;this.renderer.toneMappingExposure=1.25;this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.type=THREE.PCFSoftShadowMap;
   this.camera=new THREE.PerspectiveCamera(46,innerWidth/innerHeight,.1,260);this.camera.position.set(15,13,32);
   this.scene.add(new THREE.HemisphereLight(0xd7f4ff,0x7b9453,2.1));
@@ -28,9 +30,9 @@ export class World{
   this.environment=new THREE.Group();this.scene.add(this.environment);this.models=new Map();this.portraits={};this.wild=[];this.pickups=[];this.obstacles=[];this.clock=0;this.temp=new V3();this.cameraYaw=.2;this.cameraPitch=.52;this.cameraDistance=this.mobile?13:11.5;this.playerPos=new V3(0,height(0,18),18);this.hero=null;this.partner=null;this.selectedWild=null;this.walkTime=0;this.battleGroup=null;this.cameraMode='start';
   this.shadowTexture=this.makeShadowTexture();this.buildTerrain();this.buildNature();this.buildCamp();this.buildTrainer();this.buildPickups();this.buildAtmosphere();
   this.ring=mesh(new THREE.RingGeometry(1.25,1.4,48),new THREE.MeshBasicMaterial({color:0xfff2a4,transparent:true,opacity:.9,side:THREE.DoubleSide}),[0,0,0],null,this.scene);this.ring.rotation.x=-Math.PI/2;this.ring.visible=false;this.ring.castShadow=false;
-  this.resize();window.addEventListener('resize',()=>this.resize());
+  this.resize();this.viewportObserver=new ResizeObserver(()=>this.resize());this.viewportObserver.observe(canvas);
  }
- resize(){this.renderer.setSize(innerWidth,innerHeight,false);this.camera.aspect=innerWidth/innerHeight;this.camera.updateProjectionMatrix();}
+ resize(){const rect=this.canvas.getBoundingClientRect();const width=Math.max(1,rect.width),h=Math.max(1,rect.height);this.renderer.setSize(width,h,false);this.camera.aspect=width/h;this.camera.fov=viewportFov(this.camera.aspect);this.camera.updateProjectionMatrix();}
  makeShadowTexture(){const c=document.createElement('canvas');c.width=c.height=64;const ctx=c.getContext('2d');const g=ctx.createRadialGradient(32,32,3,32,32,30);g.addColorStop(0,'rgba(18,44,30,.30)');g.addColorStop(1,'rgba(18,44,30,0)');ctx.fillStyle=g;ctx.fillRect(0,0,64,64);return new THREE.CanvasTexture(c);}
  addShadow(parent,size=2){const m=new THREE.Mesh(new THREE.PlaneGeometry(size,size),new THREE.MeshBasicMaterial({map:this.shadowTexture,transparent:true,depthWrite:false}));m.rotation.x=-Math.PI/2;m.position.y=.025;parent.add(m);return m;}
  buildTerrain(){
@@ -110,12 +112,12 @@ export class World{
   for(const w of this.wild){if(!w.boss&&!paused&&this.cameraMode==='explore'&&((!w.visible&&t>w.cooldown)||(w.visible&&t>w.nextChange&&this.playerPos.distanceTo(w.group.position)>7))){this.rollWild(w);}if(w.visible&&this.cameraMode==='explore'&&!paused){const x=w.home.x+Math.sin(t*.2+w.phase)*1.2,z=w.home.z+Math.cos(t*.18+w.phase)*1.2;if(walkable(x,z)){w.group.position.set(x,height(x,z)+Math.max(0,Math.sin(t*2.3+w.phase))*.04,z);w.group.rotation.y=Math.atan2(Math.cos(t*.2+w.phase)*.2,-Math.sin(t*.18+w.phase)*.18);}}w.group.userData.mixer?.update(dt);}
   if(this.hero){this.hero.userData.mixer?.update(dt);this.hero.rotation.y=.5+Math.sin(t*.3)*.15;this.hero.position.y=height(5,11)+Math.sin(t*1.7)*.025;}
   if(this.cameraMode==='start'){
-   const narrow=innerWidth<700;const desired=narrow?new V3(14,10,32):new V3(13,9,30);this.camera.position.lerp(desired,.04);this.camera.lookAt(narrow?new V3(1.5,2.7,8):new V3(-1,1.6,9));
+   const portrait=this.camera.aspect<1;const desired=portrait?new V3(12,7.5,24):new V3(13,9,30);this.camera.position.lerp(desired,.04);this.camera.lookAt(portrait?new V3(5,1.6,11):new V3(-1,1.6,9));
   }else if(this.cameraMode==='explore'){
    this.playerPos.y=height(this.playerPos.x,this.playerPos.z);this.trainer.position.copy(this.playerPos);this.trainer.position.y+=jumpY;
    if(this.partner){const off=new V3(-1.6,0,1.6).applyAxisAngle(new V3(0,1,0),this.trainer.rotation.y);const target=this.playerPos.clone().add(off);const dist=this.partner.position.distanceTo(target);this.partner.position.lerp(target,Math.min(1,dt*(dist>4?5:2.7)));const p=this.partner.position;p.y=height(p.x,p.z)+(moving?Math.abs(Math.sin(t*10))*.09:Math.sin(t*2)*.015);if(moving){const d=Math.atan2(target.x-p.x,target.z-p.z);this.partner.rotation.y+=((d-this.partner.rotation.y+Math.PI*3)%TAU-Math.PI)*Math.min(1,dt*6);}this.partner.userData.mixer?.update(dt);}
    const cp=Math.cos(this.cameraPitch),sp=Math.sin(this.cameraPitch);const look=this.playerPos.clone().add(new V3(0,1.2,0));const desired=look.clone().add(new V3(Math.sin(this.cameraYaw)*this.cameraDistance*cp,this.cameraDistance*sp,Math.cos(this.cameraYaw)*this.cameraDistance*cp));desired.y=Math.max(desired.y,height(desired.x,desired.z)+1.4);this.camera.position.lerp(desired,Math.min(1,dt*7));this.camera.lookAt(look);
-  }else if(this.battleGroup){const o=this.battleGroup.position;const narrow=innerWidth<700;const desired=o.clone().add(narrow?new V3(-9,7.2,13):new V3(-8,5.8,11));this.camera.position.lerp(desired,Math.min(1,dt*5));this.camera.lookAt(o.clone().add(new V3(0,narrow?-1.1:-.15,0)));for(const [i,m] of [this.battleOwn,this.battleEnemy].entries()){m.userData.mixer?.update(dt);const d=t-(m.userData.attackTime??-100);const pulse=d<.5?Math.sin(d/.5*Math.PI):0;m.position.x=(i===0?-2:2)+(i===0?1:-1)*pulse;m.position.z=(i===0?2:-2)-(i===0?1:-1)*pulse;m.position.y=.1+Math.max(0,Math.sin(t*2+i))*.04;const hit=t-(m.userData.hitAt??-100);m.userData.visual.rotation.z=hit<.3?Math.sin(hit*40)*.05:0;}}
+  }else if(this.battleGroup){const o=this.battleGroup.position;const narrow=this.camera.aspect<1;const desired=o.clone().add(narrow?new V3(-9,7.2,13):new V3(-8,5.8,11));this.camera.position.lerp(desired,Math.min(1,dt*5));this.camera.lookAt(o.clone().add(new V3(0,narrow?-1.1:-.15,0)));for(const [i,m] of [this.battleOwn,this.battleEnemy].entries()){m.userData.mixer?.update(dt);const d=t-(m.userData.attackTime??-100);const pulse=d<.5?Math.sin(d/.5*Math.PI):0;m.position.x=(i===0?-2:2)+(i===0?1:-1)*pulse;m.position.z=(i===0?2:-2)-(i===0?1:-1)*pulse;m.position.y=.1+Math.max(0,Math.sin(t*2+i))*.04;const hit=t-(m.userData.hitAt??-100);m.userData.visual.rotation.z=hit<.3?Math.sin(hit*40)*.05:0;}}
   if(this.thrown){const p=(t-this.thrown.start)/.7;if(p>=1){this.thrown.ball.visible=false;this.thrown=null;}else{this.thrown.ball.position.set(-2+4*p,.6+Math.sin(p*Math.PI)*3,2-4*p);this.thrown.ball.rotation.x=p*10;}}
   if(this.effects)for(let k=this.effects.length-1;k>=0;k--){const e=this.effects[k],age=t-e.start;if(age>1.1){this.scene.remove(e.mesh);e.mesh.geometry.dispose();e.mesh.material.dispose();this.effects.splice(k,1);continue;}const a=e.mesh.geometry.attributes.position;for(let i=0;i<a.count;i++){a.setXYZ(i,a.getX(i)+e.vel[i].x*dt,a.getY(i)+e.vel[i].y*dt,a.getZ(i)+e.vel[i].z*dt);e.vel[i].y-=6*dt;}a.needsUpdate=true;e.mesh.material.opacity=1-age/1.1;}
   this.renderer.render(this.scene,this.camera);

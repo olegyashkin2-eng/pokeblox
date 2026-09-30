@@ -4,6 +4,8 @@ const installed=()=>matchMedia('(display-mode:standalone)').matches||navigator.s
 button.hidden=installed();
 window.addEventListener('appinstalled',()=>{button.hidden=true;promptEvent=null;});
 button.onclick=async()=>{if(promptEvent){await promptEvent.prompt();await promptEvent.userChoice;promptEvent=null;}else document.getElementById('install-help').showModal();};
-// Orientation locking is best effort; iOS uses the visible rotate prompt instead.
-document.getElementById('begin').addEventListener('click',()=>{if(matchMedia('(pointer:coarse)').matches&&installed())screen.orientation?.lock?.('landscape').catch(()=>{});});
+// Follow the device orientation, including an already installed copy of the game.
+const unlockOrientation=()=>{try{screen.orientation?.unlock?.();}catch{}};
+unlockOrientation();
+document.getElementById('begin').addEventListener('click',unlockOrientation);
 if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js').catch(()=>{});
