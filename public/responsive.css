@@ -16,6 +16,7 @@ body{position:relative;height:100dvh;width:100%;isolation:isolate}
 @media(any-pointer:coarse){
  .top-actions .icon-button,.account-button{min-width:44px;min-height:44px}
  .small-button,.quest button,.game-nav button{min-height:44px}
+ .quest button{display:flex}
  .touch-action{width:56px;height:56px}
  .panel-top .icon-button{width:44px;height:44px}
  .install-game{min-height:36px}
@@ -30,7 +31,7 @@ body{position:relative;height:100dvh;width:100%;isolation:isolate}
  .account-button{font-size:12px;padding:8px 10px;max-width:100px;min-height:44px}
  .region-pill{position:absolute;left:0;top:52px;font-size:11px;padding:6px 9px;max-width:52%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
  .save-status{position:absolute;right:0;top:52px;padding:6px 9px;font-size:11px;max-width:46%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
- .start-heading{top:calc(var(--safe-top) + 106px);left:7%;right:7%}
+ .start-heading{top:calc(var(--safe-top) + 130px);left:7%;right:7%}
  .start-heading h1{font-size:clamp(30px,7vw,57px);letter-spacing:-1.6px;margin:12px 0}
  .start-heading .eyebrow{font-size:10px}.start-heading p{font-size:14px;line-height:1.5}
  .starter-preview-label{display:none}
@@ -45,7 +46,7 @@ body{position:relative;height:100dvh;width:100%;isolation:isolate}
  .quest{left:var(--safe-left);top:calc(var(--safe-top) + 94px);width:calc(100% - var(--safe-left) - var(--safe-right) - 104px);max-width:350px;height:112px;padding:10px;border-radius:14px}
  .quest-heading .eyebrow{font-size:8px;letter-spacing:.5px}.quest-heading>span:last-child{font-size:10px}
  .quest h2{font-size:14px;line-height:1.25;margin:6px 0;max-height:36px;overflow:hidden}
- .quest p,.quest-track{display:none}.quest button{position:absolute;bottom:4px;left:10px;width:calc(100% - 20px);min-height:36px;font-size:12px}
+ .quest p,.quest-track{display:none}.quest button{display:flex;position:absolute;bottom:4px;left:10px;width:calc(100% - 20px);min-height:36px;font-size:12px}
  .map-wrap{top:calc(var(--safe-top) + 94px);right:var(--safe-right)}
  .map-wrap>button{width:88px;height:88px;border-width:3px}.map-caption{font-size:8px;letter-spacing:.8px;margin-top:7px}
  .resources{top:calc(var(--safe-top) + 214px);left:var(--safe-left);padding:7px 10px;gap:17px}.resources span{font-size:12px}.resources svg{width:16px;height:16px}
@@ -73,14 +74,16 @@ body{position:relative;height:100dvh;width:100%;isolation:isolate}
 
 /* Small phones keep the playfield free by moving the partner into the team menu. */
 @media(orientation:portrait) and (max-height:740px){
- .start-heading{top:calc(var(--safe-top) + 108px)}.start-heading h1{font-size:30px;margin:8px 0}.start-heading p{display:none}
+ .start-heading{top:calc(var(--safe-top) + 130px)}.start-heading h1{font-size:30px;margin:8px 0}.start-heading p{display:none}
  .starter-card img{height:45px}.starter-dock{padding:11px}.starter-card{padding:7px;flex-basis:95px}
  .partner{display:none}#joystick{bottom:calc(var(--safe-bottom) + 76px);width:100px;height:100px}
  .touch-buttons{bottom:calc(var(--safe-bottom) + 98px)}.nearby{bottom:calc(var(--safe-bottom) + 188px)}
  .quest{height:100px;top:calc(var(--safe-top) + 87px)}.quest h2{font-size:13px;margin-top:5px}.quest button{min-height:32px}
  .map-wrap{top:calc(var(--safe-top) + 87px)}.resources{top:calc(var(--safe-top) + 195px)}
- .battle-label{top:calc(var(--safe-top) + 86px)}.enemy-status{top:calc(var(--safe-top) + 108px);padding:9px}
- .battle-own{padding:8px 10px}.battle-own>span:last-child{margin-top:3px}.battle-actions>button{min-height:48px;padding:6px 4px}.battle-actions small{display:none}.battle-console{padding:10px}.battle-console p{max-height:53px;font-size:12px;margin-bottom:7px}
+ body:has(#battle-ui:not([hidden])) .region-pill,body:has(#battle-ui:not([hidden])) .save-status{display:none}
+ .battle-label{display:none}.enemy-status{top:calc(var(--safe-top) + 56px);width:210px;padding:8px 10px}
+ .enemy-status h2{font-size:16px;line-height:1.2;margin:4px 0 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.enemy-status .eyebrow{font-size:8px}.enemy-status>span:last-child{font-size:10px;line-height:12px;margin-top:4px}
+ .battle-own{padding:8px 10px;width:100%;display:grid;grid-template-columns:1fr auto;gap:4px 12px}.battle-own>div:first-child{grid-column:1/-1;margin:0}.battle-own h2{font-size:14px;line-height:18px}.battle-own .hp-track{align-self:center}.battle-own>span:last-child{margin:0;font-size:10px;line-height:12px}.battle-actions>button{min-height:48px;padding:6px 4px}.battle-actions small{display:none}.battle-console{padding:10px}.battle-console p{max-height:53px;font-size:12px;margin-bottom:7px}
 }
 @media(orientation:portrait) and (max-width:360px){
  .brand-icon{display:none}.brand strong{font-size:12px}.account-button{max-width:80px}
