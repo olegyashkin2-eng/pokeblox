@@ -10,7 +10,7 @@ export class EvolutionScene{
   this.time=0;this.done=false;this.reducedMotion=reducedMotion;this.phase='stone';this.disposables=[];
   this.scene=new THREE.Scene();this.scene.background=new THREE.Color('#071727');this.scene.fog=new THREE.Fog('#071727',14,30);
   this.camera=new THREE.PerspectiveCamera(35,aspect,.1,60);
-  this.color=new THREE.Color(({fire:'#ffb567',water:'#68dcff',thunder:'#ffdf69'})[stone]||'#95e8ca');
+  this.color=new THREE.Color(({fire:'#ffb567',water:'#68dcff',thunder:'#ffdf69',dragon:'#a899ff',moon:'#ffc9f2',leaf:'#a4edaa'})[stone]||'#95e8ca');
   this.scene.add(new THREE.HemisphereLight('#e0f6ff','#16314b',2));
   const key=new THREE.DirectionalLight('#fff1dc',3.4);key.position.set(-3,6,5);this.scene.add(key);
   const rim=new THREE.DirectionalLight(this.color,4);rim.position.set(3,3,-4);this.scene.add(rim);
