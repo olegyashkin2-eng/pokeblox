@@ -23,7 +23,7 @@ export async function createApp(options={}){
  const rate=(key,max,windowMs)=>{const now=Date.now();let entry=limiters.get(key);if(!entry||entry.until<now){entry={count:0,until:now+windowMs};limiters.set(key,entry);}entry.count++;return entry.count<=max;};
  const sameOrigin=req=>{if(req.headers['sec-fetch-site']==='cross-site')return false;const origin=req.headers.origin;if(!origin)return true;try{const configured=options.publicUrl??process.env.PUBLIC_URL;if(configured)return new URL(origin).origin===new URL(configured).origin;return new URL(origin).host===req.headers.host&&['http:','https:'].includes(new URL(origin).protocol);}catch{return false;}};
  const server=http.createServer(async(req,res)=>{res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Referrer-Policy','same-origin');res.setHeader('X-Frame-Options','DENY');let url;try{url=new URL(req.url,'http://localhost');}catch{return json(res,400,{error:'INVALID_URL'});}try{
-  if(url.pathname==='/healthz')return json(res,200,{ok:true,version:'0.7.0'});
+  if(url.pathname==='/healthz')return json(res,200,{ok:true,version:'0.8.0'});
   if(url.pathname.startsWith('/api/')){
    if(req.method!=='GET'&&!sameOrigin(req))return json(res,403,{error:'INVALID_ORIGIN'});
    if(url.pathname==='/api/me'&&req.method==='GET'){const s=session(req);return json(res,200,s?{user:{id:s.id,username:s.username},csrfToken:s.csrf_token}:{user:null,csrfToken:null});}
@@ -57,4 +57,4 @@ export async function createApp(options={}){
  if(options.backups!==false){backupTimer=setInterval(()=>makeBackup().catch(()=>console.error('Backup failed')),3600000);backupTimer.unref();}
  return {server,db,makeBackup,async close(){clearInterval(cleanup);clearInterval(backupTimer);await new Promise(r=>server.close(r));db.close();}};
 }
-if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){const app=await createApp();app.server.listen(Number(process.env.PORT??3000),'0.0.0.0',()=>console.log('Pokeblox 0.7.0 listening; persistent database ready.'));for(const signal of ['SIGTERM','SIGINT'])process.on(signal,()=>app.close().then(()=>process.exit(0)));}
+if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){const app=await createApp();app.server.listen(Number(process.env.PORT??3000),'0.0.0.0',()=>console.log('Pokeblox 0.8.0 listening; persistent database ready.'));for(const signal of ['SIGTERM','SIGINT'])process.on(signal,()=>app.close().then(()=>process.exit(0)));}
