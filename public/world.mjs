@@ -1,6 +1,5 @@
 import * as THREE from 'three';
-import {questModel} from './quest-models.mjs';
-import {PokemonAnimator} from './pokemon-animation.mjs';
+import {loadClassicModels,makeClassicPokemon,disposePokemon} from './classic-models.mjs';
 import {AttackEffect} from './attack-effects.mjs';
 import {EvolutionScene} from './evolution-scene.mjs';
 import {SPECIES,ALL_IDS,walkable,zoneAt,rollEncounter,ISLAND2_SPAWNS} from './data.mjs';
@@ -15,7 +14,7 @@ const mat=(color,extra={})=>new THREE.MeshStandardMaterial({color,roughness:.95,
 const boxGeo=new THREE.BoxGeometry(1,1,1),ballGeo=new THREE.SphereGeometry(1,12,8),rockGeo=new THREE.IcosahedronGeometry(1,0);
 const cylinderGeo=new THREE.CylinderGeometry(1,1,1,10);
 const materials=new Map();
-function retirePokemon(root){root?.userData.animator?.cancel();root?.userData.model?.skeleton?.dispose();}
+const retirePokemon=disposePokemon;
 function material(color){if(!materials.has(color))materials.set(color,mat(color));return materials.get(color);}
 function mesh(geo,color,pos,scale,parent){const m=new THREE.Mesh(geo,typeof color==='object'?color:material(color));if(pos)m.position.set(...pos);if(scale)m.scale.set(...scale);m.castShadow=true;m.receiveShadow=true;parent?.add(m);return m;}
 export function height(x,z){const r=Math.hypot(x,z);return .3+.23*Math.sin(x*.11)*Math.cos(z*.12)+3.8*Math.exp(-((x-25)**2+(z+40)**2)/420)+1.8*Math.exp(-((x+29)**2+(z+36)**2)/320)-Math.max(0,r-56)**1.5*.073;}
@@ -75,14 +74,10 @@ export class World{
  }
  makeBall(r=.28){const g=new THREE.Group();mesh(new THREE.SphereGeometry(r,16,10,0,TAU,0,Math.PI/2),0xd96550,[0,0,0],null,g);mesh(new THREE.SphereGeometry(r,16,10,0,TAU,Math.PI/2,Math.PI/2),0xf9f5de,[0,0,0],null,g);const line=mesh(new THREE.TorusGeometry(r*.98,r*.07,6,24),0x2b4943,[0,0,0],null,g);line.rotation.x=Math.PI/2;mesh(ballGeo,0x2b4943,[0,0,r*.96],[r*.26,r*.26,r*.09],g);mesh(ballGeo,0xffffed,[0,0,r*1.04],[r*.17,r*.17,r*.06],g);return g;}
  buildAtmosphere(){this.clouds=[];for(let i=0;i<10;i++){const g=new THREE.Group();const m=new THREE.MeshBasicMaterial({color:0xf1f7e8,transparent:true,opacity:.76});for(let j=0;j<3;j++)mesh(new THREE.IcosahedronGeometry(1,1),m,[j*2.2,Math.sin(j)*.8,0],[3,1.2,1.8],g).castShadow=false;g.position.set((rand()-.5)*200,27+rand()*10,(rand()-.5)*200);this.environment.add(g);this.clouds.push(g);}const pts=[];for(let i=0;i<70;i++)pts.push((rand()-.5)*90,2+rand()*7,(rand()-.5)*90);const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.Float32BufferAttribute(pts,3));this.motes=new THREE.Points(geo,new THREE.PointsMaterial({color:0xfff6cf,size:.07,transparent:true,opacity:.7}));this.environment.add(this.motes);}
- async loadModels(onProgress){let done=0;for(const id of ALL_IDS){this.models.set(id,questModel(id));onProgress(++done,ALL_IDS.length);await new Promise(r=>setTimeout(r,0));}for(const id of ALL_IDS)this.portraits[id]=this.makePortrait(id);this.spawnWild();}
+ async loadModels(onProgress){this.models=await loadClassicModels(ALL_IDS,onProgress);for(const id of ALL_IDS)this.portraits[id]=this.makePortrait(id);this.spawnWild();}
  makePokemon(id,targetHeight=SPECIES[id].height){
-  // Geometry/material are shared; bones and animation state belong to this instance.
-  const model=questModel(id),bounds=new THREE.Box3().setFromObject(model),size=bounds.getSize(new V3());
-  model.position.set(-(bounds.min.x+bounds.max.x)/2,-bounds.min.y,-(bounds.min.z+bounds.max.z)/2);
-  const visual=new THREE.Group();visual.add(model);visual.scale.setScalar(targetHeight/size.y);
-  const outer=new THREE.Group();outer.add(visual);this.animationSeed=(this.animationSeed??0)+1;
-  outer.userData={id,visual,model,height:targetHeight,animator:new PokemonAnimator(model,{phase:this.animationSeed*2.399})};return outer;
+  this.animationSeed=(this.animationSeed??0)+1;
+  return makeClassicPokemon(id,targetHeight,this.models?.get(id),this.animationSeed*2.399);
  }
  configureIsland(id){if(this.island===id)return;for(const w of this.wild){this.scene.remove(w.group);retirePokemon(w.group);}this.wild=[];const keys=['environment','pickups','obstacles','healer','portal','portalGlow','clouds','motes','lake'];this.layouts[this.island]=Object.fromEntries(keys.map(k=>[k,this[k]]));this.scene.remove(this.environment);this.island=id;if(this.layouts[id])Object.assign(this,this.layouts[id]);else{this.environment=new THREE.Group();this.pickups=[];this.obstacles=[];this.buildTerrain();this.buildNature();this.buildCamp();this.buildPickups();this.buildAtmosphere();}this.scene.add(this.environment);this.scene.background.set(id===2?'#a9dce9':'#addcdf');this.scene.fog.color.set(id===2?'#b9deea':'#b9e2d8');this.playerPos.set(0,height(0,18),18);this.spawnWild();}
  buildCoast(){for(let i=0;i<65;i++){const a=i*2.399,r=48+rand()*12,x=Math.sin(a)*r,z=Math.cos(a)*r;if(!walkable(x,z))continue;const h=height(x,z),ice=x<0&&z<-20;mesh(boxGeo,ice?0xdce9ee:0x919eaa,[x,h+1,z],[1+rand()*2,1+rand()*3,1+rand()*2],this.environment).rotation.y=a;this.obstacles.push({x,z,r:.8});if(i%3===0)for(let j=0;j<3;j++)mesh(boxGeo,0xe6ae9d,[x+j*.3,h+.6+j*.2,z+1],[.2,1.2-j*.2,.2],this.environment);}
@@ -156,7 +151,7 @@ export class World{
     this.partner.userData.animator.update(paused?0:dt,speed);
    }
    const cp=Math.cos(this.cameraPitch),sp=Math.sin(this.cameraPitch);const look=this.playerPos.clone().add(new V3(0,1.2,0));const desired=look.clone().add(new V3(Math.sin(this.cameraYaw)*this.cameraDistance*cp,this.cameraDistance*sp,Math.cos(this.cameraYaw)*this.cameraDistance*cp));desired.y=Math.max(desired.y,height(desired.x,desired.z)+1.4);this.camera.position.lerp(desired,Math.min(1,dt*7));this.camera.lookAt(look);
-  }else if(this.battleGroup){const o=this.battleGroup.position;const narrow=this.camera.aspect<1;const short=this.viewportHeight<500;const fit=Math.max(1,(narrow?650:500)/this.viewportHeight);const desired=o.clone().add((narrow?new V3(-9,7.2,13):new V3(-8,5.8,11)).multiplyScalar(fit));this.camera.position.lerp(desired,Math.min(1,dt*5));this.camera.lookAt(o.clone().add(new V3(0,narrow?-1.1:short?-1.8:-.15,0)));for(const m of [this.battleOwn,this.battleEnemy])m.userData.animator.update(dt);
+  }else if(this.battleGroup){const o=this.battleGroup.position;const narrow=this.camera.aspect<1;const short=this.viewportHeight<500;const modelFit=Math.max(1,Math.max(this.battleOwn.userData.span,this.battleEnemy.userData.span)/3.4);const fit=Math.max(1,(narrow?650:500)/this.viewportHeight)*modelFit;const desired=o.clone().add((narrow?new V3(-9,7.2,13):new V3(-8,5.8,11)).multiplyScalar(fit));this.camera.position.lerp(desired,Math.min(1,dt*5));this.camera.lookAt(o.clone().add(new V3(0,narrow?-1.1:short?-1.8:-.15,0)));for(const m of [this.battleOwn,this.battleEnemy])m.userData.animator.update(dt);
    const a=this.currentAttack;
    if(a){a.model.position.copy(a.origin).addScaledVector(a.direction,a.model.userData.animator.travel*a.reach);a.effect.update(a.model.userData.animator.action.time/a.spec.duration);}
   }

@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import {disposePokemon} from './classic-models.mjs';
 export const EVOLUTION_DURATION=7.2;
 const clamp=THREE.MathUtils.clamp;
 const ease=t=>{t=clamp(t,0,1);return t*t*(3-2*t);};
@@ -15,8 +16,9 @@ export class EvolutionScene{
   const rim=new THREE.DirectionalLight(this.color,4);rim.position.set(3,3,-4);this.scene.add(rim);
   this.light=new THREE.PointLight(this.color,12,12);this.light.position.set(0,2.6,1);this.scene.add(this.light);
   this.old=oldModel;this.next=newModel;this.scene.add(this.old,this.next);this.next.visible=false;
+  this.modelFit=Math.max(1,Math.max(this.old.userData.span??0,this.next.userData.span??0)/3.6);
   this.modelMaterials=[];
-  for(const root of [this.old,this.next])root.traverse(obj=>{if(!obj.isMesh)return;obj.material=obj.material.clone();this.modelMaterials.push(obj.material);});
+  for(const root of [this.old,this.next])root.traverse(obj=>{if(!obj.isMesh)return;const copy=m=>{const own=m.clone();this.modelMaterials.push(own);return own;};obj.material=Array.isArray(obj.material)?obj.material.map(copy):copy(obj.material);});
   const basic=(opacity=1)=>new THREE.MeshBasicMaterial({color:this.color,transparent:true,opacity,depthWrite:false,side:THREE.DoubleSide,blending:THREE.AdditiveBlending});
   const add=(g,m,pos)=>{const obj=new THREE.Mesh(g,m);if(pos)obj.position.set(...pos);this.scene.add(obj);this.disposables.push(g,m);return obj;};
   this.platform=add(new THREE.CylinderGeometry(2.45,2.6,.2,64),new THREE.MeshStandardMaterial({color:'#183449',roughness:.38,metalness:.25}),[0,-.15,0]);
@@ -36,14 +38,14 @@ export class EvolutionScene{
   this.time+=Math.max(0,dt);const t=this.time;this.phase=evolutionPhase(t);this.done=t>=EVOLUTION_DURATION;
   this.camera.aspect=aspect;this.camera.updateProjectionMatrix();
   const a=this.reducedMotion?.12:.18+Math.sin(Math.min(t,7)*.35)*.14;
-  const distance=Math.max(7.9,6.2/Math.max(aspect,.55));this.camera.position.set(Math.sin(a)*distance,2.85,Math.cos(a)*distance);this.camera.lookAt(0,.88,0);
+  const distance=Math.max(7.9,6.2/Math.max(aspect,.55))*this.modelFit;this.camera.position.set(Math.sin(a)*distance,2.85,Math.cos(a)*distance);this.camera.lookAt(0,.88,0);
   const charge=ease((t-1.35)/2.3),reveal=ease((t-4.65)/1.05),glow=t<3.65?charge:t<4.65?1:1-reveal;
   this.old.visible=t<4.18;this.next.visible=t>=4.18;
   for(const [index,model] of [this.old,this.next].entries()){
    model.userData.animator?.update(dt);model.position.set(0,.03+Math.sin(Math.min(t,4.65)/4.65*Math.PI)*.45,0);
    model.rotation.y=this.reducedMotion?.08:t<3.65?.12+charge*.3:t<4.65?.42+(t-3.65)*Math.PI*2:.14+(1-reveal)*.25;
    const s=index===0?1-charge*.045:.84+ease((t-4.18)/1.12)*.16;model.scale.setScalar(s);
-   model.traverse(obj=>{if(obj.isMesh){obj.material.emissive.set('#efffff');obj.material.emissiveIntensity=glow*(this.reducedMotion?1.3:3.5);}});
+   model.traverse(obj=>{if(obj.isMesh)for(const m of Array.isArray(obj.material)?obj.material:[obj.material])if(m.emissive){m.emissive.set('#efffff');m.emissiveIntensity=glow*(this.reducedMotion?1.3:3.5);}});
   }
   this.stone.position.set(0,1.3+Math.sin(Math.min(t/1.35,1)*Math.PI)*.45,1.2*(1-ease(t/1.35)));
   this.stone.rotation.set(t*.6,t*1.4,.3);this.stone.scale.setScalar(Math.max(.001,1-ease((t-1)/.5)));
@@ -58,5 +60,5 @@ export class EvolutionScene{
   this.rays.forEach((r,i)=>{r.material.opacity=(this.reducedMotion?0:1)*Math.max(0,1-Math.abs(t-4.7)/1.1)*.42;r.rotation.z=i*Math.PI/7+t*.035;r.scale.y=1+reveal*.6;});
   return this.done;
  }
- dispose(){for(const model of [this.old,this.next]){model.userData.animator?.cancel();model.userData.model?.skeleton?.dispose();}for(const m of this.modelMaterials)m.dispose();for(const item of this.disposables)item.dispose();this.scene.clear();}
+ dispose(){for(const model of [this.old,this.next])disposePokemon(model);for(const m of this.modelMaterials)m.dispose();for(const item of this.disposables)item.dispose();this.scene.clear();}
 }
