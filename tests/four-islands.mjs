@@ -15,7 +15,7 @@ assert.equal(ALL_IDS.length,77);assert.deepEqual(ISLAND3_IDS,[27,28,56,57,66,67,
 assert.deepEqual([...ISLAND4_IDS].sort((a,b)=>a-b),[10,11,12,13,14,15,35,36,39,40,43,44,45,46,47,48,49,63,64,65,69,70,71,96,97,108,122,124,132,137]);
 assert.equal(TIDAL_ENCOUNTERS.reduce((s,[,p])=>s+p,0),100);
 const frequencies={};for(let i=0;i<1e6;i++){const id=rollTidal(()=>(i+.5)/1e6);frequencies[id]=(frequencies[id]??0)+1;}
-assert.deepEqual(frequencies,{120:494950,121:300000,131:200000,144:50,147:5000});
+assert.deepEqual(frequencies,{120:449950,121:300000,131:200000,144:50,147:50000});
 assert.ok(!ISLAND2_SPAWNS.some(p=>[148,149].includes(p.id)));assert.equal(ISLAND2_SPAWNS[19].id,55,'Original boss save key retained');
 for(const [old,next,stone] of [[147,148,'dragon'],[148,149,'dragon'],[35,36,'moon'],[39,40,'moon'],[44,45,'leaf'],[70,71,'leaf'],[120,121,'water']]){
  const state=createState(),p=newPokemon(old,50);assert.equal(evolve(p,state,next),false,'Levels alone cannot replace a stone');state.stones[stone]=1;assert.ok(evolve(p,state,next));assert.equal(state.stones[stone],0);assert.equal(p.hp,hpMax(p));assert.equal(evolve(p,state,next),false);
@@ -48,6 +48,8 @@ let complete=false;const journey=world.startVoyage(2,3).then(()=>complete=true);
 const at=voyage.time;for(const aspect of [390/844,844/390,768/1024,1024/768]){voyage.update(0,aspect);assert.equal(voyage.time,at);assert.ok(voyage.camera.projectionMatrix.elements.every(Number.isFinite));}
 assert.equal(complete,false);assert.equal(save.state.island,3,'Destination committed before voyage completion');world.tick(5);await journey;assert.equal(complete,true);assert.equal(world.voyageScene,null);assert.equal(voyage.scene.children.length,0);
 console.log('PASS: actual new biomes, accessible encounters and pickups, four region saves, new evolution scenes, voyage rotation/pause/completion');
+
+const {checkTravelUI}=await import('./travel-ui.mjs');await checkTravelUI(world);
 
 const {createApp}=await import('../server/index.mjs');const dir=await mkdtemp(tmpdir()+'/pokeblox-four-');let app;
 try{
