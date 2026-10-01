@@ -55,7 +55,7 @@ const rows=[
 export const EXTRA_SPECIES=Object.fromEntries(rows.map(([id,name,type,height,island,move,extra={}])=>[id,{name,type,height,island,zone:ISLAND_NAMES[island],move,...extra}]));
 export const EXTRA_STONES={dragon:{name:'Драконий камень',color:0x8772ff},moon:{name:'Лунный камень',color:0xf3b9ef},leaf:{name:'Лиственный камень',color:0x7ae695}};
 export const EXTRA_TYPES={ground:{name:'Земляной',color:'#d9b769',icon:'gem'},fighting:{name:'Боевой',color:'#d68e69',icon:'star'},fairy:{name:'Волшебный',color:'#eba8d0',icon:'star'},psychic:{name:'Психический',color:'#c789e8',icon:'star'},bug:{name:'Насекомый',color:'#b4cc6c',icon:'leaf'},ice:{name:'Ледяной',color:'#a0e6f2',icon:'drop'},dragon:{name:'Драконий',color:'#a193f3',icon:'bolt'}};
-export const TIDAL_ENCOUNTERS=Object.freeze([[144,.005],[147,.5],[131,20],[120,49.495],[121,30]].map(Object.freeze));
+export const TIDAL_ENCOUNTERS=Object.freeze([[144,.005],[147,5],[131,20],[120,44.995],[121,30]].map(Object.freeze));
 export function rollTidal(rng=Math.random){let r=rng()*100;for(const [id,p] of TIDAL_ENCOUNTERS){r-=p;if(r<0)return id;}return 121;}
 export const TIDAL_SPAWNS=[{id:120,x:17,z:-12,table:'tidal'},{id:120,x:36,z:28,table:'tidal'},{id:120,x:14,z:15,table:'tidal'}];
 export const ISLAND3_SPAWNS=ISLAND3_IDS.map((id,i)=>({id,x:[-18,-37,-30,-15,4,17,9,36,27][i],z:[7,-5,-27,-39,-15,-34,-48,29,23][i]}));
