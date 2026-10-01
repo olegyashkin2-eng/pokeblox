@@ -25,7 +25,7 @@
     "kadabra_to_alakazam": "level 36 (single-player trade adaptation)",
     "machoke_to_machamp": "level 36 (single-player trade adaptation)",
     "tidal_encounter_percent": {
-      "dratini": 0.5,
+      "dratini": 5,
       "articuno": 0.005,
       "lapras": 20
     }
