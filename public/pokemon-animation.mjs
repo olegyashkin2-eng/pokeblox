@@ -39,6 +39,9 @@ const rows={
 };
 const extraGaits={10:'crawl',11:'shell',12:'flutter',13:'crawl',14:'shell',15:'flutter',27:'biped',28:'biped',35:'waddle',36:'waddle',39:'hop',40:'hop',43:'waddle',44:'waddle',45:'waddle',46:'crawl',47:'crawl',48:'hop',49:'flutter',56:'biped',57:'biped',63:'biped',64:'biped',65:'biped',66:'biped',67:'biped',68:'biped',69:'plant',70:'hover',71:'hover',96:'waddle',97:'biped',106:'kicker',107:'boxer',108:'waddle',120:'star',121:'star',122:'mime',124:'dance',131:'seal',132:'blob',137:'hover',144:'flutter',147:'serpent',148:'serpent',149:'dragon'};
 for(const [key,d] of Object.entries(EXTRA_SPECIES)){const id=Number(key),gait=extraGaits[id];rows[id]=[gait,4.3+(id%11)*.47,.35+(id%7)*.045,['hop','flutter'].includes(gait)?.11:.025+(id%5)*.008,.028+(id%6)*.011,`${gait}-${id}-strike`,`${d.type}-${id}-special`];}
+const newGaits={};
+for(const [gait,ids] of Object.entries({flutter:[16,17,18,21,22,41,42,83,123,142,145,146],quad:[19,20,29,30,32,33,37,38,52,53,58,59,77,78,111,128],serpent:[23,24,95,130],blob:[88,89],hover:[81,82,92,93,109,110],hop:[100,101,102],plant:[103,114],crawl:[98,99,140],shell:[91,138,139],waddle:[79,80,113,143]}))for(const id of ids)newGaits[id]=gait;
+for(const [key,d] of Object.entries(SPECIES)){const id=Number(key);if(rows[id])continue;const gait=newGaits[id]??'biped';rows[id]=[gait,4.5+(id%13)*.41,.34+(id%7)*.055,gait==='flutter'?.1:.035+(id%5)*.007,.03+(id%6)*.01,`${gait}-${id}-strike`,`${d.type}-${id}-special`];}
 export const ANIMATION_PROFILES=Object.freeze(Object.fromEntries(Object.entries(rows).map(([id,r])=>[id,Object.freeze({gait:r[0],cadence:r[1],stride:r[2],bounce:r[3],sway:r[4],normal:r[5],special:r[6]})])));
 const TAU=Math.PI*2,clamp=THREE.MathUtils.clamp;
 const ease=x=>{x=clamp(x,0,1);return x*x*(3-2*x);};
@@ -48,7 +51,7 @@ export function attackSpec(id,kind='normal'){
  const p=ANIMATION_PROFILES[id];if(!p)throw Error('No animation for '+id);
  const special=kind==='special',name=special?p.special:p.normal;
  const contact=!special||(['flame-fang','quick-dash'].includes(name)||SPECIES[id].type==='fighting');
- const effect=!special?'hit':id===133?'dash':[1,2].includes(id)?'vine':id===3?'solar':[4,5,6,136].includes(id)?'fire':[25,26,135].includes(id)?'electric':[74,75,76].includes(id)?'rock':id===129?'splash':id===9?'hydro':({grass:'vine',bug:'pollen',psychic:'psychic',fairy:'fairy',ground:'sand',fighting:'force',ice:'ice',dragon:'dragon',normal:'dash'}[SPECIES[id].type]??'water');
+ const effect=!special?'hit':id===133?'dash':[1,2].includes(id)?'vine':id===3?'solar':[4,5,6,136].includes(id)?'fire':[25,26,135].includes(id)?'electric':[74,75,76].includes(id)?'rock':id===129?'splash':id===9?'hydro':({fire:'fire',electric:'electric',rock:'rock',poison:'psychic',ghost:'psychic',flying:'force',steel:'rock',grass:'vine',bug:'pollen',psychic:'psychic',fairy:'fairy',ground:'sand',fighting:'force',ice:'ice',dragon:'dragon',normal:'dash'}[SPECIES[id].type]??'water');
  const duration=special?(id===3?1.85:id===129?1.55:1.38+(id%5)*.065):.85+(id%6)*.035;
  return {id,kind:special?'special':'normal',name,effect,contact,duration,cast:special&&!contact?.33:.46,impact:special&&!contact?.61:.49};
 }

@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="ru"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no"><meta name="theme-color" content="#173e39">
-<meta name="description" content="Покеблокс: Канто. Четыре острова, 77 детализированных 3D-покемонов, путешествия на Лапрасе и сохранения."><title>Покеблокс · Четыре острова</title>
+<meta name="description" content="Покеблокс: Канто. Девять островов, финальная арена, 149 детализированных 3D-покемонов, путешествия на Лапрасе и сохранения."><title>Покеблокс · Острова Канто</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23f5faf6'/%3E%3Cpath d='M2 16a14 14 0 0 1 28 0Z' fill='%23ef654d'/%3E%3Cpath d='M2 16h28' stroke='%231b3436' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='5' fill='white' stroke='%231b3436' stroke-width='3'/%3E%3C/svg%3E">
 <link rel="manifest" href="./manifest.webmanifest"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes">
-<link rel="stylesheet" href="./style.css"><link rel="stylesheet" href="./responsive.css">
+<link rel="stylesheet" href="./style.css"><link rel="stylesheet" href="./responsive.css"><link rel="stylesheet" href="./finale.css">
 <script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
 </head><body>
 <svg class="symbols" aria-hidden="true"><defs>
@@ -37,12 +37,12 @@
 <section id="start" class="start-screen" hidden>
  <div class="start-heading"><div class="eyebrow"><span></span> ПЕРВОЕ ПРИКЛЮЧЕНИЕ</div><h1>Твой остров.<br>Твоя команда.</h1><p>Начни путь с Пикачу. Ищи редких покемонов<br>и развивай свою команду.</p></div>
  <div class="starter-preview-label"><span id="hero-type" class="type-pill"></span><h2 id="hero-name">Пикачу</h2><span id="hero-desc">Маленькая искра большого приключения</span></div>
- <div class="starter-dock"><div class="dock-heading"><span>01 <i>/</i> ТВОЙ ПЕРВЫЙ ПОКЕМОН — ПИКАЧУ</span><span class="mini-note">Редкие покемоны ждут на острове</span></div><div id="starter-grid" class="starter-grid"></div><p id="continue-summary" class="continue-summary" hidden></p><div class="dock-bottom"><span><svg><use href="#i-compass"/></svg> 4 острова · 77 видов · Путешествия на Лапрасе</span><button id="begin" class="primary">Начать приключение <svg><use href="#i-arrow"/></svg></button></div></div>
+ <div class="starter-dock"><div class="dock-heading"><span>01 <i>/</i> ТВОЙ ПЕРВЫЙ ПОКЕМОН — ПИКАЧУ</span><span class="mini-note">Редкие покемоны ждут на острове</span></div><div id="starter-grid" class="starter-grid"></div><p id="continue-summary" class="continue-summary" hidden></p><div class="dock-bottom"><span><svg><use href="#i-compass"/></svg> 9 островов + вулкан · 149 видов · Путешествия на Лапрасе</span><button id="begin" class="primary">Начать приключение <svg><use href="#i-arrow"/></svg></button></div></div>
 </section>
 <div id="hud" hidden>
  <aside class="quest glass"><div class="quest-heading"><span class="eyebrow">ПУТЬ ИССЛЕДОВАТЕЛЯ</span><span id="quest-fraction">0/4</span></div><h2 id="quest-title">Собери первую команду</h2><p id="quest-text">Найди все 5 стартовых видов.</p><div class="quest-track"><i id="quest-progress"></i></div><button id="quest-detail">Все задания <svg><use href="#i-arrow"/></svg></button></aside>
  <aside class="map-wrap"><button id="minimap-button" aria-label="Открыть карту острова"><canvas id="minimap" width="300" height="300"></canvas><span class="map-north">N</span><span class="map-expand"><svg><use href="#i-map"/></svg></span></button><span class="map-caption">ОСТРОВ КАНТО</span></aside>
- <div class="resources glass"><span title="Покеболы"><svg><use href="#i-ball"/></svg><b id="balls-count">20</b></span><span title="Открыто форм"><svg><use href="#i-book"/></svg><b id="dex-count">1/77</b></span></div>
+ <div class="resources glass"><span title="Покеболы"><svg><use href="#i-ball"/></svg><b id="balls-count">20</b></span><span title="Открыто форм"><svg><use href="#i-book"/></svg><b id="dex-count">1/149</b></span></div>
  <div id="nearby" class="nearby glass" hidden><span id="nearby-label">Покемон рядом</span><button id="interact" class="primary"><span id="interact-label">Взаимодействовать</span><kbd>E</kbd></button></div>
  <div class="bottom-bar"><button id="partner" class="partner glass"><img id="partner-img" alt=""><span><span class="eyebrow">ТВОЙ НАПАРНИК</span><strong id="partner-name">Пикачу <small>ур. 5</small></strong><span class="hp-track"><i id="partner-hp"></i></span><span class="xp-track"><i id="partner-xp"></i></span></span><svg class="partner-arrow"><use href="#i-arrow"/></svg></button><nav class="game-nav glass"><button id="open-team"><svg><use href="#i-ball"/></svg><span>Команда</span><kbd>Q</kbd></button><button id="open-dex"><svg><use href="#i-book"/></svg><span>Покедекс</span><kbd>P</kbd></button><button id="open-bag"><svg><use href="#i-bag"/></svg><span>Рюкзак</span><kbd>B</kbd></button><button id="open-map"><svg><use href="#i-map"/></svg><span>Карта</span><kbd>M</kbd></button></nav><div class="desktop-hint"><span><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> движение</span><span>Мышь с зажатой кнопкой — камера</span><span><kbd>Shift</kbd> бег · <kbd>Space</kbd> прыжок</span></div></div>
  <div id="touch-controls"><div id="joystick" aria-label="Джойстик движения"><div id="stick"></div></div><div class="touch-buttons"><button id="touch-run" class="touch-action" aria-label="Бежать" aria-pressed="false"><svg><use href="#i-run"/></svg></button><button id="touch-jump" class="touch-action" aria-label="Прыгнуть">↑</button></div></div>
@@ -51,6 +51,20 @@
  <div class="battle-label">ДИКАЯ ВСТРЕЧА</div>
  <div class="enemy-status glass"><span class="eyebrow" id="enemy-type"></span><h2 id="enemy-name"></h2><div class="hp-track"><i id="enemy-hp"></i></div><span id="enemy-hp-text"></span></div>
  <div class="battle-bottom"><div class="battle-own glass"><div><h2 id="battle-own-name"></h2><span id="battle-own-level"></span></div><div class="hp-track"><i id="battle-own-hp"></i></div><span id="battle-own-hp-text"></span></div><div class="battle-console glass"><p id="battle-message" role="status">Что будет делать твой покемон?</p><div class="battle-actions"><button id="attack"><svg><use href="#i-bolt"/></svg><span>Атака<small>Обычный удар</small></span></button><button id="special"><svg><use href="#i-star"/></svg><span id="special-label">Приём<small>Сила стихии</small></span></button><button id="catch"><svg><use href="#i-ball"/></svg><span>Поймать<small id="catch-label">Покебол</small></span></button><button id="battle-heal"><svg><use href="#i-cross"/></svg><span>Лечение<small id="heal-label">Зелье</small></span></button><button id="battle-switch"><svg><use href="#i-ball"/></svg><span>Сменить<small>Другой покемон</small></span></button><button id="flee" class="flee">Уйти из боя <svg><use href="#i-arrow"/></svg></button></div></div></div>
+</section>
+<section id="raid-ui" class="raid-ui" hidden aria-label="Финальная битва: два против одного">
+ <header class="raid-boss-status"><span class="eyebrow">ФИНАЛ · ГРАЙМЕР / ЧАРИЗАРД / МЬЮ / НИДОКИНГ</span><h2>Нечто-Р <span id="raid-boss-hp-text">15 000 / 15 000 HP</span></h2><div class="hp-track"><i id="raid-boss-hp"></i></div><p id="raid-next-move"></p></header>
+ <div class="raid-bottom">
+  <div class="raid-allies">
+   <article class="raid-ally"><h3 id="raid-name-0"></h3><div class="hp-track"><i id="raid-hp-0"></i></div><small id="raid-hp-text-0"></small><label for="raid-order-0">Действие первого бойца</label><select id="raid-order-0"></select></article>
+   <article class="raid-ally"><h3 id="raid-name-1"></h3><div class="hp-track"><i id="raid-hp-1"></i></div><small id="raid-hp-text-1"></small><label for="raid-order-1">Действие второго бойца</label><select id="raid-order-1"></select></article>
+  </div>
+  <div class="raid-console"><p id="raid-message" role="status">Выбери действия двух бойцов.</p><button id="raid-turn" class="primary">Командовать обоим</button><div class="raid-console-footer"><button id="raid-leave">Вернуться в лагерь</button><small id="raid-save">Автосохранение</small></div></div>
+ </div>
+</section>
+<section id="final-credits" class="final-credits" hidden aria-label="Финальные титры">
+ <div class="credits-window"><div class="credits-roll"><span class="eyebrow">ПОКЕБЛОКС · КАНТО</span><h1>Первая часть<br>пройдена</h1><p id="credits-collection">149 / 149 · Нечто-Р побеждён</p><div class="credits-divider"></div><h2>От первой искры<br>до сердца вулкана</h2><p>Девять островов.<br>Сто сорок девять открытий.<br>И команда, которая дошла до конца.</p><h3>Главные герои</h3><p>Ты и твои покемоны</p><h3>Морской проводник</h3><p>Лапрас</p><h3>Мир и приключение</h3><p>По рисункам и идеям автора игры</p><h3>Покемоны и 3D-модели</h3><p>© Nintendo / Creatures Inc. / GAME FREAK inc.<br>Pokémon 3D API Assets</p><h3>Характеристики и графика</h3><p>PokéAPI · Three.js</p><div class="credits-divider"></div><h2>Спасибо за приключение</h2><p>Острова всегда будут ждать тебя.</p><small>Неофициальная фанатская игра</small></div></div>
+ <button id="credits-done" class="primary">Вернуться на острова</button>
 </section>
 <dialog id="panel" class="panel"><div class="panel-top"><div><span class="eyebrow" id="panel-kicker">КАНТО · ЧАСТЬ 01</span><h2 id="panel-title">Команда</h2></div><button id="close-panel" class="icon-button" aria-label="Закрыть"><svg><use href="#i-x"/></svg></button></div><div id="panel-content"></div></dialog>
 <div id="toast" class="toast" role="status" hidden></div>
