@@ -1,6 +1,7 @@
 import {ALL_IDS,BASES,hpMax,walkable,ISLAND2_IDS,ISLAND2_ZONES,ISLAND2_SPAWNS,ISLAND3_IDS,ISLAND4_IDS,ISLAND3_SPAWNS,ISLAND4_SPAWNS,TIDAL_ADDITIONS,EXTRA_ZONES,PICKUP_LAYOUTS,STONES,canBattle} from './data.mjs';
 import {EXPANSION_IDS,EXPANSION_SPAWNS,SUPPLEMENTAL_IDS} from './expansion.mjs';
 import {BOSS_HP} from './finale.mjs';
+import {CODE_IDS,emptyCodeRewards} from './codes.mjs';
 const fail=()=>{throw new Error('INVALID_SAVE');};
 const integer=(v,min,max)=>Number.isSafeInteger(v)&&v>=min&&v<=max?v:fail();
 const number=(v,min,max)=>typeof v==='number'&&Number.isFinite(v)&&v>=min&&v<=max?v:fail();
@@ -10,12 +11,16 @@ const list=(a,allowed)=>{if(!Array.isArray(a)||a.length>allowed.length||a.some(x
 const spawns={2:ISLAND2_SPAWNS,3:ISLAND3_SPAWNS,4:ISLAND4_SPAWNS,...EXPANSION_SPAWNS};
 const allowedWild={1:[...BASES,6],2:[...ISLAND2_IDS,55,...TIDAL_ADDITIONS.filter(id=>![148,149].includes(id)),...SUPPLEMENTAL_IDS[2]],3:ISLAND3_IDS,4:ISLAND4_IDS,...EXPANSION_IDS,10:[]};
 export function validateSnapshot(input){
- if(![2,3,4,5].includes(input?.version)||!input.state?.started)fail();
+ if(![2,3,4,5,6].includes(input?.version)||!input.state?.started)fail();
  const legacy=input.version<4,expansion=input.version>=5,s=input.state,maxIsland=legacy?2:expansion?10:4;
  if(!Array.isArray(s.party)||s.party.length<1||s.party.length>180)fail();
  const party=s.party.map(pokemon);if(new Set(party.map(p=>p.uid)).size!==party.length)fail();
  const island=s.island??1;integer(island,1,maxIsland);
  const state={island,laprasUnlocked:bool(s.laprasUnlocked??false),bossDefeated:bool(s.bossDefeated??false),started:true,party,active:integer(s.active,0,party.length-1),balls:integer(s.balls,0,1e7),potions:integer(s.potions,0,1e7),candies:integer(s.candies,0,1e7),stones:{},seen:list(s.seen,ALL_IDS),caught:list(s.caught,ALL_IDS),wins:integer(s.wins,0,1e7),evolutions:integer(s.evolutions,0,1e7),captured:integer(s.captured,0,1e7),pickedStones:list(s.pickedStones,Object.keys(STONES)),completed:bool(s.completed),visited:list(s.visited,['Янтарные скалы','Грозовая роща','Лазурное озеро','Лиственный лес','Лагерь исследователей','Солнечная поляна',...ISLAND2_ZONES,...Object.values(EXTRA_ZONES).flat()]),finalDefeated:bool(s.finalDefeated??false),finalCreditsSeen:bool(s.finalCreditsSeen??false)};
+ const codes=input.version>=6?s.codeRewards:emptyCodeRewards();
+ if(!codes)fail();
+ state.codeRewards={redeemed:list(codes.redeemed,CODE_IDS),xpUntil:integer(codes.xpUntil,0,9e15),catchUntil:integer(codes.catchUntil,0,9e15)};
+ if((codes.xpUntil>0)!==state.codeRewards.redeemed.includes('pikacode')||(codes.catchUntil>0)!==state.codeRewards.redeemed.includes('pokeblox4ever'))fail();
  for(let id=2;id<=10;id++)state[`island${id}Wins`]=integer(s[`island${id}Wins`]??0,0,1e7);
  for(const key of Object.keys(STONES))state.stones[key]=integer(s.stones?.[key]??(legacy&&!['water','thunder','fire'].includes(key)?0:undefined),0,1e7);
  for(const p of party)if(!state.caught.includes(p.species)||!state.seen.includes(p.species))fail();
@@ -44,5 +49,5 @@ export function validateSnapshot(input){
   const allies=r.uids.map(uid=>party.find(p=>p.uid===uid));if(allies.some(p=>!p)||allies.every(p=>!p.hp))fail();
   raid={uids:[...r.uids],bossHp:integer(r.bossHp,1,BOSS_HP),turn:integer(r.turn,0,10000),cooldowns:r.cooldowns.map(n=>integer(n,0,2))};
  }
- return {version:5,state,world,regions,battle,raid,settings:{soundEnabled:bool(input.settings?.soundEnabled)}};
+ return {version:6,state,world,regions,battle,raid,settings:{soundEnabled:bool(input.settings?.soundEnabled)}};
 }
