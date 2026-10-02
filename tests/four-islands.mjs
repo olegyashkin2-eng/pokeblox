@@ -39,7 +39,7 @@ for(const id of [2,3,4]){world.configureIsland(id);assert.equal(world.wild.lengt
 assert.ok(islandRadius(4)>islandRadius(3));
 assert.throws(()=>world.beginBattle(131,25));assert.throws(()=>world.beginBattle(25,131));
 world.configureIsland(3);world.restoreWorld(regions[3]);world.playerPos.set(-31,world.ground(-31,14),14);state.island=3;state.visited.add('Кактусовая роща');
-const save={version:5,state:{...state,seen:[...state.seen],caught:[...state.caught],visited:[...state.visited],pickedStones:[]},regions:{1:regions[1],2:regions[2],4:regions[4]},world:world.snapshotWorld(),battle:null,raid:null,settings:{soundEnabled:false}};
+const save={version:6,state:{...state,seen:[...state.seen],caught:[...state.caught],visited:[...state.visited],pickedStones:[]},regions:{1:regions[1],2:regions[2],4:regions[4]},world:world.snapshotWorld(),battle:null,raid:null,settings:{soundEnabled:false}};
 assert.deepEqual(validateSnapshot(save),save);assert.ok(JSON.stringify(save).length<64000,'Fits unload keepalive budget');
 const invalid=structuredClone(save);invalid.state.party.push(newPokemon(131,5));assert.throws(()=>validateSnapshot(invalid));
 const bad=structuredClone(save);bad.world.position=[35,4];assert.throws(()=>validateSnapshot(bad));

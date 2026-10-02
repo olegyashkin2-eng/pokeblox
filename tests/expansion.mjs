@@ -48,7 +48,7 @@ assert.equal(travelReason({...state,island:1},10),'');assert.ok(travelReason({..
 assert.throws(()=>createRaid({...state,caught:new Set(ALL_IDS.slice(1))},state.party.map(p=>p.uid)));
 assert.throws(()=>createRaid(state,[state.party[0].uid,state.party[0].uid]));
 const raid=createRaid(state,state.party.map(p=>p.uid));assert.equal(raid.bossHp,15000);
-const snapshot=()=>({version:5,state:{...state,seen:[...state.seen],caught:[...state.caught],visited:[...state.visited],pickedStones:[...state.pickedStones]},world:regions[10],regions:Object.fromEntries(Object.entries(regions).filter(([id])=>id!=='10')),battle:null,raid:raid.resolved?null:structuredClone(raid),settings:{soundEnabled:false}});
+const snapshot=()=>({version:6,state:{...state,seen:[...state.seen],caught:[...state.caught],visited:[...state.visited],pickedStones:[...state.pickedStones]},world:regions[10],regions:Object.fromEntries(Object.entries(regions).filter(([id])=>id!=='10')),battle:null,raid:raid.resolved?null:structuredClone(raid),settings:{soundEnabled:false}});
 const save=structuredClone(snapshot());assert.deepEqual(validateSnapshot(save),save);
 // A full 180-member account plus ten regions must fit both API and unload limits.
 const large=structuredClone(save);large.state.party=Array.from({length:180},(_,i)=>({...newPokemon(ALL_IDS.filter(canBattle)[i%148],50),uid:9000+i}));large.raid.uids=large.state.party.slice(0,2).map(p=>p.uid);
