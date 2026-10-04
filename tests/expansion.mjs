@@ -12,7 +12,7 @@ const {validateSnapshot}=await import('../public/save-format.mjs');
 const {World}=await import('../public/world.mjs');
 const {classicFixtures}=await import('./classic-fixtures.mjs');
 
-assert.deepEqual(ALL_IDS,Array.from({length:149},(_,i)=>i+1));
+assert.deepEqual(ALL_IDS,Array.from({length:151},(_,i)=>i+1));
 assert.deepEqual(PHOTO_ROSTERS,{
  5:[81,82,25,26,135,145,100,101],6:[92,93,94,142,138,139,140,141],
  7:[69,70,71,1,2,48,49,123,127,46,47,10,11,12,13,14,15,43,44,45],
@@ -21,11 +21,11 @@ assert.deepEqual(PHOTO_ROSTERS,{
 });
 const obtainable=new Set([25,...[ISLAND2_SPAWNS,ISLAND3_SPAWNS,ISLAND4_SPAWNS,...Object.values(EXPANSION_SPAWNS)].flat().map(p=>p.id),...Object.values(ENCOUNTERS).flat().map(p=>p[0]),...TIDAL_ENCOUNTERS.map(p=>p[0]),...Object.values(ENCOUNTER_TABLES).flat().map(p=>p[0])]);
 let added=true;while(added){added=false;for(const id of [...obtainable])for(const next of [SPECIES[id].next,...Object.values(SPECIES[id].stones??{})].filter(Boolean)){if(!obtainable.has(next)){obtainable.add(next);added=true;}}}
-assert.deepEqual([...obtainable].sort((a,b)=>a-b),ALL_IDS,'All 149 species really can be obtained');
+assert.deepEqual([...obtainable].sort((a,b)=>a-b),ALL_IDS,'All 151 species really can be obtained');
 for(const [name,rare] of [['power',145],['fire',146]]){let count=0;for(let i=0;i<1e6;i++)if(rollTable(name,()=>(i+.5)/1e6)===rare)count++;assert.equal(count,50);assert.ok(!EXPANSION_SPAWNS[name==='power'?5:9].some(p=>p.id===rare),'Legendary has no guaranteed spawn');}
 assert.equal(TIDAL_ENCOUNTERS.find(p=>p[0]===147)[1],5);
 assert.equal(evolutionOptions(newPokemon(129,50),createState()).length,0,'Preserve the previous Magikarp rule');
-console.log('PASS: all six photos, complete attainable 149, exact 0.005% Zapdos/Moltres and 5% Dratini');
+console.log('PASS: all six photos, complete attainable 151, exact 0.005% Zapdos/Moltres and 5% Dratini');
 
 globalThis.document={hidden:false,createElement:()=>({width:0,height:0,getContext:()=>({fillText(){}})})};
 const world=Object.create(World.prototype);Object.assign(world,{island:1,layouts:{},sun:new THREE.DirectionalLight(),shadowTexture:null,models:await classicFixtures(),scene:new THREE.Scene(),environment:new THREE.Group(),pickups:[],obstacles:[],wild:[],clock:0,camera:new THREE.PerspectiveCamera(46,390/844,.1,260),cameraMode:'explore',cameraYaw:0,cameraPitch:.52,cameraDistance:12,playerPos:new THREE.Vector3(0,0,18),trainer:new THREE.Group(),ring:new THREE.Group(),renderer:{render(){}}});
@@ -48,14 +48,14 @@ assert.equal(travelReason({...state,island:1},10),'');assert.ok(travelReason({..
 assert.throws(()=>createRaid({...state,caught:new Set(ALL_IDS.slice(1))},state.party.map(p=>p.uid)));
 assert.throws(()=>createRaid(state,[state.party[0].uid,state.party[0].uid]));
 const raid=createRaid(state,state.party.map(p=>p.uid));assert.equal(raid.bossHp,15000);
-const snapshot=()=>({version:6,state:{...state,seen:[...state.seen],caught:[...state.caught],visited:[...state.visited],pickedStones:[...state.pickedStones]},world:regions[10],regions:Object.fromEntries(Object.entries(regions).filter(([id])=>id!=='10')),battle:null,raid:raid.resolved?null:structuredClone(raid),settings:{soundEnabled:false}});
+const snapshot=()=>({version:7,state:{...state,seen:[...state.seen],caught:[...state.caught],visited:[...state.visited],pickedStones:[...state.pickedStones]},world:regions[10],regions:Object.fromEntries(Object.entries(regions).filter(([id])=>id!=='10')),battle:null,raid:raid.resolved?null:structuredClone(raid),settings:{soundEnabled:false}});
 const save=structuredClone(snapshot());assert.deepEqual(validateSnapshot(save),save);
 // A full 180-member account plus ten regions must fit both API and unload limits.
-const large=structuredClone(save);large.state.party=Array.from({length:180},(_,i)=>({...newPokemon(ALL_IDS.filter(canBattle)[i%148],50),uid:9000+i}));large.raid.uids=large.state.party.slice(0,2).map(p=>p.uid);
+const large=structuredClone(save);large.state.party=Array.from({length:180},(_,i)=>({...newPokemon(ALL_IDS.filter(canBattle)[i%150],50),uid:9000+i}));large.raid.uids=large.state.party.slice(0,2).map(p=>p.uid);
 const bytes=Buffer.byteLength(JSON.stringify({snapshot:validateSnapshot(large),revision:999999,writeId:'12345678-1234-1234-1234-123456789012'}));assert.ok(bytes<62000,`Largest account payload: ${bytes} bytes`);
-const v4=structuredClone(save);v4.version=4;v4.raid=null;v4.state.island=2;v4.world={...v4.regions[2],wild:v4.regions[2].wild.slice(0,23)};v4.regions={1:regions[1],3:regions[3],4:regions[4]};v4.battle={wildKey:3,enemy:newPokemon(54,20),ownUid:v4.state.party[0].uid,turn:6,specialCooldown:1};
-v4.world.wild[3].id=54;v4.world.wild[3].visible=true;const migrated=validateSnapshot(v4);assert.equal(migrated.world.wild.length,31);assert.deepEqual(migrated.world.wild.slice(0,23),v4.world.wild);assert.deepEqual(migrated.battle,v4.battle);assert.deepEqual(migrated.state.party,v4.state.party);assert.deepEqual(migrated.regions,v4.regions);
-for(const mutate of [s=>s.raid.uids[1]=s.raid.uids[0],s=>s.raid.bossHp=15001,s=>s.raid.cooldowns[0]=3,s=>s.state.caught.pop(),s=>s.state.party.forEach(p=>p.hp=0),s=>s.raid.uids[0]=900000]){const bad=structuredClone(save);mutate(bad);assert.throws(()=>validateSnapshot(bad));}
+const v4=structuredClone(save);v4.version=4;v4.raid=null;v4.state.island=2;v4.world={...v4.regions[2],wild:v4.regions[2].wild.slice(0,23)};v4.regions={1:regions[1],3:regions[3],4:{...regions[4],wild:regions[4].wild.slice(0,30)}};v4.battle={wildKey:3,enemy:newPokemon(54,20),ownUid:v4.state.party[0].uid,turn:6,specialCooldown:1};
+v4.world.wild[3].id=54;v4.world.wild[3].visible=true;const migrated=validateSnapshot(v4);assert.equal(migrated.world.wild.length,31);assert.deepEqual(migrated.world.wild.slice(0,23),v4.world.wild);assert.deepEqual(migrated.battle,v4.battle);assert.deepEqual(migrated.state.party,v4.state.party);assert.deepEqual(migrated.regions[1],v4.regions[1]);assert.deepEqual(migrated.regions[3],v4.regions[3]);assert.deepEqual(migrated.regions[4].wild.slice(0,30),v4.regions[4].wild);assert.equal(migrated.regions[4].wild.length,33);
+for(const mutate of [s=>s.raid.uids[1]=s.raid.uids[0],s=>s.raid.bossHp=15001,s=>s.raid.cooldowns[0]=3,s=>s.state.caught.shift(),s=>s.state.party.forEach(p=>p.hp=0),s=>s.raid.uids[0]=900000]){const bad=structuredClone(save);mutate(bad);assert.throws(()=>validateSnapshot(bad));}
 console.log(`PASS: v2/v3/v4 migration path, preserved active battle, v5 raid validation; full account is ${bytes} bytes`);
 
 // Invalid orders cannot partially consume potions or change a completed turn.

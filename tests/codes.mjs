@@ -15,7 +15,7 @@ function trainer(){
  const state=data.createState();Object.assign(state,{started:true,candies:3,party:[data.newPokemon(25,5)],seen:new Set([25]),caught:new Set([25])});return state;
 }
 function snapshot(state=trainer()){
- return {version:6,state:{...state,party:state.party.map(p=>({...p})),codeRewards:structuredClone(state.codeRewards),seen:[...state.seen],caught:[...state.caught],pickedStones:[],visited:[]},regions:{},battle:null,raid:null,settings:{soundEnabled:false},world:{position:[0,18],rotation:0,yaw:0,pitch:.52,distance:12,playedSeconds:4,wild:Array.from({length:15},(_,key)=>({key,id:25,visible:true,nextChangeAt:0,x:0,z:0,phase:0})),pickups:Array.from({length:13},(_,key)=>({key,readyAt:0}))}};
+ return {version:7,state:{...state,party:state.party.map(p=>({...p})),codeRewards:structuredClone(state.codeRewards),seen:[...state.seen],caught:[...state.caught],pickedStones:[],visited:[]},regions:{},battle:null,raid:null,settings:{soundEnabled:false},world:{position:[0,18],rotation:0,yaw:0,pitch:.52,distance:12,playedSeconds:4,wild:Array.from({length:15},(_,key)=>({key,id:25,visible:true,nextChangeAt:0,x:0,z:0,phase:0})),pickups:Array.from({length:13},(_,key)=>({key,readyAt:0}))}};
 }
 const boosted=trainer();
 assert.equal(codes.redeemCode(boosted,'  PiKaCoDe  ',now).code,'pikacode');
@@ -31,7 +31,7 @@ assert.equal(codes.xpMultiplier(saved.state,now+300000),1);
 assert.equal(codes.redeemCode(saved.state,'pikacode',now+999999).error,'CODE_USED','Expired codes cannot restart their timers');
 const legacy=snapshot();legacy.version=5;delete legacy.state.codeRewards;
 const migrated=validateSnapshot(legacy);
-assert.equal(migrated.version,6);assert.deepEqual(migrated.state.codeRewards,codes.emptyCodeRewards());assert.deepEqual(migrated.world,legacy.world);assert.deepEqual(migrated.state.party,legacy.state.party);
+assert.equal(migrated.version,7);assert.deepEqual(migrated.state.codeRewards,codes.emptyCodeRewards());assert.deepEqual(migrated.world,legacy.world);assert.deepEqual(migrated.state.party,legacy.state.party);
 
 function encounter(action,bonus,at=now){
  const state=trainer();if(bonus)state.codeRewards=structuredClone(boosted.codeRewards);
