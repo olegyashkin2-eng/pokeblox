@@ -1,6 +1,6 @@
 {
   "retrieved_at": "2026-10-01",
-  "species_count": 149,
+  "species_count": 151,
   "sources": [
     {
       "url": "https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/v2/csv/pokemon_stats.csv",
@@ -37,9 +37,21 @@
     "legendary_encounter_percent": {
       "articuno": 0.005,
       "zapdos": 0.005,
-      "moltres": 0.005
+      "moltres": 0.005,
+      "mewtwo": 0.005
     },
-    "magikarp_and_shellder": "No evolution, as in the earlier island rules. Gyarados and Cloyster spawn separately on island 2."
+    "magikarp_and_shellder": "No evolution, as in the earlier island rules. Gyarados and Cloyster spawn separately on island 2.",
+    "mythical_encounter_percent": {
+      "mew": 0.001
+    },
+    "volcano_required_count": 146,
+    "volcano_excluded_ids": [
+      144,
+      145,
+      146,
+      150,
+      151
+    ]
   },
   "ids": [
     1,
@@ -190,6 +202,8 @@
     146,
     147,
     148,
-    149
+    149,
+    150,
+    151
   ]
 }
