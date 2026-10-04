@@ -6,6 +6,7 @@ import {readFile,stat,mkdir,readdir,unlink} from 'node:fs/promises';
 import {resolve,dirname,extname,sep} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {validateSnapshot} from '../public/save-format.mjs';
+import {redeemCode,emptyCodeRewards} from '../public/codes.mjs';
 const scrypt=promisify(scryptCb),root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),publicRoot=resolve(root,'public');
 const hash=s=>createHash('sha256').update(s).digest('hex');
 const scryptOptions={N:32768,r:8,p:1,maxmem:64*1024*1024};
@@ -23,7 +24,7 @@ export async function createApp(options={}){
  const rate=(key,max,windowMs)=>{const now=Date.now();let entry=limiters.get(key);if(!entry||entry.until<now){entry={count:0,until:now+windowMs};limiters.set(key,entry);}entry.count++;return entry.count<=max;};
  const sameOrigin=req=>{if(req.headers['sec-fetch-site']==='cross-site')return false;const origin=req.headers.origin;if(!origin)return true;try{const configured=options.publicUrl??process.env.PUBLIC_URL;if(configured)return new URL(origin).origin===new URL(configured).origin;return new URL(origin).host===req.headers.host&&['http:','https:'].includes(new URL(origin).protocol);}catch{return false;}};
  const server=http.createServer(async(req,res)=>{res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Referrer-Policy','same-origin');res.setHeader('X-Frame-Options','DENY');let url;try{url=new URL(req.url,'http://localhost');}catch{return json(res,400,{error:'INVALID_URL'});}try{
-  if(url.pathname==='/healthz')return json(res,200,{ok:true,version:'1.0.0'});
+  if(url.pathname==='/healthz')return json(res,200,{ok:true,version:'1.1.0'});
   if(url.pathname.startsWith('/api/')){
    if(req.method!=='GET'&&!sameOrigin(req))return json(res,403,{error:'INVALID_ORIGIN'});
    if(url.pathname==='/api/me'&&req.method==='GET'){const s=session(req);return json(res,200,s?{user:{id:s.id,username:s.username},csrfToken:s.csrf_token}:{user:null,csrfToken:null});}
@@ -43,9 +44,32 @@ export async function createApp(options={}){
    if(req.method!=='GET'&&req.headers['x-csrf-token']!==s.csrf_token)return json(res,403,{error:'INVALID_CSRF'});
    if(url.pathname==='/api/logout'&&req.method==='POST'){db.prepare('DELETE FROM sessions WHERE token_hash = ?').run(s.token_hash);res.setHeader('Set-Cookie',`${cookieName}=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0${production?'; Secure':''}`);return json(res,200,{ok:true});}
    if(url.pathname==='/api/save'&&req.method==='GET'){const row=db.prepare('SELECT * FROM game_saves WHERE user_id = ?').get(s.id);return json(res,200,{accountKey:s.id,revision:row?.revision??0,lastWriteId:row?.last_write_id??null,updatedAt:row?.updated_at??null,snapshot:row?JSON.parse(row.snapshot):null});}
-   if(url.pathname==='/api/save'&&req.method==='POST'){
+   if(['/api/save','/api/redeem'].includes(url.pathname)&&req.method==='POST'){
     const body=await readBody(req);if(!Number.isSafeInteger(body?.revision)||body.revision<0||typeof body.writeId!=='string'||!/^[a-zA-Z0-9-]{8,80}$/.test(body.writeId))return json(res,400,{error:'INVALID_WRITE'});let snapshot;try{snapshot=validateSnapshot(body.snapshot);}catch{return json(res,400,{error:'INVALID_SAVE'});}
-    db.exec('BEGIN IMMEDIATE');let row;try{row=db.prepare('SELECT revision, last_write_id, updated_at, snapshot FROM game_saves WHERE user_id = ?').get(s.id);if(row?.last_write_id===body.writeId){db.exec('COMMIT');return json(res,200,{revision:row.revision,lastWriteId:row.last_write_id,updatedAt:row.updated_at});}if(row&&body.snapshot.version<JSON.parse(row.snapshot).version){db.exec('ROLLBACK');return json(res,409,{error:'SAVE_CONFLICT',revision:row.revision,lastWriteId:row.last_write_id});}if((row?.revision??0)!==body.revision){db.exec('ROLLBACK');return json(res,409,{error:'SAVE_CONFLICT',revision:row?.revision??0,lastWriteId:row?.last_write_id??null});}const revision=body.revision+1,updatedAt=new Date().toISOString();db.prepare('INSERT INTO game_saves (user_id, snapshot, revision, last_write_id, updated_at) VALUES (?, ?, ?, ?, ?) ON CONFLICT(user_id) DO UPDATE SET snapshot = excluded.snapshot, revision = excluded.revision, last_write_id = excluded.last_write_id, updated_at = excluded.updated_at').run(s.id,JSON.stringify(snapshot),revision,body.writeId,updatedAt);db.exec('COMMIT');return json(res,200,{revision,lastWriteId:body.writeId,updatedAt});}catch(e){try{db.exec('ROLLBACK');}catch{}throw e;}
+    const redeem=url.pathname==='/api/redeem';
+    db.exec('BEGIN IMMEDIATE');
+    try{
+     const row=db.prepare('SELECT revision, last_write_id, updated_at, snapshot FROM game_saves WHERE user_id = ?').get(s.id);
+     const stored=row?JSON.parse(row.snapshot):null;
+     if(row?.last_write_id===body.writeId){
+      db.exec('COMMIT');return json(res,200,{revision:row.revision,lastWriteId:row.last_write_id,updatedAt:row.updated_at,...(redeem?{snapshot:stored}:{})});
+     }
+     // Reward history and expiration times are server-owned. Ordinary saves and
+     // older tabs cannot clear a redeemed code or extend its boost.
+     const priorRewards=stored?.state.codeRewards??emptyCodeRewards();
+     if((stored&&body.snapshot.version<stored.version)||(row?.revision??0)!==body.revision||JSON.stringify(snapshot.state.codeRewards)!==JSON.stringify(priorRewards)){
+      db.exec('ROLLBACK');return json(res,409,{error:'SAVE_CONFLICT',revision:row?.revision??0,lastWriteId:row?.last_write_id??null});
+     }
+     if(redeem){
+      if(snapshot.battle||snapshot.raid){db.exec('ROLLBACK');return json(res,400,{error:'CODE_IN_BATTLE'});}
+      const reward=redeemCode(snapshot.state,body.code);
+      if(reward.error){db.exec('ROLLBACK');return json(res,400,reward);}
+      snapshot=validateSnapshot(snapshot);
+     }
+     const revision=body.revision+1,updatedAt=new Date().toISOString();
+     db.prepare('INSERT INTO game_saves (user_id, snapshot, revision, last_write_id, updated_at) VALUES (?, ?, ?, ?, ?) ON CONFLICT(user_id) DO UPDATE SET snapshot = excluded.snapshot, revision = excluded.revision, last_write_id = excluded.last_write_id, updated_at = excluded.updated_at').run(s.id,JSON.stringify(snapshot),revision,body.writeId,updatedAt);
+     db.exec('COMMIT');return json(res,200,{revision,lastWriteId:body.writeId,updatedAt,...(redeem?{snapshot}:{})});
+    }catch(e){try{db.exec('ROLLBACK');}catch{}throw e;}
    }
    return json(res,404,{error:'NOT_FOUND'});
   }
@@ -57,4 +81,4 @@ export async function createApp(options={}){
  if(options.backups!==false){backupTimer=setInterval(()=>makeBackup().catch(()=>console.error('Backup failed')),3600000);backupTimer.unref();}
  return {server,db,makeBackup,async close(){clearInterval(cleanup);clearInterval(backupTimer);await new Promise(r=>server.close(r));db.close();}};
 }
-if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){const app=await createApp();app.server.listen(Number(process.env.PORT??3000),'0.0.0.0',()=>console.log('Pokeblox 1.0.0 listening; persistent database ready.'));for(const signal of ['SIGTERM','SIGINT'])process.on(signal,()=>app.close().then(()=>process.exit(0)));}
+if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){const app=await createApp();app.server.listen(Number(process.env.PORT??3000),'0.0.0.0',()=>console.log('Pokeblox 1.1.0 listening; persistent database ready.'));for(const signal of ['SIGTERM','SIGINT'])process.on(signal,()=>app.close().then(()=>process.exit(0)));}

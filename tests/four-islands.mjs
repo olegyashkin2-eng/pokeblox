@@ -11,8 +11,8 @@ const {classicFixtures}=await import('./classic-fixtures.mjs');
 const {World}=await import('../public/world.mjs');
 const {resolveTurn}=await import('../public/battle.mjs');
 const {EvolutionScene}=await import('../public/evolution-scene.mjs');
-assert.equal(ALL_IDS.length,149);assert.deepEqual(ISLAND3_IDS,[27,28,56,57,66,67,68,106,107]);
-assert.deepEqual([...ISLAND4_IDS].sort((a,b)=>a-b),[10,11,12,13,14,15,35,36,39,40,43,44,45,46,47,48,49,63,64,65,69,70,71,96,97,108,122,124,132,137]);
+assert.equal(ALL_IDS.length,151);assert.deepEqual(ISLAND3_IDS,[27,28,56,57,66,67,68,106,107]);
+assert.deepEqual(ISLAND4_IDS.filter(id=>id!==151).sort((a,b)=>a-b),[10,11,12,13,14,15,35,36,39,40,43,44,45,46,47,48,49,63,64,65,69,70,71,96,97,108,122,124,132,137]);
 assert.equal(TIDAL_ENCOUNTERS.reduce((s,[,p])=>s+p,0),100);
 const frequencies={};for(let i=0;i<1e6;i++){const id=rollTidal(()=>(i+.5)/1e6);frequencies[id]=(frequencies[id]??0)+1;}
 assert.deepEqual(frequencies,{120:449950,121:300000,131:200000,144:50,147:50000});
@@ -35,11 +35,11 @@ function reachable(){
  for(let n=0;n<queue.length;n++){const [x,z]=queue[n];for(const [dx,dz] of [[1,0],[-1,0],[0,1],[0,-1]]){const nx=x+dx,nz=z+dz,k=key(nx,nz);if(!visited.has(k)&&!world.blocked(nx,nz)){visited.add(k);queue.push([nx,nz]);}}}
  for(const p of [...world.wild.map(w=>w.home),...world.pickups])assert.ok(queue.some(([x,z])=>Math.hypot(x-p.x,z-p.z)<2.5),`Island ${world.island}: reachable ${p.x},${p.z}`);
 }
-for(const id of [2,3,4]){world.configureIsland(id);assert.equal(world.wild.length,{2:31,3:9,4:30}[id]);assert.equal(world.pickups.length,PICKUP_LAYOUTS[id].length);assert.ok(world.wild.every(w=>w.group.userData.modelSource==='original-glb'));reachable();regions[id]=world.snapshotWorld();}
+for(const id of [2,3,4]){world.configureIsland(id);assert.equal(world.wild.length,{2:31,3:9,4:33}[id]);assert.equal(world.pickups.length,PICKUP_LAYOUTS[id].length);assert.ok(world.wild.every(w=>w.group.userData.modelSource==='original-glb'));reachable();regions[id]=world.snapshotWorld();}
 assert.ok(islandRadius(4)>islandRadius(3));
 assert.throws(()=>world.beginBattle(131,25));assert.throws(()=>world.beginBattle(25,131));
 world.configureIsland(3);world.restoreWorld(regions[3]);world.playerPos.set(-31,world.ground(-31,14),14);state.island=3;state.visited.add('Кактусовая роща');
-const save={version:5,state:{...state,seen:[...state.seen],caught:[...state.caught],visited:[...state.visited],pickedStones:[]},regions:{1:regions[1],2:regions[2],4:regions[4]},world:world.snapshotWorld(),battle:null,raid:null,settings:{soundEnabled:false}};
+const save={version:7,state:{...state,seen:[...state.seen],caught:[...state.caught],visited:[...state.visited],pickedStones:[]},regions:{1:regions[1],2:regions[2],4:regions[4]},world:world.snapshotWorld(),battle:null,raid:null,settings:{soundEnabled:false}};
 assert.deepEqual(validateSnapshot(save),save);assert.ok(JSON.stringify(save).length<64000,'Fits unload keepalive budget');
 const invalid=structuredClone(save);invalid.state.party.push(newPokemon(131,5));assert.throws(()=>validateSnapshot(invalid));
 const bad=structuredClone(save);bad.world.position=[35,4];assert.throws(()=>validateSnapshot(bad));

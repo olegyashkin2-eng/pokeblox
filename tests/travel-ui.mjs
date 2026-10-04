@@ -60,9 +60,9 @@ export async function checkTravelUI(world,expanded=false){
  await sail(4);await sail(2);assert.deepEqual([world.playerPos.x,world.playerPos.z],origin,'Return restores shore position');
  await sail(1);openMap();game.closePanel();
  if(expanded){
-  assert.equal(route(10).disabled,true,'Final arena needs all 149');
+  assert.equal(route(10).disabled,true,'Final arena needs 146 required species');
   for(const id of [5,6,7,8,9])await sail(id);
-  game.state.caught=new Set(data.ALL_IDS);game.state.seen=new Set(data.ALL_IDS);game.state.party.push(data.newPokemon(149,50),data.newPokemon(9,50));await sail(10);
+  game.state.caught=new Set(data.VOLCANO_REQUIRED_IDS);game.state.seen=new Set(data.VOLCANO_REQUIRED_IDS);game.state.party.push(data.newPokemon(149,50),data.newPokemon(9,50));await sail(10);
   world.playerPos.set(0,height(0,-30,10),-30);game.interact();assert.equal(element('panel').open,true);assert.ok(element('panel-content').innerHTML.includes('15 000 HP'));assert.equal(element('raid-start').disabled,false);
   const picks=element('panel-content').picks;assert.equal(picks.filter(p=>p.checked).length,2);picks[0].checked=false;picks[0].onchange();picks[2].checked=true;picks[2].onchange();element('raid-start').onclick();
   assert.equal(element('raid-ui').hidden,false);assert.equal(game.raid.bossHp,15000);assert.equal(game.saves.writes.at(-1).raid.bossHp,15000);

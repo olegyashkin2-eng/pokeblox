@@ -5065,9 +5065,60 @@
         ]
       },
       "validation": "GLB 2.0 parsed, all Draco primitives decoded, all embedded images decoded; world bounds apply default-pose skin transforms."
+    },
+    {
+      "id": 150,
+      "name": "Mewtwo",
+      "filename": "150.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/150.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/150.glb",
+      "byte_size": 4546020,
+      "sha256": "a38ebbc1ff9549584bd451c8d19b229f6af100ff2804c863d3bda39bf781e6fc",
+      "meshes": 4,
+      "triangles": 9691,
+      "materials": 3,
+      "embedded_images": 4,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [
+        "pm0150_00_00_00000_defaultwait01_loop",
+        "pm0150_00_00_00030_walk01_loop",
+        "pm0150_00_00_00100_run01_loop",
+        "pm0150_00_00_00400_attack01",
+        "pm0150_00_00_00450_rangeattack01"
+      ],
+      "retrieved_at": "2026-10-04",
+      "optimization": {
+        "method": "Keep the five authored clips used by the game and drop unreferenced binary data; all retained binary views are byte-identical.",
+        "source_byte_size": 7600268,
+        "source_sha256": "98ed03ce2dda7979f0ef0edf804671a3c3823a495dbe7fd230386122ebf77e69"
+      }
+    },
+    {
+      "id": 151,
+      "name": "Mew",
+      "filename": "151.glb",
+      "download_url": "https://raw.githubusercontent.com/Pokemon-3D-api/assets/main/models/opt/regular/151.glb",
+      "source_page": "https://github.com/Pokemon-3D-api/assets/blob/main/models/opt/regular/151.glb",
+      "byte_size": 52600,
+      "sha256": "4fb8e617eb114c4018c57c9c982232e55dc31857e2f6fec2c22578945bdaf38f",
+      "meshes": 1,
+      "triangles": 4582,
+      "materials": 4,
+      "embedded_images": 4,
+      "external_files": false,
+      "extensions_required": [
+        "EXT_texture_webp",
+        "KHR_draco_mesh_compression"
+      ],
+      "animations": [],
+      "retrieved_at": "2026-10-04"
     }
   ],
-  "download_total_bytes": 18789808,
+  "download_total_bytes": 22474872,
   "integration_notes": [
     "Copy only the numeric .glb files into your game asset folder. All images are embedded.",
     "Configure GLTFLoader with DRACOLoader; local decoder files from three/examples/jsm/libs/draco/gltf are recommended. These assets also require EXT_texture_webp, supported by modern browsers.",
@@ -5076,6 +5127,6 @@
     "After correcting orientation and updating world matrices, compute a skinned Box3; scale by targetHeight / size.y and translate horizontal center to zero and min.y to ground. Avoid normalizing by longest dimension: long tails shrink Raichu and Charizard excessively.",
     "Animation selection should be deliberate: Charizard has a dizzy clip and Pikachu a thunder-shock clip; they are not neutral idle animations. Static models can receive gentle whole-body bob/turn movement."
   ],
-  "updated_at": "2026-10-01",
+  "updated_at": "2026-10-04",
   "total_bytes": 17876252
 }
