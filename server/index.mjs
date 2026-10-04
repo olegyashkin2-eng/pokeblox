@@ -6,7 +6,7 @@ import {readFile,stat,mkdir,readdir,unlink} from 'node:fs/promises';
 import {resolve,dirname,extname,sep} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {validateSnapshot} from '../public/save-format.mjs';
-import {redeemCode,emptyCodeRewards} from '../public/codes.mjs';
+import {redeemCode,emptyCodeRewards,normalizeCode} from '../public/codes.mjs';
 const scrypt=promisify(scryptCb),root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),publicRoot=resolve(root,'public');
 const hash=s=>createHash('sha256').update(s).digest('hex');
 const scryptOptions={N:32768,r:8,p:1,maxmem:64*1024*1024};
@@ -16,6 +16,7 @@ const mime={'.webmanifest':'application/manifest+json; charset=utf-8','.html':'t
 export async function createApp(options={}){
  const production=options.production??process.env.NODE_ENV==='production';const dbPath=options.dbPath??process.env.DB_PATH??resolve(root,'data/pokeblox.db');await mkdir(dirname(dbPath),{recursive:true});const db=new DatabaseSync(dbPath);db.exec('PRAGMA foreign_keys = ON');db.exec('PRAGMA journal_mode = WAL');db.exec('PRAGMA synchronous = FULL');db.exec('PRAGMA busy_timeout = 5000');
  const version=db.prepare('PRAGMA user_version').get().user_version;if(version<1){db.exec('BEGIN IMMEDIATE');try{db.exec(await readFile(resolve(root,'server/migrations/001_accounts.sql'),'utf8'));db.exec('PRAGMA user_version = 1');db.exec('COMMIT');}catch(e){db.exec('ROLLBACK');throw e;}}
+ if(version<2){db.exec('BEGIN IMMEDIATE');try{db.exec(await readFile(resolve(root,'server/migrations/002_limited_codes.sql'),'utf8'));db.exec('PRAGMA user_version = 2');db.exec('COMMIT');}catch(e){db.exec('ROLLBACK');throw e;}}
  const cookieName=production?'__Host-pokeblox_session':'pokeblox_session';const sessionAge=30*24*3600;const limiters=new Map();let hashing=0;const dummyHash=await hashPassword(randomBytes(32).toString('hex'));
  const json=(res,status,obj,extra={})=>{res.writeHead(status,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff',...extra});res.end(JSON.stringify(obj));};
  const readBody=async req=>{if(!String(req.headers['content-type']??'').startsWith('application/json'))throw Object.assign(Error('JSON_REQUIRED'),{status:415});let length=0;const chunks=[];for await(const chunk of req){length+=chunk.length;if(length>62000)throw Object.assign(Error('TOO_LARGE'),{status:413});chunks.push(chunk);}try{return JSON.parse(Buffer.concat(chunks).toString('utf8'));}catch{throw Object.assign(Error('INVALID_JSON'),{status:400});}};
@@ -24,7 +25,7 @@ export async function createApp(options={}){
  const rate=(key,max,windowMs)=>{const now=Date.now();let entry=limiters.get(key);if(!entry||entry.until<now){entry={count:0,until:now+windowMs};limiters.set(key,entry);}entry.count++;return entry.count<=max;};
  const sameOrigin=req=>{if(req.headers['sec-fetch-site']==='cross-site')return false;const origin=req.headers.origin;if(!origin)return true;try{const configured=options.publicUrl??process.env.PUBLIC_URL;if(configured)return new URL(origin).origin===new URL(configured).origin;return new URL(origin).host===req.headers.host&&['http:','https:'].includes(new URL(origin).protocol);}catch{return false;}};
  const server=http.createServer(async(req,res)=>{res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Referrer-Policy','same-origin');res.setHeader('X-Frame-Options','DENY');let url;try{url=new URL(req.url,'http://localhost');}catch{return json(res,400,{error:'INVALID_URL'});}try{
-  if(url.pathname==='/healthz')return json(res,200,{ok:true,version:'1.1.0'});
+  if(url.pathname==='/healthz')return json(res,200,{ok:true,version:'1.1.1'});
   if(url.pathname.startsWith('/api/')){
    if(req.method!=='GET'&&!sameOrigin(req))return json(res,403,{error:'INVALID_ORIGIN'});
    if(url.pathname==='/api/me'&&req.method==='GET'){const s=session(req);return json(res,200,s?{user:{id:s.id,username:s.username},csrfToken:s.csrf_token}:{user:null,csrfToken:null});}
@@ -62,9 +63,17 @@ export async function createApp(options={}){
      }
      if(redeem){
       if(snapshot.battle||snapshot.raid){db.exec('ROLLBACK');return json(res,400,{error:'CODE_IN_BATTLE'});}
-      const reward=redeemCode(snapshot.state,body.code);
+      const code=normalizeCode(body.code);
+      // The count and grant share BEGIN IMMEDIATE with the save. Concurrent
+      // accounts cannot both claim the last place; retries never spend a place.
+      if(code==='a'){
+       if(db.prepare('SELECT 1 FROM limited_code_redemptions WHERE code = ? AND user_id = ?').get(code,s.id)){db.exec('ROLLBACK');return json(res,400,{error:'CODE_USED'});}
+       if(db.prepare('SELECT COUNT(*) AS total FROM limited_code_redemptions WHERE code = ?').get(code).total>=2){db.exec('ROLLBACK');return json(res,400,{error:'CODE_EXHAUSTED'});}
+      }
+      const reward=redeemCode(snapshot.state,code);
       if(reward.error){db.exec('ROLLBACK');return json(res,400,reward);}
       snapshot=validateSnapshot(snapshot);
+      if(code==='a')db.prepare('INSERT INTO limited_code_redemptions (code, user_id, redeemed_at) VALUES (?, ?, ?)').run(code,s.id,new Date().toISOString());
      }
      const revision=body.revision+1,updatedAt=new Date().toISOString();
      db.prepare('INSERT INTO game_saves (user_id, snapshot, revision, last_write_id, updated_at) VALUES (?, ?, ?, ?, ?) ON CONFLICT(user_id) DO UPDATE SET snapshot = excluded.snapshot, revision = excluded.revision, last_write_id = excluded.last_write_id, updated_at = excluded.updated_at').run(s.id,JSON.stringify(snapshot),revision,body.writeId,updatedAt);
@@ -81,4 +90,4 @@ export async function createApp(options={}){
  if(options.backups!==false){backupTimer=setInterval(()=>makeBackup().catch(()=>console.error('Backup failed')),3600000);backupTimer.unref();}
  return {server,db,makeBackup,async close(){clearInterval(cleanup);clearInterval(backupTimer);await new Promise(r=>server.close(r));db.close();}};
 }
-if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){const app=await createApp();app.server.listen(Number(process.env.PORT??3000),'0.0.0.0',()=>console.log('Pokeblox 1.1.0 listening; persistent database ready.'));for(const signal of ['SIGTERM','SIGINT'])process.on(signal,()=>app.close().then(()=>process.exit(0)));}
+if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){const app=await createApp();app.server.listen(Number(process.env.PORT??3000),'0.0.0.0',()=>console.log('Pokeblox 1.1.1 listening; persistent database ready.'));for(const signal of ['SIGTERM','SIGINT'])process.on(signal,()=>app.close().then(()=>process.exit(0)));}

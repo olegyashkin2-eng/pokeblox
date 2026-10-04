@@ -1,6 +1,6 @@
 import {hpMax,MAX_PARTY} from './data.mjs';
 
-export const CODE_IDS=['pikacode','pokeblox4ever','mrdragonforce'];
+export const CODE_IDS=['pikacode','pokeblox4ever','mrdragonforce','a'];
 export const emptyCodeRewards=()=>({redeemed:[],xpUntil:0,catchUntil:0});
 export const normalizeCode=value=>typeof value==='string'?value.trim().toLowerCase():'';
 export const xpMultiplier=(state,now=Date.now())=>state.codeRewards?.xpUntil>now?2:1;
@@ -13,25 +13,30 @@ export function redeemCode(state,input,now=Date.now()){
  const rewards=state.codeRewards??emptyCodeRewards();
  if(rewards.redeemed.includes(code))return {error:'CODE_USED'};
  let gift;
- if(code==='mrdragonforce'){
+ if(code==='mrdragonforce'||code==='a'){
   if(state.party.length>=MAX_PARTY)return {error:'PARTY_FULL'};
-  if(state.balls>1e7-250)return {error:'BALL_LIMIT'};
+  if(code==='mrdragonforce'&&state.balls>1e7-250)return {error:'BALL_LIMIT'};
   const uid=Math.max(0,...state.party.map(p=>p.uid))+1;
   if(uid>1e9)return {error:'PARTY_FULL'};
-  gift={uid,species:147,level:5,xp:0,hp:0};gift.hp=hpMax(gift);
+  gift={uid,species:code==='a'?150:147,level:5,xp:0,hp:0};gift.hp=hpMax(gift);
  }
  state.codeRewards=rewards;
  if(code==='pikacode')rewards.xpUntil=now+5*60*1000;
  if(code==='pokeblox4ever')rewards.catchUntil=now+10*60*1000;
  if(gift){
-  state.balls+=250;state.party.push(gift);
+  if(code==='mrdragonforce')state.balls+=250;state.party.push(gift);
   for(const key of ['seen','caught']){
-   if(state[key] instanceof Set)state[key].add(147);
-   else if(!state[key].includes(147))state[key].push(147);
+   if(state[key] instanceof Set)state[key].add(gift.species);
+   else if(!state[key].includes(gift.species))state[key].push(gift.species);
   }
  }
  rewards.redeemed.push(code);
  return {code};
+}
+
+export function codePanelHTML(state){
+ const disabled=state.started?'':' disabled';
+ return `<section class="code-box" aria-labelledby="code-title"><h3 id="code-title">Коды и подарки</h3><p>Введи код и забери награду. Каждый код можно использовать один раз на аккаунт. У некоторых кодов есть общий лимит для всех игроков.</p>${state.started?'':'<p class="code-hint">Войди в аккаунт и начни или продолжи приключение, чтобы активировать код.</p>'}<form id="code-form" class="code-form"><label for="code-input">Код</label><div class="code-entry"><input id="code-input" name="code" type="text" placeholder="Введи код" maxlength="40" autocomplete="off" autocapitalize="off" spellcheck="false" required${disabled}><button id="code-submit" type="submit" class="primary"${disabled}>Активировать</button></div><p id="code-message" class="code-message" role="status" aria-live="polite"></p></form><p>Для активации нужен интернет. Время бонуса идёт и при закрытой игре.</p><div id="code-boosts" class="code-boosts" aria-label="Активные бонусы"></div>${state.codeRewards.redeemed.length?`<details class="code-used"><summary>Использовано кодов: ${state.codeRewards.redeemed.length}</summary><p>${state.codeRewards.redeemed.join(' · ')}</p></details>`:''}</section>`;
 }
 
 export function activeCodeBoosts(state,now=Date.now()){

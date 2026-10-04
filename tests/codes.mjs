@@ -134,6 +134,7 @@ class UISaves{
  ready=true;blocked=false;redeeming=false;
  enqueue(value){validateSnapshot(JSON.parse(JSON.stringify(value)));}
  async redeem(value,code){
+  if(code==='exhausted')return {error:'CODE_EXHAUSTED'};
   const snapshot=validateSnapshot(JSON.parse(JSON.stringify(value))),result=codes.redeemCode(snapshot.state,code);
   return result.error?result:{snapshot:validateSnapshot(snapshot)};
  }
@@ -142,6 +143,7 @@ const context=vm.createContext({...data,...codes,performance,document:{getElemen
 const source=await readFile(new URL('../public/game.mjs',import.meta.url),'utf8');
 vm.runInContext(source.replace(/^import .*;\r?\n/gm,'').replace(/^init\(\);\s*$/m,'')+`\nglobalThis.game={state,openPanel,updateCodeBonuses,feedCandy,setWorld(value){world=value;}};`,context);
 const game=context.game;
+game.openPanel('codes');assert.ok(element('panel-content').innerHTML.includes('продолжи приключение'));assert.ok(element('panel-content').innerHTML.includes('required disabled'));
 Object.assign(game.state,trainer());game.setWorld({portraits:{},snapshotWorld:()=>snapshot().world});
 game.openPanel('bag');assert.ok(element('panel-content').innerHTML.includes('Коды и подарки'));assert.equal(element('panel').open,true);
 element('code-input').value='mrdragonforce';await element('code-form').onsubmit({preventDefault(){}});
@@ -150,5 +152,10 @@ element('code-input').value='mrdragonforce';await element('code-form').onsubmit(
 element('code-input').value='pikacode';await element('code-form').onsubmit({preventDefault(){}});game.updateCodeBonuses();assert.ok(element('code-boosts').innerHTML.includes('5:00'));
 const level=game.state.party[0].level;game.feedCandy();assert.equal(game.state.party[0].level,level+1,'XP code does not multiply guaranteed candy levels');
 game.state.codeRewards.xpUntil=1;game.updateCodeBonuses();assert.ok(element('code-boosts').innerHTML.includes('нет активных'));
+game.openPanel('codes');assert.equal(element('panel-title').textContent,'Коды');
+element('code-input').value=' A ';await element('code-form').onsubmit({preventDefault(){}});
+assert.equal(game.state.party.at(-1).species,150);assert.equal(game.state.balls,270);assert.equal(element('panel-title').textContent,'Коды');assert.ok(element('code-message').textContent.includes('Мьюту'));
+element('code-input').value='exhausted';await element('code-form').onsubmit({preventDefault(){}});
+assert.equal(element('code-message').dataset.kind,'error');assert.ok(element('code-message').textContent.includes('два игрока'));
 const sw=await readFile(new URL('../public/sw.js',import.meta.url),'utf8');assert.ok(sw.includes("'/codes.mjs'")&&sw.includes("'/codes.css'"));
-console.log('PASS: actual bag form, Dratini and inventory refresh, duplicate feedback, timer expiry, candy behavior and offline assets');
+console.log('PASS: real codes and bag dialogs, login hint, Mewtwo and Dratini grants, exhausted/duplicate feedback, timers and offline assets');
