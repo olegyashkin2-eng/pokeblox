@@ -1,10 +1,14 @@
 export const CAMP_PORTAL=Object.freeze({x:8,z:22});
 export const VOLCANO_ISLAND=10;
 export const VOLCANO_ARENA=Object.freeze({x:0,z:-30});
-export const COLLECTION_IDS=Object.freeze(Array.from({length:149},(_,i)=>i+1));
+export const COLLECTION_IDS=Object.freeze(Array.from({length:151},(_,i)=>i+1));
 export const collectionCount=state=>COLLECTION_IDS.filter(id=>state.caught.has(id)).length;
+export const OPTIONAL_RARE_IDS=Object.freeze([144,145,146,150,151]);
+export const VOLCANO_REQUIRED_IDS=Object.freeze(COLLECTION_IDS.filter(id=>!OPTIONAL_RARE_IDS.includes(id)));
+export const VOLCANO_REQUIRED_COUNT=VOLCANO_REQUIRED_IDS.length;
+export const volcanoCollectionCount=state=>VOLCANO_REQUIRED_IDS.filter(id=>state.caught.has(id)).length;
 export const NEW_ISLAND_NAMES={5:'Электростанция',6:'Заброшенный остров',7:'Остров-заповедник',8:'Просторный остров',9:'Огненная долина',10:'Арена на вулкане'};
-// First lists reproduce the photos; supplements complete the attainable 149.
+// First lists reproduce the photos; supplements complete the attainable 151.
 export const PHOTO_ROSTERS={
  5:[81,82,25,26,135,145,100,101],
  6:[92,93,94,142,138,139,140,141],
@@ -12,9 +16,9 @@ export const PHOTO_ROSTERS={
  8:[19,20,16,17,18,133,128,52,53,83,84,85,50,51,112,111,115],
  9:[4,5,6,126,146,136,58,59,77,78,37,38]
 };
-export const SUPPLEMENTAL_IDS={2:[72,73,79,80,91,98,99,130],5:[125],6:[41,42,88,89,109,110],7:[102,103,114],8:[21,22,23,24,29,30,31,32,33,34,95,104,105,113,143],9:[]};
+export const SUPPLEMENTAL_IDS={2:[72,73,79,80,91,98,99,130],5:[125],6:[41,42,88,89,109,110,150],7:[102,103,114],8:[21,22,23,24,29,30,31,32,33,34,95,104,105,113,143],9:[]};
 export const EXPANSION_IDS=Object.fromEntries(Object.entries(PHOTO_ROSTERS).map(([id,ids])=>[id,[...ids,...SUPPLEMENTAL_IDS[id]]]));
-export const ENCOUNTER_TABLES={power:[[145,.005],[81,34.995],[100,35],[125,30]],fire:[[146,.005],[4,34.995],[37,35],[58,30]],field:[[133,5],[19,47.5],[16,47.5]]};
+export const ENCOUNTER_TABLES={power:[[145,.005],[81,34.995],[100,35],[125,30]],fire:[[146,.005],[4,34.995],[37,35],[58,30]],field:[[133,5],[19,47.5],[16,47.5]],mythic:[[151,.001],[63,49.999],[39,50]],ruins:[[150,.005],[92,49.995],[41,50]]};
 export function rollTable(name,rng=Math.random){let r=rng()*100;for(const [id,weight] of ENCOUNTER_TABLES[name]){r-=weight;if(r<0)return id;}return ENCOUNTER_TABLES[name].at(-1)[0];}
 function positions(count,radius){
  const result=[];for(let n=0;result.length<count;n++){
@@ -24,10 +28,11 @@ function positions(count,radius){
  }return result;
 }
 export const EXPANSION_SPAWNS=Object.fromEntries(Object.entries(EXPANSION_IDS).map(([key,ids])=>{
- const island=Number(key),ordinary=ids.filter(id=>![145,146,133].includes(id)),points=positions(ordinary.length,island===8?108:island===7?88:65);
+ const island=Number(key),ordinary=ids.filter(id=>![145,146,150,133].includes(id)),points=positions(ordinary.length,island===8?108:island===7?88:65);
  const rows=ordinary.map((id,i)=>({id,...points[i]}));
  if(island===5||island===9)for(const [x,z] of [[-18,-34],[9,-41],[29,-31]])rows.push({id:island===5?81:4,x,z,table:island===5?'power':'fire'});
  if(island===8)for(const [x,z] of [[-15,12],[12,40],[51,40]])rows.push({id:19,x,z,table:'field'});
+ if(island===6)for(const [x,z] of [[-18,-34],[9,-41],[29,-31]])rows.push({id:92,x,z,table:'ruins'});
  return [island,rows];
 }));
 EXPANSION_SPAWNS[10]=[];

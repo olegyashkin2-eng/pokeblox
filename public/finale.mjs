@@ -1,5 +1,5 @@
 import {SPECIES,battleStat,hpMax,canBattle,effectiveness} from './data.mjs';
-import {collectionCount,VOLCANO_ISLAND} from './expansion.mjs';
+import {volcanoCollectionCount,VOLCANO_REQUIRED_COUNT,VOLCANO_ISLAND} from './expansion.mjs';
 
 export const BOSS_HP=15000;
 export const BOSS_MOVES=Object.freeze([
@@ -11,7 +11,7 @@ export const BOSS_MOVES=Object.freeze([
 export const bossMove=raid=>BOSS_MOVES[raid.turn%BOSS_MOVES.length];
 export const raidMembers=(state,raid)=>raid.uids.map(uid=>state.party.find(p=>p.uid===uid));
 export function createRaid(state,uids){
- if(state.island!==VOLCANO_ISLAND||collectionCount(state)!==149)throw Error('Для вулкана нужна коллекция 149/149.');
+ if(state.island!==VOLCANO_ISLAND||volcanoCollectionCount(state)!==VOLCANO_REQUIRED_COUNT)throw Error(`Для вулкана нужны ${VOLCANO_REQUIRED_COUNT} видов без Мью, Мьюту и трёх легендарных птиц.`);
  if(!Array.isArray(uids)||uids.length!==2||new Set(uids).size!==2)throw Error('Выбери двух разных покемонов.');
  const party=uids.map(uid=>state.party.find(p=>p.uid===uid));
  if(party.some(p=>!p||p.hp<=0||!canBattle(p.species)))throw Error('Нужны два здоровых бойца.');

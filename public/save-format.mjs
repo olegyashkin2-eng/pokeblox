@@ -1,5 +1,5 @@
 import {ALL_IDS,BASES,hpMax,walkable,ISLAND2_IDS,ISLAND2_ZONES,ISLAND2_SPAWNS,ISLAND3_IDS,ISLAND4_IDS,ISLAND3_SPAWNS,ISLAND4_SPAWNS,TIDAL_ADDITIONS,EXTRA_ZONES,PICKUP_LAYOUTS,STONES,canBattle} from './data.mjs';
-import {EXPANSION_IDS,EXPANSION_SPAWNS,SUPPLEMENTAL_IDS} from './expansion.mjs';
+import {EXPANSION_IDS,EXPANSION_SPAWNS,SUPPLEMENTAL_IDS,VOLCANO_REQUIRED_IDS} from './expansion.mjs';
 import {BOSS_HP} from './finale.mjs';
 import {CODE_IDS,emptyCodeRewards} from './codes.mjs';
 const fail=()=>{throw new Error('INVALID_SAVE');};
@@ -11,7 +11,7 @@ const list=(a,allowed)=>{if(!Array.isArray(a)||a.length>allowed.length||a.some(x
 const spawns={2:ISLAND2_SPAWNS,3:ISLAND3_SPAWNS,4:ISLAND4_SPAWNS,...EXPANSION_SPAWNS};
 const allowedWild={1:[...BASES,6],2:[...ISLAND2_IDS,55,...TIDAL_ADDITIONS.filter(id=>![148,149].includes(id)),...SUPPLEMENTAL_IDS[2]],3:ISLAND3_IDS,4:ISLAND4_IDS,...EXPANSION_IDS,10:[]};
 export function validateSnapshot(input){
- if(![2,3,4,5,6].includes(input?.version)||!input.state?.started)fail();
+ if(![2,3,4,5,6,7].includes(input?.version)||!input.state?.started)fail();
  const legacy=input.version<4,expansion=input.version>=5,s=input.state,maxIsland=legacy?2:expansion?10:4;
  if(!Array.isArray(s.party)||s.party.length<1||s.party.length>180)fail();
  const party=s.party.map(pokemon);if(new Set(party.map(p=>p.uid)).size!==party.length)fail();
@@ -26,13 +26,13 @@ export function validateSnapshot(input){
  for(const p of party)if(!state.caught.includes(p.species)||!state.seen.includes(p.species))fail();
  if(state.laprasUnlocked&&(!state.caught.includes(131)||!state.seen.includes(131)))fail();
  if(island>2&&!state.laprasUnlocked)fail();
- if((island===10||state.finalDefeated)&&state.caught.length!==149)fail();
+ if((island===10||state.finalDefeated)&&!VOLCANO_REQUIRED_IDS.every(id=>state.caught.includes(id)))fail();
  if(state.finalCreditsSeen&&!state.finalDefeated)fail();
  function validateWorld(w,id){
   if(!w||!Array.isArray(w.position)||w.position.length!==2)fail();
   const position=w.position.map(v=>number(v,-130,130));if(!walkable(...position,id))fail();
   const count=spawns[id]?.length??15,pickupCount=PICKUP_LAYOUTS[id].length;
-  const oldCount=legacy?(id===2?20:15):!expansion&&id===2?23:count;
+  const oldCount=legacy?(id===2?20:15):!expansion&&id===2?23:input.version<7&&[4,6].includes(id)?count-3:count;
   if(!Array.isArray(w.wild)||w.wild.length!==oldCount||!Array.isArray(w.pickups)||w.pickups.length!==(legacy?13:pickupCount))fail();
   const wild=w.wild.map((v,i)=>{if(v.key!==i||!allowedWild[id].includes(v.id))fail();return {key:i,id:v.id,visible:bool(v.visible),nextChangeAt:number(v.nextChangeAt,0,9e15),x:number(v.x,-130,130),z:number(v.z,-130,130),phase:number(v.phase,0,7)};});
   // Append new encounters; keep every old wild/pickup key and battle intact.
@@ -49,5 +49,5 @@ export function validateSnapshot(input){
   const allies=r.uids.map(uid=>party.find(p=>p.uid===uid));if(allies.some(p=>!p)||allies.every(p=>!p.hp))fail();
   raid={uids:[...r.uids],bossHp:integer(r.bossHp,1,BOSS_HP),turn:integer(r.turn,0,10000),cooldowns:r.cooldowns.map(n=>integer(n,0,2))};
  }
- return {version:6,state,world,regions,battle,raid,settings:{soundEnabled:bool(input.settings?.soundEnabled)}};
+ return {version:7,state,world,regions,battle,raid,settings:{soundEnabled:bool(input.settings?.soundEnabled)}};
 }
