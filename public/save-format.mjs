@@ -1,4 +1,4 @@
-import {ALL_IDS,BASES,hpMax,walkable,ISLAND2_IDS,ISLAND2_ZONES,ISLAND2_SPAWNS,ISLAND3_IDS,ISLAND4_IDS,ISLAND3_SPAWNS,ISLAND4_SPAWNS,TIDAL_ADDITIONS,EXTRA_ZONES,PICKUP_LAYOUTS,STONES,canBattle} from './data.mjs';
+import {ALL_IDS,BASES,hpMax,walkable,ISLAND2_IDS,ISLAND2_ZONES,ISLAND2_SPAWNS,ISLAND3_IDS,ISLAND4_IDS,ISLAND3_SPAWNS,ISLAND4_SPAWNS,TIDAL_ADDITIONS,EXTRA_ZONES,PICKUP_LAYOUTS,STONES,canBattle,partyLimit} from './data.mjs';
 import {EXPANSION_IDS,EXPANSION_SPAWNS,SUPPLEMENTAL_IDS,VOLCANO_REQUIRED_IDS} from './expansion.mjs';
 import {BOSS_HP} from './finale.mjs';
 import {CODE_IDS,emptyCodeRewards} from './codes.mjs';
@@ -13,7 +13,7 @@ const allowedWild={1:[...BASES,6],2:[...ISLAND2_IDS,55,...TIDAL_ADDITIONS.filter
 export function validateSnapshot(input){
  if(![2,3,4,5,6,7].includes(input?.version)||!input.state?.started)fail();
  const legacy=input.version<4,expansion=input.version>=5,s=input.state,maxIsland=legacy?2:expansion?10:4;
- if(!Array.isArray(s.party)||s.party.length<1||s.party.length>180)fail();
+ if(!Array.isArray(s.party)||s.party.length<1||s.party.length>partyLimit(input.version>=6?s:{}))fail();
  const party=s.party.map(pokemon);if(new Set(party.map(p=>p.uid)).size!==party.length)fail();
  const island=s.island??1;integer(island,1,maxIsland);
  const state={island,laprasUnlocked:bool(s.laprasUnlocked??false),bossDefeated:bool(s.bossDefeated??false),started:true,party,active:integer(s.active,0,party.length-1),balls:integer(s.balls,0,1e7),potions:integer(s.potions,0,1e7),candies:integer(s.candies,0,1e7),stones:{},seen:list(s.seen,ALL_IDS),caught:list(s.caught,ALL_IDS),wins:integer(s.wins,0,1e7),evolutions:integer(s.evolutions,0,1e7),captured:integer(s.captured,0,1e7),pickedStones:list(s.pickedStones,Object.keys(STONES)),completed:bool(s.completed),visited:list(s.visited,['Янтарные скалы','Грозовая роща','Лазурное озеро','Лиственный лес','Лагерь исследователей','Солнечная поляна',...ISLAND2_ZONES,...Object.values(EXTRA_ZONES).flat()]),finalDefeated:bool(s.finalDefeated??false),finalCreditsSeen:bool(s.finalCreditsSeen??false)};
