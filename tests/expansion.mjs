@@ -9,6 +9,7 @@ const {ALL_IDS,SPECIES,BASES,ISLAND2_SPAWNS,ISLAND3_SPAWNS,ISLAND4_SPAWNS,create
 const {PHOTO_ROSTERS,EXPANSION_SPAWNS,ENCOUNTER_TABLES,rollTable,CAMP_PORTAL}=await import('../public/expansion.mjs');
 const {BOSS_HP,createRaid,resolveRaidTurn,bossMove}=await import('../public/finale.mjs');
 const {validateSnapshot}=await import('../public/save-format.mjs');
+const {redeemCode}=await import('../public/codes.mjs');
 const {World}=await import('../public/world.mjs');
 const {classicFixtures}=await import('./classic-fixtures.mjs');
 
@@ -53,6 +54,11 @@ const save=structuredClone(snapshot());assert.deepEqual(validateSnapshot(save),s
 // A full 180-member account plus ten regions must fit both API and unload limits.
 const large=structuredClone(save);large.state.party=Array.from({length:180},(_,i)=>({...newPokemon(ALL_IDS.filter(canBattle)[i%150],50),uid:9000+i}));large.raid.uids=large.state.party.slice(0,2).map(p=>p.uid);
 const bytes=Buffer.byteLength(JSON.stringify({snapshot:validateSnapshot(large),revision:999999,writeId:'12345678-1234-1234-1234-123456789012'}));assert.ok(bytes<62000,`Largest account payload: ${bytes} bytes`);
+const rosterLarge=structuredClone(large);
+assert.equal(redeemCode(rosterLarge.state,'mrdragon').code,'mrdragon');
+assert.equal(rosterLarge.state.party.length,330);
+const giftBytes=Buffer.byteLength(JSON.stringify({snapshot:validateSnapshot(rosterLarge),revision:999999,writeId:'12345678-1234-1234-1234-123456789012'}));
+assert.ok(giftBytes<62000,`Full roster plus ten regions fits API and unload keepalive: ${giftBytes} bytes`);
 const v4=structuredClone(save);v4.version=4;v4.raid=null;v4.state.island=2;v4.world={...v4.regions[2],wild:v4.regions[2].wild.slice(0,23)};v4.regions={1:regions[1],3:regions[3],4:{...regions[4],wild:regions[4].wild.slice(0,30)}};v4.battle={wildKey:3,enemy:newPokemon(54,20),ownUid:v4.state.party[0].uid,turn:6,specialCooldown:1};
 v4.world.wild[3].id=54;v4.world.wild[3].visible=true;const migrated=validateSnapshot(v4);assert.equal(migrated.world.wild.length,31);assert.deepEqual(migrated.world.wild.slice(0,23),v4.world.wild);assert.deepEqual(migrated.battle,v4.battle);assert.deepEqual(migrated.state.party,v4.state.party);assert.deepEqual(migrated.regions[1],v4.regions[1]);assert.deepEqual(migrated.regions[3],v4.regions[3]);assert.deepEqual(migrated.regions[4].wild.slice(0,30),v4.regions[4].wild);assert.equal(migrated.regions[4].wild.length,33);
 for(const mutate of [s=>s.raid.uids[1]=s.raid.uids[0],s=>s.raid.bossHp=15001,s=>s.raid.cooldowns[0]=3,s=>s.state.caught.shift(),s=>s.state.party.forEach(p=>p.hp=0),s=>s.raid.uids[0]=900000]){const bad=structuredClone(save);mutate(bad);assert.throws(()=>validateSnapshot(bad));}
