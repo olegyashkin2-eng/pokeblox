@@ -156,6 +156,13 @@ game.openPanel('codes');assert.equal(element('panel-title').textContent,'Код�
 element('code-input').value=' A ';await element('code-form').onsubmit({preventDefault(){}});
 assert.equal(game.state.party.at(-1).species,150);assert.equal(game.state.balls,270);assert.equal(element('panel-title').textContent,'Коды');assert.ok(element('code-message').textContent.includes('Мьюту'));
 element('code-input').value='exhausted';await element('code-form').onsubmit({preventDefault(){}});
-assert.equal(element('code-message').dataset.kind,'error');assert.ok(element('code-message').textContent.includes('два игрока'));
+assert.equal(element('code-message').dataset.kind,'error');assert.ok(element('code-message').textContent.includes('Все активации'));
+const oldTeam=JSON.stringify(game.state.party),oldCount=game.state.party.length;
+element('code-input').value=' MRDragon ';await element('code-form').onsubmit({preventDefault(){}});
+assert.equal(game.state.party.length,oldCount+150);assert.equal(JSON.stringify(game.state.party.slice(0,oldCount)),oldTeam);
+assert.equal(game.state.caught.size,151);assert.equal(game.state.seen.size,151);assert.equal(game.state.laprasUnlocked,true);
+assert.equal(game.state.balls,270);assert.ok(element('code-message').textContent.includes('151'));assert.equal(element('code-message').dataset.kind,'success');
+element('code-input').value='mrdragon';await element('code-form').onsubmit({preventDefault(){}});
+assert.equal(element('code-message').dataset.kind,'error');assert.equal(game.state.party.length,oldCount+150);
 const sw=await readFile(new URL('../public/sw.js',import.meta.url),'utf8');assert.ok(sw.includes("'/codes.mjs'")&&sw.includes("'/codes.css'"));
 console.log('PASS: real codes and bag dialogs, login hint, Mewtwo and Dratini grants, exhausted/duplicate feedback, timers and offline assets');

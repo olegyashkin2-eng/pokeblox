@@ -1,4 +1,4 @@
-import {SPECIES,hpMax,newPokemon,damageFor,catchChance,MAX_PARTY,gainXP,canBattle} from './data.mjs';
+import {SPECIES,hpMax,newPokemon,damageFor,catchChance,partyLimit,gainXP,canBattle} from './data.mjs';
 import {xpMultiplier} from './codes.mjs';
 export function resolveTurn(state,battle,action,rng=Math.random,now=Date.now()){
  if(!canBattle(battle.own.species)||!canBattle(battle.enemy.species))return {error:'Лапрас помогает в путешествиях и не участвует в боях'};
@@ -8,7 +8,7 @@ export function resolveTurn(state,battle,action,rng=Math.random,now=Date.now()){
  if(action==='catch'&&battle.wild?.boss)return {error:'Босса нельзя поймать. Голдака можно получить эволюцией Псайдака.'};
  if(!['attack','special','catch','heal','switch'].includes(action))return {error:'Неизвестное действие'};
  if(action==='special'&&battle.specialCooldown>0)return {error:'Приём ещё не восстановился'};
- if(action==='catch'&&(!state.balls||state.party.length>=MAX_PARTY))return {error:state.balls?'Команда заполнена':'Покеболы закончились'};
+ if(action==='catch'&&(!state.balls||state.party.length>=partyLimit(state)))return {error:state.balls?'Команда заполнена':'Покеболы закончились'};
  if(action==='heal'&&(!state.potions||own.hp>=hpMax(own)))return {error:'Лечение сейчас недоступно'};
  if(action==='attack'||action==='special'){
   const hit=damageFor(own,enemy,action==='special',rng);enemy.hp=Math.max(0,enemy.hp-hit.damage);events.push({actor:'own',targetHp:enemy.hp,species:own.species,animation:action==='special'?'special':'normal',type:action==='special'?SPECIES[own.species].type:'normal',text:`${SPECIES[own.species].name}: ${action==='special'?SPECIES[own.species].move:'атака'}! −${hit.damage} HP.${hit.critical?' Критический удар!':''}${hit.eff>1?' Очень эффективно!':hit.eff<1?' Не очень эффективно…':''}`});if(action==='special')battle.specialCooldown=2;if(!enemy.hp){state.wins++;result='victory';}
